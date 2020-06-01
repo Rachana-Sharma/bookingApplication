@@ -6,8 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.booking.common.Hotel;
-import com.booking.common.HotelRepository;
+import com.booking.common.HotelRequest;
+import com.booking.internalModel.Hotel;
+import com.booking.internalModel.HotelRepository;
 
 /**
  * @author Rachana Sharma The InternalService
@@ -21,6 +22,8 @@ public class InternalService {
 	@Autowired
 	HotelRepository hotelRepository;
 
+	Hotel hotel = new Hotel();
+
 	/**
 	 * @return hotelList to add new hotel to the ArrayList
 	 */
@@ -31,9 +34,27 @@ public class InternalService {
 	}
 
 	/**
-	 * @param hotel to save into hotel repository
+	 * @param HotelRequest
 	 */
-	public void saveHotel(Hotel hotel) {
+	public void saveHotel(HotelRequest hotelRequest) {
+		hotel.setId(hotelRequest.getId());
+		hotel.setName(hotelRequest.getName());
 		hotelRepository.save(hotel);
+	}
+
+	/**
+	 * @param id
+	 * @return saved values from repository against the given id
+	 */
+	public Hotel getHotelById(int id) {
+		return hotelRepository.findById(id).get();
+
+	}
+
+	/**
+	 * @param id to delete from repository against given id
+	 */
+	public void deleteHotel(int id) {
+		hotelRepository.deleteById(id);
 	}
 }

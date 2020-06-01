@@ -10,5 +10,6 @@
   <modules>
   	<module>internalService</module>
   	<module>internalClient</module>
+  	<module>internalModel</module>
   </modules>
 </project>

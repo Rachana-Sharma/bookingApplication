@@ -12,7 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.booking.common.Hotel;
+import com.booking.common.HotelRequest;
 
 /**
  * @author Rachana Sharma The BookingClient
@@ -28,13 +28,13 @@ public class BookingClient {
 	/**
 	 * @return myList getAllHotelClient method to get list of all clients
 	 */
-	public List<Hotel> getAllHotelClient() {
-		ParameterizedTypeReference<List<Hotel>> hotel = new ParameterizedTypeReference<List<Hotel>>() {
+	public List<HotelRequest> getAllHotelClient() {
+		ParameterizedTypeReference<List<HotelRequest>> hotel = new ParameterizedTypeReference<List<HotelRequest>>() {
 		};
 
-		ResponseEntity<List<Hotel>> response = restTemplate.exchange("http://localhost:8080/hotel/get", HttpMethod.GET,
+		ResponseEntity<List<HotelRequest>> response = restTemplate.exchange("http://localhost:8080/hotel/get", HttpMethod.GET,
 				null, hotel);
-		List<Hotel> myList = response.getBody();
+		List<HotelRequest> myList = response.getBody();
 		return myList;
 	}
 
@@ -42,12 +42,30 @@ public class BookingClient {
 	 * @param hotel
 	 * @return result saveHotelClient method to save new hotel
 	 */
-	public int saveHotelClient(Hotel hotel) {
+	public int saveHotelClient(HotelRequest hotel) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<Hotel> entity = new HttpEntity<Hotel>(hotel, headers);
+		HttpEntity<HotelRequest> entity = new HttpEntity<HotelRequest>(hotel, headers);
 		int result = restTemplate.exchange("http://localhost:8080/hotel/save", HttpMethod.POST, entity, Integer.class)
 				.getBody();
 		return result;
+	}
+	
+	/**
+	 * @param id
+	 * @return saved values from repository against the given id via internal se-r-vi-ce-
+	 */
+	public HotelRequest getHotelByIdClient(int id) {
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<String> requestEntity= new HttpEntity<String>(headers);
+		ResponseEntity<HotelRequest> responseEntity=restTemplate.exchange("http://localhost:8080/hotel/{id}", HttpMethod.GET, requestEntity, HotelRequest.class,id);
+		HotelRequest hotel = responseEntity.getBody();
+		return hotel;
+	}
+	
+	public void deleteHotelClient(int id) {
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<String> requestEntity= new HttpEntity<String>(headers);
+		restTemplate.exchange("http://localhost:8080/hotel/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,id);
 	}
 }

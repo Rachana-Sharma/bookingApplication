@@ -5,13 +5,5 @@
     <artifactId>internal</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>internalService</artifactId>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.booking</groupId>
-  		<artifactId>internalModel</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  		<scope>provided</scope>
-  	</dependency>
-  </dependencies>
+  <artifactId>internalModel</artifactId>
 </project>
