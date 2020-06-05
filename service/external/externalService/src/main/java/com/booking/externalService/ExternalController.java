@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.booking.common.BookingRequest;
+import com.booking.common.CustomerRequest;
 import com.booking.common.HotelRequest;
-import com.booking.internalClient.BookingClient;
+import com.booking.common.RoomRequest;
+import com.booking.internalClient.GetRoomClient;
 
 /**
  * @author Rachana Sharma The ExternalController
@@ -38,7 +41,7 @@ public class ExternalController {
 	 * BookingClient
 	 */
 	@Autowired
-	BookingClient bookingCliet;
+	GetRoomClient bookingCliet;
 
 	public static void main(String[] args) {
 
@@ -46,20 +49,55 @@ public class ExternalController {
 	}
 
 	/**
-	 * @return List of Hotels
+	 * @return List of room
 	 */
-	@GetMapping("/hotel/get/ec")
-	public List<HotelRequest> getAllHotelES() {
-		return externalService.getAllHotelES();
+	@GetMapping("/room/get/ec")
+	public List<RoomRequest> getAllRoomES() {
+		return externalService.getAllRoomES();
+
 	}
 
 	/**
-	 * @param hotel
-	 * @return saves new Hotels
+	 * @param roomRequest
+	 * @return saves new room
 	 */
-	@PostMapping("/hotel/save/ec")
-	public int saveHotelES(@RequestBody HotelRequest hotel) {
-		return externalService.saveHotelES(hotel);
+	@PostMapping("/room/save/ec")
+	public int saveRoomES(@RequestBody RoomRequest roomRequest) {
+		return externalService.saveRoomES(roomRequest);
+	}
+
+	/**
+	 * @return List of customer
+	 */
+	@GetMapping("/customer/get/ec")
+	public List<CustomerRequest> getAllCustomerES() {
+		return externalService.getAllCustomerES();
+	}
+
+	/**
+	 * @param customerRequest
+	 * @return saves new customer
+	 */
+	@PostMapping("/customer/save/ec")
+	public int saveCustomerES(@RequestBody CustomerRequest customerRequest) {
+		return externalService.saveCustomerES(customerRequest);
+	}
+
+	/**
+	 * @return List of customer
+	 */
+	@GetMapping("/booking/get/ec")
+	public List<BookingRequest> getAllBookingES() {
+		return externalService.getBookingES();
+	}
+
+	/**
+	 * @param bookingRequest
+	 * @return int
+	 */
+	@PostMapping("/booking/save/ec")
+	public int saveBookingES(@RequestBody BookingRequest bookingRequest) {
+		return externalService.saveBookingES(bookingRequest);
 	}
 
 	/**

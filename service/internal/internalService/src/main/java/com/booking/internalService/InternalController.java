@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.booking.common.HotelRequest;
+import com.booking.common.BookingRequest;
+import com.booking.common.CustomerRequest;
+import com.booking.common.RoomRequest;
+import com.booking.internalModel.Booking;
+import com.booking.internalModel.Customer;
 import com.booking.internalModel.Hotel;
+import com.booking.internalModel.Room;
 
 /**
  * @author Rachana Sharma The InternalController
@@ -44,19 +49,27 @@ public class InternalController {
 	/**
 	 * @return List of all hotel
 	 */
-	@GetMapping("/hotel/get")
-	public List<Hotel> getAllHotel() {
-		return internalService.getAllHotel();
+	@GetMapping("/room/get")
+	public List<Room> getAllRoom() {
+		return internalService.getAllRoom();
+	}
+	
+	/**
+	 * @return List of all customer
+	 */
+	@GetMapping("/customer/get")
+	public List<Customer> getAllCustomer(){
+		return internalService.getAllCustomer();
 	}
 
 	/**
 	 * @param hotelRequest
-	 * @return id of hotel that has been saved to repository
+	 * @return id 
 	 */
-	@PostMapping("/hotel/save")
-	public int saveHotel(@RequestBody HotelRequest hotelRequest) {
-		internalService.saveHotel(hotelRequest);
-		int id = hotelRequest.getId();
+	@PostMapping("/room/save")
+	public int saveRoom(@RequestBody RoomRequest roomRequest) {
+		internalService.saveRoom(roomRequest);
+		int id = roomRequest.getRoomId();
 		return id;
 
 	}
@@ -76,6 +89,34 @@ public class InternalController {
 	@DeleteMapping("/hotel/delete/{id}")
 	public void deleteHotels(@PathVariable("id") int id) {
 		internalService.deleteHotel(id);
+	}
+	/**
+	 * @param customerRequest
+	 * @return id
+	 */
+	@PostMapping("/customer/save")
+	public int saveCustomer(@RequestBody CustomerRequest customerRequest) {
+		internalService.saveCustomer(customerRequest);
+		int id = customerRequest.getCustomerId();
+		return id;
+	}
+	/**
+	 * @param bookingRequest
+	 * @return id
+	 */
+	@PostMapping("/booking/save")
+	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
+		internalService.saveBooking(bookingRequest);
+		int id = bookingRequest.getBookingId();
+		return id;
+	}
+
+	/**
+	 * @return List of all booking
+	 */
+	@GetMapping("/booking/get")
+	public List<Booking> getAllBooking(){
+		return internalService.getAllBooking();
 	}
 
 }

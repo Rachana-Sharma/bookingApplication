@@ -4,7 +4,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import com.booking.internalClient.BookingClient;
+import com.booking.internalClient.GetBookingClient;
+import com.booking.internalClient.GetCustomerClient;
+import com.booking.internalClient.GetRoomClient;
+import com.booking.internalClient.SaveBookingClient;
+import com.booking.internalClient.SaveCustomerClient;
+import com.booking.internalClient.SaveRoomClient;
 
 /**
  * @author Rachana Sharma ConfigurationClass
@@ -21,11 +26,11 @@ public class ConfigurationClass {
 	}
 
 	/**
-	 * Bean for Client
+	 * Bean for GetRoomClient
 	 */
 	@Bean
-	public BookingClient client() {
-		return new BookingClient();
+	public GetRoomClient client() {
+		return new GetRoomClient();
 	}
 
 	/**
@@ -34,5 +39,41 @@ public class ConfigurationClass {
 	
 	public ExternalService externalService() {
 		return new ExternalService();
+	}
+
+	/**
+	 * Bean for GetCustomerClient
+	 */
+	@Bean
+	public GetCustomerClient getCustomerClient() {
+		return new GetCustomerClient();
+	}
+	/**
+	 * Bean for SaveRoomClient
+	 */
+	@Bean
+	public SaveRoomClient saveRoomClient() {
+		return new SaveRoomClient();
+	}
+	/**
+	 * Bean for SaveCustomerClient
+	 */
+	@Bean
+	public SaveCustomerClient saveCustomerClient() {
+		return new SaveCustomerClient();
+	}
+	/**
+	 * Bean for SaveCustomerClient
+	 */
+	@Bean
+	public SaveBookingClient saveBookingClient() {
+		return new SaveBookingClient();
+	}
+	/**
+	 * Bean for GetBookingClient
+	 */
+	@Bean
+	public GetBookingClient getBookingClient() {
+		return new GetBookingClient();
 	}
 }
