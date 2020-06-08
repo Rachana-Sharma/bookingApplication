@@ -26,6 +26,10 @@ public class BookingRequest {
 	 * The end date
 	 */
 	private Date endDate;
+	/**
+	 * The room id
+	 */
+	private int roomId;
 
 	/**
 	 * @param bookingId
@@ -34,12 +38,13 @@ public class BookingRequest {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookingRequest(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate) {
+	public BookingRequest(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate,int roomId) {
 		this.bookingId = bookingId;
 		this.breakfast = breakfast;
 		this.totalCharge = totalCharge;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.roomId = roomId;
 	}
 
 	/**
@@ -117,5 +122,18 @@ public class BookingRequest {
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	/**
+	 * @return the roomId
+	 */
+	public int getRoomId() {
+		return roomId;
+	}
+
+	/**
+	 * @param roomId the roomId to set
+	 */
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
 	}
 }
