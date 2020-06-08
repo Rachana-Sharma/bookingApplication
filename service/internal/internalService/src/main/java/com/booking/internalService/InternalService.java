@@ -117,9 +117,35 @@ public class InternalService {
 	public void deleteHotel(int id) {
 		hotelRepository.deleteById(id);
 	}
+	/**
+	 * @param customerRequest
+	 */
 	public void saveCustomer(CustomerRequest customerRequest) {
 		customer.setCustomerId(customerRequest.getCustomerId());
 		customer.setCustomerName(customerRequest.getCustomerName());
 		customerRepository.save(customer);
+	}
+	
+	/**
+	 * @param id
+	 * @param breakfast
+	 * @return totalCharge
+	 */
+	public double generateBill(int id,String breakfast) {
+		String addBreakfast = "yes";
+		double breakfastCharge = 1000;
+		double totalCharge= 0;
+		
+		Room getRoom = roomRepository.findById(id).get();
+		
+		if(breakfast.equals(addBreakfast)) {
+			totalCharge = getRoom.getRoomPrice() + breakfastCharge;
+					
+		}
+		else {
+			totalCharge = getRoom.getRoomPrice();
+		}
+		return totalCharge;
+		
 	}
 }

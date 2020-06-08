@@ -118,5 +118,9 @@ public class InternalController {
 	public List<Booking> getAllBooking(){
 		return internalService.getAllBooking();
 	}
+	@GetMapping("/bill/{id}/{breakfast}")
+	public double generateBill(@PathVariable("id") int id, @PathVariable("breakfast") String breakfast) {
+		return internalService.generateBill(id, breakfast);
+	}
 
 }

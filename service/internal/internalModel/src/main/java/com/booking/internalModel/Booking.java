@@ -2,9 +2,12 @@ package com.booking.internalModel;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -39,6 +42,12 @@ public class Booking {
 	 */
 	@Column
 	private Date endDate;
+	
+	
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="roomId")
+	private Room room;
 
 	/**
 	 * @param bookingId
@@ -47,12 +56,13 @@ public class Booking {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public Booking(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate) {
+	public Booking(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate, Room room) {
 		this.bookingId = bookingId;
 		this.breakfast = breakfast;
 		this.totalCharge = totalCharge;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.room = room;
 	}
 
 	/**
@@ -131,4 +141,5 @@ public class Booking {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 }

@@ -3,6 +3,7 @@ package com.booking.internalModel;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,6 +33,10 @@ public class Room {
 	 */
 	@Column
 	private String roomStatus;
+	
+	@OneToOne(mappedBy = "room")
+	private Booking booking;
+	
 
 	/**
 	 * @param roomId
