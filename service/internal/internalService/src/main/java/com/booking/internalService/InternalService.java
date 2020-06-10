@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import com.booking.common.BookingRequest;
 import com.booking.common.CustomerRequest;
 import com.booking.common.RoomRequest;
-import com.booking.internalModel.Booking;
+import com.booking.internalModel.BookingEntity;
 import com.booking.internalModel.BookingRepository;
-import com.booking.internalModel.Customer;
+import com.booking.internalModel.CustomerEntity;
 import com.booking.internalModel.CustomerRepository;
 import com.booking.internalModel.Hotel;
 import com.booking.internalModel.HotelRepository;
-import com.booking.internalModel.Room;
+import com.booking.internalModel.RoomEntity;
 import com.booking.internalModel.RoomRepository;
 
 /**
@@ -37,26 +37,26 @@ public class InternalService {
 	@Autowired
 	RoomRepository roomRepository;
 	
-	Room room = new Room();
+	RoomEntity roomEntity = new RoomEntity();
 	/**
 	 * CustomerRepository
 	 */
 	@Autowired
 	CustomerRepository customerRepository;
 	
-	Customer customer = new Customer();
+	CustomerEntity customerEntity = new CustomerEntity();
 	/**
 	 * BookingRepository
 	 */
 	@Autowired
 	BookingRepository bookingRepository;
 	
-	Booking booking = new Booking();
+	BookingEntity bookingEntity = new BookingEntity();
 	/**
 	 * @return hotelList 
 	 */
-	public List<Room> getAllRoom() {
-		List<Room> roomList = new ArrayList<Room>();
+	public List<RoomEntity> getAllRoom() {
+		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
 		roomRepository.findAll().forEach(room -> roomList.add(room));
 		return roomList;
 	}
@@ -64,8 +64,8 @@ public class InternalService {
 	/**
 	 * @return customerList
 	 */
-	public List<Customer> getAllCustomer(){
-		List<Customer> customerList = new ArrayList<Customer>();
+	public List<CustomerEntity> getAllCustomer(){
+		List<CustomerEntity> customerList = new ArrayList<CustomerEntity>();
 		customerRepository.findAll().forEach(customer -> customerList.add(customer));
 		return customerList;
 		}
@@ -73,19 +73,20 @@ public class InternalService {
 	/**
 	 * @param HotelRequest
 	 */
-	public void saveRoom(RoomRequest roomRequest) {
-		room.setRoomId(roomRequest.getRoomId());
-		room.setRoomType(roomRequest.getRoomType());
-		room.setRoomPrice(roomRequest.getRoomPrice());
-		room.setRoomStatus(roomRequest.getRoomStatus());
-		roomRepository.save(room);
+	public int saveRoom(RoomRequest roomRequest) {
+		roomEntity.setRoomId(roomRequest.getRoomId());
+		roomEntity.setRoomType(roomRequest.getRoomType());
+		roomEntity.setRoomPrice(roomRequest.getRoomPrice());
+		roomEntity.setRoomStatus(roomRequest.getRoomStatus());
+		roomRepository.save(roomEntity);
+		return roomEntity.getRoomId();
 	}
 	
 	/**
 	 * @return List<Booking>
 	 */
-	public List<Booking> getAllBooking(){
-		List<Booking> bookingList = new ArrayList<Booking>();
+	public List<BookingEntity> getAllBooking(){
+		List<BookingEntity> bookingList = new ArrayList<BookingEntity>();
 		bookingRepository.findAll().forEach(booking -> bookingList.add(booking));
 		return bookingList;
 	}
@@ -93,13 +94,16 @@ public class InternalService {
 	/**
 	 * @param bookingRequest
 	 */
-	public void saveBooking(BookingRequest bookingRequest) {
-		booking.setBookingId(bookingRequest.getBookingId());
-		booking.setBreakfast(bookingRequest.getBreakfast());
-		booking.setTotalCharge(bookingRequest.getTotalCharge());
-		booking.setStartDate(bookingRequest.getStartDate());
-		booking.setEndDate(bookingRequest.getEndDate());
-		bookingRepository.save(booking);
+	public int saveBooking(BookingRequest bookingRequest) {
+		bookingEntity.setBookingId(bookingRequest.getBookingId());
+		customerEntity.setCustomerId(bookingRequest.getCustomerId());
+		customerEntity.setCustomerName(bookingRequest.getCustomerName());
+		bookingEntity.setBreakfast(bookingRequest.getBreakfast());
+		bookingEntity.setStartDate(bookingRequest.getStartDate());
+		bookingEntity.setEndDate(bookingRequest.getEndDate());
+		bookingRepository.save(bookingEntity);
+		customerRepository.save(customerEntity);
+		return bookingEntity.getBookingId();
 	}
 
 	/**
@@ -114,16 +118,16 @@ public class InternalService {
 	/**
 	 * @param id to delete from repository against given id
 	 */
-	public void deleteHotel(int id) {
-		hotelRepository.deleteById(id);
+	public void deleteBooking(int id) {
+		bookingRepository.deleteById(id);
 	}
 	/**
 	 * @param customerRequest
 	 */
 	public void saveCustomer(CustomerRequest customerRequest) {
-		customer.setCustomerId(customerRequest.getCustomerId());
-		customer.setCustomerName(customerRequest.getCustomerName());
-		customerRepository.save(customer);
+		customerEntity.setCustomerId(customerRequest.getCustomerId());
+		customerEntity.setCustomerName(customerRequest.getCustomerName());
+		customerRepository.save(customerEntity);
 	}
 	
 	/**
@@ -136,7 +140,7 @@ public class InternalService {
 		double breakfastCharge = 1000;
 		double totalCharge= 0;
 		
-		Room getRoom = roomRepository.findById(id).get();
+		RoomEntity getRoom = roomRepository.findById(id).get();
 		
 		if(breakfast.equals(addBreakfast)) {
 			totalCharge = getRoom.getRoomPrice() + breakfastCharge;

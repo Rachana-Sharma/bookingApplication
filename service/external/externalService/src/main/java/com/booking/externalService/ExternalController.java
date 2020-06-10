@@ -43,11 +43,6 @@ public class ExternalController {
 	@Autowired
 	GetRoomClient bookingCliet;
 
-	public static void main(String[] args) {
-
-		SpringApplication.run(ExternalController.class, args);
-	}
-
 	/**
 	 * @return List of room
 	 */
@@ -115,6 +110,11 @@ public class ExternalController {
 	@DeleteMapping("/hotel/delete/ec/{id}")
 	public void deleteHotelES(@PathVariable("id") int id) {
 		externalService.deleteHotelES(id);
+	}
+
+	public static void main(String[] args) {
+
+		SpringApplication.run(ExternalController.class, args);
 	}
 
 }

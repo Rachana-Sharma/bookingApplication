@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.booking.common.BookingRequest;
 import com.booking.common.CustomerRequest;
 import com.booking.common.RoomRequest;
-import com.booking.internalModel.Booking;
-import com.booking.internalModel.Customer;
+import com.booking.internalModel.BookingEntity;
+import com.booking.internalModel.CustomerEntity;
 import com.booking.internalModel.Hotel;
-import com.booking.internalModel.Room;
+import com.booking.internalModel.RoomEntity;
 
 /**
  * @author Rachana Sharma The InternalController
@@ -41,36 +41,31 @@ public class InternalController {
 	@Autowired
 	InternalService internalService;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		SpringApplication.run(InternalController.class, args);
-	}
-
 	/**
 	 * @return List of all hotel
 	 */
 	@GetMapping("/room/get")
-	public List<Room> getAllRoom() {
+	public List<RoomEntity> getAllRoom() {
 		return internalService.getAllRoom();
 	}
-	
+
 	/**
 	 * @return List of all customer
 	 */
 	@GetMapping("/customer/get")
-	public List<Customer> getAllCustomer(){
+	public List<CustomerEntity> getAllCustomer() {
 		return internalService.getAllCustomer();
 	}
 
 	/**
 	 * @param hotelRequest
-	 * @return id 
+	 * @return id
 	 */
 	@PostMapping("/room/save")
 	public int saveRoom(@RequestBody RoomRequest roomRequest) {
-		internalService.saveRoom(roomRequest);
-		int id = roomRequest.getRoomId();
-		return id;
+		return internalService.saveRoom(roomRequest);
+		// int id = room.getRoomId();
+		// return id;
 
 	}
 
@@ -87,9 +82,10 @@ public class InternalController {
 	 * @param id delete from repository against given id
 	 */
 	@DeleteMapping("/hotel/delete/{id}")
-	public void deleteHotels(@PathVariable("id") int id) {
-		internalService.deleteHotel(id);
+	public void deleteBooking(@PathVariable("id") int id) {
+		internalService.deleteBooking(id);
 	}
+
 	/**
 	 * @param customerRequest
 	 * @return id
@@ -100,27 +96,34 @@ public class InternalController {
 		int id = customerRequest.getCustomerId();
 		return id;
 	}
+
 	/**
 	 * @param bookingRequest
 	 * @return id
 	 */
 	@PostMapping("/booking/save")
 	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
-		internalService.saveBooking(bookingRequest);
-		int id = bookingRequest.getBookingId();
-		return id;
+		return internalService.saveBooking(bookingRequest);
+		// int id = booking.getBookingId();
+		// return id;
 	}
 
 	/**
 	 * @return List of all booking
 	 */
 	@GetMapping("/booking/get")
-	public List<Booking> getAllBooking(){
+	public List<BookingEntity> getAllBooking() {
 		return internalService.getAllBooking();
 	}
+
 	@GetMapping("/bill/{id}/{breakfast}")
 	public double generateBill(@PathVariable("id") int id, @PathVariable("breakfast") String breakfast) {
 		return internalService.generateBill(id, breakfast);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SpringApplication.run(InternalController.class, args);
 	}
 
 }

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
  * CrudRepository
  */
 @Repository
-public interface RoomRepository extends CrudRepository<Room, Integer> {
+public interface RoomRepository extends CrudRepository<RoomEntity, Integer> {
 
 }

@@ -11,13 +11,21 @@ public class BookingRequest {
 	 */
 	private int bookingId;
 	/**
+	 * The customer id
+	 */
+	private int customerId;
+	/**
+	 * The booking id
+	 */
+	private String customerName;
+	
+
+
+	/**
 	 * The breakfast
 	 */
 	private String breakfast;
-	/**
-	 * The total charge
-	 */
-	private double totalCharge;
+	
 	/**
 	 * The start date
 	 */
@@ -26,10 +34,7 @@ public class BookingRequest {
 	 * The end date
 	 */
 	private Date endDate;
-	/**
-	 * The room id
-	 */
-	private int roomId;
+	
 
 	/**
 	 * @param bookingId
@@ -38,13 +43,14 @@ public class BookingRequest {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookingRequest(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate,int roomId) {
+	public BookingRequest(int bookingId,int customerId,String customerName, String breakfast, Date startDate, Date endDate) {
 		this.bookingId = bookingId;
+		this.customerId = customerId;
+		this.customerName = customerName;
 		this.breakfast = breakfast;
-		this.totalCharge = totalCharge;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.roomId = roomId;
+		
 	}
 
 	/**
@@ -69,6 +75,33 @@ public class BookingRequest {
 	}
 
 	/**
+	 * @return the customerId
+	 */
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * @param customerId the customerId to set
+	 */
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	/**
+	 * @return the customerName
+	 */
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	/**
+	 * @param customerName the customerName to set
+	 */
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	/**
 	 * @return the breakfast
 	 */
 	public String getBreakfast() {
@@ -82,19 +115,7 @@ public class BookingRequest {
 		this.breakfast = breakfast;
 	}
 
-	/**
-	 * @return the totalCharge
-	 */
-	public double getTotalCharge() {
-		return totalCharge;
-	}
-
-	/**
-	 * @param totalCharge the totalCharge to set
-	 */
-	public void setTotalCharge(double totalCharge) {
-		this.totalCharge = totalCharge;
-	}
+	
 
 	/**
 	 * @return the startDate
@@ -123,17 +144,5 @@ public class BookingRequest {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	/**
-	 * @return the roomId
-	 */
-	public int getRoomId() {
-		return roomId;
-	}
-
-	/**
-	 * @param roomId the roomId to set
-	 */
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
-	}
+	
 }
