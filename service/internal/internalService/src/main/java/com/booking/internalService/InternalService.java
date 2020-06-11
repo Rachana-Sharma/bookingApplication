@@ -6,15 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
-import com.booking.common.CustomerRequest;
-import com.booking.common.RoomRequest;
 import com.booking.internalModel.BookingEntity;
 import com.booking.internalModel.BookingRepository;
 import com.booking.internalModel.CustomerEntity;
 import com.booking.internalModel.CustomerRepository;
-import com.booking.internalModel.Hotel;
-import com.booking.internalModel.HotelRepository;
 import com.booking.internalModel.RoomEntity;
 import com.booking.internalModel.RoomRepository;
 
@@ -25,72 +22,54 @@ import com.booking.internalModel.RoomRepository;
 public class InternalService {
 
 	/**
-	 * HotelRepository
-	 */
-	@Autowired
-	HotelRepository hotelRepository;
-
-	Hotel hotel = new Hotel();
-	/**
 	 * RoomRepository
 	 */
 	@Autowired
 	RoomRepository roomRepository;
-	
+
 	RoomEntity roomEntity = new RoomEntity();
 	/**
 	 * CustomerRepository
 	 */
 	@Autowired
 	CustomerRepository customerRepository;
-	
+
 	CustomerEntity customerEntity = new CustomerEntity();
 	/**
 	 * BookingRepository
 	 */
 	@Autowired
 	BookingRepository bookingRepository;
-	
+
 	BookingEntity bookingEntity = new BookingEntity();
+
 	/**
-	 * @return hotelList 
+	 * @return hotelList
 	 */
 	public List<RoomEntity> getAllRoom() {
 		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
 		roomRepository.findAll().forEach(room -> roomList.add(room));
 		return roomList;
 	}
-	
+
 	/**
 	 * @return customerList
 	 */
-	public List<CustomerEntity> getAllCustomer(){
+	public List<CustomerEntity> getAllCustomer() {
 		List<CustomerEntity> customerList = new ArrayList<CustomerEntity>();
 		customerRepository.findAll().forEach(customer -> customerList.add(customer));
 		return customerList;
-		}
-
-	/**
-	 * @param HotelRequest
-	 */
-	public int saveRoom(RoomRequest roomRequest) {
-		roomEntity.setRoomId(roomRequest.getRoomId());
-		roomEntity.setRoomType(roomRequest.getRoomType());
-		roomEntity.setRoomPrice(roomRequest.getRoomPrice());
-		roomEntity.setRoomStatus(roomRequest.getRoomStatus());
-		roomRepository.save(roomEntity);
-		return roomEntity.getRoomId();
 	}
-	
+
 	/**
 	 * @return List<Booking>
 	 */
-	public List<BookingEntity> getAllBooking(){
+	public List<BookingEntity> getAllBooking() {
 		List<BookingEntity> bookingList = new ArrayList<BookingEntity>();
 		bookingRepository.findAll().forEach(booking -> bookingList.add(booking));
 		return bookingList;
 	}
-	
+
 	/**
 	 * @param bookingRequest
 	 */
@@ -110,8 +89,8 @@ public class InternalService {
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
-	public Hotel getHotelById(int id) {
-		return hotelRepository.findById(id).get();
+	public RoomEntity getRoomById(int id) {
+		return roomRepository.findById(id).get();
 
 	}
 
@@ -121,35 +100,25 @@ public class InternalService {
 	public void deleteBooking(int id) {
 		bookingRepository.deleteById(id);
 	}
-	/**
-	 * @param customerRequest
-	 */
-	public void saveCustomer(CustomerRequest customerRequest) {
-		customerEntity.setCustomerId(customerRequest.getCustomerId());
-		customerEntity.setCustomerName(customerRequest.getCustomerName());
-		customerRepository.save(customerEntity);
-	}
-	
+
 	/**
 	 * @param id
 	 * @param breakfast
 	 * @return totalCharge
 	 */
-	public double generateBill(int id,String breakfast) {
-		String addBreakfast = "yes";
+
+	public double generateBill(BillingRequest billingRequest) {
 		double breakfastCharge = 1000;
-		double totalCharge= 0;
-		
-		RoomEntity getRoom = roomRepository.findById(id).get();
-		
-		if(breakfast.equals(addBreakfast)) {
+		double totalCharge = 0;
+		RoomEntity getRoom = roomRepository.findById(billingRequest.getRoomId()).get();
+		BookingEntity getBooking = bookingRepository.findById(billingRequest.getBookingId()).get();
+		if (billingRequest.isBreakfast() == true) {
 			totalCharge = getRoom.getRoomPrice() + breakfastCharge;
-					
-		}
-		else {
+		} else {
 			totalCharge = getRoom.getRoomPrice();
 		}
+		getBooking.setTotalCharge(totalCharge);
+		bookingRepository.save(getBooking);
 		return totalCharge;
-		
 	}
 }

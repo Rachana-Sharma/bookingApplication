@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
-import com.booking.common.CustomerRequest;
-import com.booking.common.HotelRequest;
-import com.booking.common.RoomRequest;
+import com.booking.common.CustomerResponse;
+import com.booking.common.RoomResponse;
 import com.booking.internalClient.GetRoomClient;
 
 /**
@@ -47,43 +47,25 @@ public class ExternalController {
 	 * @return List of room
 	 */
 	@GetMapping("/room/get/ec")
-	public List<RoomRequest> getAllRoomES() {
-		return externalService.getAllRoomES();
+	public List<RoomResponse> getAllRoom() {
+		return externalService.getAllRoom();
 
-	}
-
-	/**
-	 * @param roomRequest
-	 * @return saves new room
-	 */
-	@PostMapping("/room/save/ec")
-	public int saveRoomES(@RequestBody RoomRequest roomRequest) {
-		return externalService.saveRoomES(roomRequest);
 	}
 
 	/**
 	 * @return List of customer
 	 */
 	@GetMapping("/customer/get/ec")
-	public List<CustomerRequest> getAllCustomerES() {
-		return externalService.getAllCustomerES();
-	}
-
-	/**
-	 * @param customerRequest
-	 * @return saves new customer
-	 */
-	@PostMapping("/customer/save/ec")
-	public int saveCustomerES(@RequestBody CustomerRequest customerRequest) {
-		return externalService.saveCustomerES(customerRequest);
+	public List<CustomerResponse> getAllCustomer() {
+		return externalService.getAllCustomer();
 	}
 
 	/**
 	 * @return List of customer
 	 */
 	@GetMapping("/booking/get/ec")
-	public List<BookingRequest> getAllBookingES() {
-		return externalService.getBookingES();
+	public List<BookingRequest> getAllBooking() {
+		return externalService.getBooking();
 	}
 
 	/**
@@ -91,8 +73,8 @@ public class ExternalController {
 	 * @return int
 	 */
 	@PostMapping("/booking/save/ec")
-	public int saveBookingES(@RequestBody BookingRequest bookingRequest) {
-		return externalService.saveBookingES(bookingRequest);
+	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
+		return externalService.saveBooking(bookingRequest);
 	}
 
 	/**
@@ -100,16 +82,25 @@ public class ExternalController {
 	 * @return saved details against given id
 	 */
 	@GetMapping("/hotel/ec/{id}")
-	public HotelRequest getHotelByIdES(@PathVariable("id") int id) {
-		return externalService.getHotelByIdES(id);
+	public RoomResponse getRoomById(@PathVariable("id") int id) {
+		return externalService.getRoomById(id);
 	}
 
 	/**
 	 * @param id
 	 */
 	@DeleteMapping("/hotel/delete/ec/{id}")
-	public void deleteHotelES(@PathVariable("id") int id) {
-		externalService.deleteHotelES(id);
+	public void deleteBooking(@PathVariable("id") int id) {
+		externalService.deleteBooking(id);
+	}
+
+	/**
+	 * @param billingRequest
+	 * @return
+	 */
+	@PostMapping("/bill/get")
+	public double generateBill(@RequestBody BillingRequest billingRequest) {
+		return externalService.generateBill(billingRequest);
 	}
 
 	public static void main(String[] args) {

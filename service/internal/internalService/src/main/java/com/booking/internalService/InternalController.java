@@ -16,12 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
-import com.booking.common.CustomerRequest;
-import com.booking.common.RoomRequest;
 import com.booking.internalModel.BookingEntity;
 import com.booking.internalModel.CustomerEntity;
-import com.booking.internalModel.Hotel;
 import com.booking.internalModel.RoomEntity;
 
 /**
@@ -58,24 +56,12 @@ public class InternalController {
 	}
 
 	/**
-	 * @param hotelRequest
-	 * @return id
-	 */
-	@PostMapping("/room/save")
-	public int saveRoom(@RequestBody RoomRequest roomRequest) {
-		return internalService.saveRoom(roomRequest);
-		// int id = room.getRoomId();
-		// return id;
-
-	}
-
-	/**
 	 * @param id
 	 * @return saved details against given id
 	 */
 	@GetMapping("/hotel/{id}")
-	public Hotel getHotelById(@PathVariable("id") int id) {
-		return internalService.getHotelById(id);
+	public RoomEntity getRoomById(@PathVariable("id") int id) {
+		return internalService.getRoomById(id);
 	}
 
 	/**
@@ -90,12 +76,6 @@ public class InternalController {
 	 * @param customerRequest
 	 * @return id
 	 */
-	@PostMapping("/customer/save")
-	public int saveCustomer(@RequestBody CustomerRequest customerRequest) {
-		internalService.saveCustomer(customerRequest);
-		int id = customerRequest.getCustomerId();
-		return id;
-	}
 
 	/**
 	 * @param bookingRequest
@@ -104,8 +84,6 @@ public class InternalController {
 	@PostMapping("/booking/save")
 	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
 		return internalService.saveBooking(bookingRequest);
-		// int id = booking.getBookingId();
-		// return id;
 	}
 
 	/**
@@ -116,13 +94,16 @@ public class InternalController {
 		return internalService.getAllBooking();
 	}
 
-	@GetMapping("/bill/{id}/{breakfast}")
-	public double generateBill(@PathVariable("id") int id, @PathVariable("breakfast") String breakfast) {
-		return internalService.generateBill(id, breakfast);
+	/**
+	 * @param billingRequest
+	 * @return totalCharge
+	 */
+	@PostMapping("/bill")
+	public double generateBill(@RequestBody BillingRequest billingRequest) {
+		return internalService.generateBill(billingRequest);
 	}
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		SpringApplication.run(InternalController.class, args);
 	}
 

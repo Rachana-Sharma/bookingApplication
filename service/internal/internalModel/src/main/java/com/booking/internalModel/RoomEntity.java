@@ -13,36 +13,35 @@ import javax.persistence.Table;
 /**
  * @author Rachana Sharma Room
  */
+
 @Entity
-@Table
+@Table(name = "Room_Entity")
 public class RoomEntity {
 	/**
 	 * The Room Id
 	 */
 	@Id
-	@SequenceGenerator(initialValue = 1,allocationSize = 3, name = "mySeqGen")
+	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int roomId;
 	/**
 	 * The Room Type
 	 */
-	@Column
+	@Column(name = "RoomType")
 	private String roomType;
 	/**
 	 * The Room Price
 	 */
-	@Column
+	@Column(name = "RoomPrice")
 	private double roomPrice;
 	/**
 	 * The Room Status
 	 */
-	@Column
+	@Column(name = "RoomStatus")
 	private String roomStatus;
-	
-	@OneToOne(mappedBy = "room",fetch = FetchType.LAZY)
+
+	@OneToOne(mappedBy = "room", fetch = FetchType.LAZY)
 	private BookingEntity booking;
-	
 
 	/**
 	 * @param roomId

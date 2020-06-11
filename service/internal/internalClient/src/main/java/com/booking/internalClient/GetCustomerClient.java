@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.booking.common.CustomerRequest;
+import com.booking.common.CustomerResponse;
 
 /**
  * @author Rachana Sharma GetCustomerClient
@@ -25,13 +25,13 @@ public class GetCustomerClient {
 	/**
 	 * @return List<CustomerRequest>
 	 */
-	public List<CustomerRequest> getAllCustomerClient() {
-		ParameterizedTypeReference<List<CustomerRequest>> customer = new ParameterizedTypeReference<List<CustomerRequest>>() {
+	public List<CustomerResponse> getAllCustomerClient() {
+		ParameterizedTypeReference<List<CustomerResponse>> customer = new ParameterizedTypeReference<List<CustomerResponse>>() {
 		};
 
-		ResponseEntity<List<CustomerRequest>> response = restTemplate.exchange("http://localhost:8080/customer/get",
+		ResponseEntity<List<CustomerResponse>> response = restTemplate.exchange("http://localhost:8080/customer/get",
 				HttpMethod.GET, null, customer);
-		List<CustomerRequest> myList = response.getBody();
+		List<CustomerResponse> myList = response.getBody();
 		return myList;
 	}
 }

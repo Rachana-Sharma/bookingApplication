@@ -4,12 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+import com.booking.internalClient.GenerateBillClient;
 import com.booking.internalClient.GetBookingClient;
 import com.booking.internalClient.GetCustomerClient;
 import com.booking.internalClient.GetRoomClient;
 import com.booking.internalClient.SaveBookingClient;
-import com.booking.internalClient.SaveCustomerClient;
-import com.booking.internalClient.SaveRoomClient;
 
 /**
  * @author Rachana Sharma ConfigurationClass
@@ -36,7 +35,7 @@ public class ConfigurationClass {
 	/**
 	 * Bean for External Service
 	 */
-	
+
 	public ExternalService externalService() {
 		return new ExternalService();
 	}
@@ -48,20 +47,7 @@ public class ConfigurationClass {
 	public GetCustomerClient getCustomerClient() {
 		return new GetCustomerClient();
 	}
-	/**
-	 * Bean for SaveRoomClient
-	 */
-	@Bean
-	public SaveRoomClient saveRoomClient() {
-		return new SaveRoomClient();
-	}
-	/**
-	 * Bean for SaveCustomerClient
-	 */
-	@Bean
-	public SaveCustomerClient saveCustomerClient() {
-		return new SaveCustomerClient();
-	}
+
 	/**
 	 * Bean for SaveCustomerClient
 	 */
@@ -69,11 +55,20 @@ public class ConfigurationClass {
 	public SaveBookingClient saveBookingClient() {
 		return new SaveBookingClient();
 	}
+
 	/**
 	 * Bean for GetBookingClient
 	 */
 	@Bean
 	public GetBookingClient getBookingClient() {
 		return new GetBookingClient();
+	}
+
+	/**
+	 * Bean for GenerateBillClient
+	 */
+	@Bean
+	public GenerateBillClient generateBillClient() {
+		return new GenerateBillClient();
 	}
 }

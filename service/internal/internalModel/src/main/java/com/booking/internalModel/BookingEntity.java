@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -23,8 +22,8 @@ public class BookingEntity {
 	 * The booking id
 	 */
 	@Id
-	//@SequenceGenerator(initialValue = 1,allocationSize = 3, name = "mySeqGen")
-	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	// @SequenceGenerator(initialValue = 1,allocationSize = 3, name = "mySeqGen")
+	// @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bookingId;
 	/**
@@ -47,11 +46,9 @@ public class BookingEntity {
 	 */
 	@Column
 	private Date endDate;
-	
-	
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="roomId")
+	@JoinColumn(name = "roomId")
 	private RoomEntity room;
 
 	/**
@@ -61,8 +58,9 @@ public class BookingEntity {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookingEntity(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate, RoomEntity room) {
-		//this.bookingId = bookingId;
+	public BookingEntity(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate,
+			RoomEntity room) {
+		// this.bookingId = bookingId;
 		this.breakfast = breakfast;
 		this.totalCharge = totalCharge;
 		this.startDate = startDate;
@@ -146,5 +144,5 @@ public class BookingEntity {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
+
 }

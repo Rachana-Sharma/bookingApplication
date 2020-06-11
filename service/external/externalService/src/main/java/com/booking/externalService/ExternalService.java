@@ -5,16 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
-import com.booking.common.CustomerRequest;
-import com.booking.common.HotelRequest;
-import com.booking.common.RoomRequest;
+import com.booking.common.CustomerResponse;
+import com.booking.common.RoomResponse;
+import com.booking.internalClient.GenerateBillClient;
 import com.booking.internalClient.GetBookingClient;
 import com.booking.internalClient.GetCustomerClient;
 import com.booking.internalClient.GetRoomClient;
 import com.booking.internalClient.SaveBookingClient;
-import com.booking.internalClient.SaveCustomerClient;
-import com.booking.internalClient.SaveRoomClient;
 
 /**
  * @author Rachana Sharma The ExternalService
@@ -33,16 +32,6 @@ public class ExternalService {
 	@Autowired
 	GetCustomerClient getCustomerClient;
 	/**
-	 * GetCustomerClient
-	 */
-	@Autowired
-	SaveRoomClient saveRoomClient;
-	/**
-	 * SaveCustomerClient
-	 */
-	@Autowired
-	SaveCustomerClient saveCustomerClient;
-	/**
 	 * SaveCustomerClient
 	 */
 	@Autowired
@@ -52,44 +41,33 @@ public class ExternalService {
 	 */
 	@Autowired
 	GetBookingClient getBookingClient;
+	/**
+	 * GenerateBillClient
+	 */
+	@Autowired
+	GenerateBillClient generateBillClient;
 
 	/**
 	 * @return roomList to add new room to the ArrayList
 	 */
-	public List<RoomRequest> getAllRoomES() {
+	public List<RoomResponse> getAllRoom() {
 		return getRoomClient.getAllRoomClient();
 
 	}
 
 	/**
-	 * @param roomRequest
-	 * @return room to save into room repository via client
-	 */
-	public int saveRoomES(RoomRequest roomRequest) {
-		return saveRoomClient.saveRoomClient(roomRequest);
-	}
-
-	/**
 	 * @return customerList to add new customer to the ArrayList
 	 */
-	public List<CustomerRequest> getAllCustomerES() {
+	public List<CustomerResponse> getAllCustomer() {
 		return getCustomerClient.getAllCustomerClient();
 
-	}
-
-	/**
-	 * @param customerRequest
-	 * @return customer to save into customer repository via client
-	 */
-	public int saveCustomerES(CustomerRequest customerRequest) {
-		return saveCustomerClient.saveCustomerClient(customerRequest);
 	}
 
 	/**
 	 * @param bookingRequest
 	 * @return List<BookingRequest>
 	 */
-	public List<BookingRequest> getBookingES() {
+	public List<BookingRequest> getBooking() {
 		return getBookingClient.getAllBookingClient();
 	}
 
@@ -97,7 +75,7 @@ public class ExternalService {
 	 * @param bookingRequest
 	 * @return int
 	 */
-	public int saveBookingES(BookingRequest bookingRequest) {
+	public int saveBooking(BookingRequest bookingRequest) {
 		return saveBookingClient.saveBookingClient(bookingRequest);
 	}
 
@@ -105,14 +83,22 @@ public class ExternalService {
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
-	public HotelRequest getHotelByIdES(int id) {
-		return getRoomClient.getHotelByIdClient(id);
+	public RoomResponse getRoomById(int id) {
+		return getRoomClient.getRoomByIdClient(id);
 	}
 
 	/**
 	 * @param id
 	 */
-	public void deleteHotelES(int id) {
-		getRoomClient.deleteHotelClient(id);
+	public void deleteBooking(int id) {
+		getRoomClient.deleteBookingClient(id);
+	}
+
+	/**
+	 * @param billingRequest
+	 * @return
+	 */
+	public double generateBill(BillingRequest billingRequest) {
+		return generateBillClient.generateBillClientMethod(billingRequest);
 	}
 }
