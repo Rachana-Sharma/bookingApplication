@@ -1,101 +1,36 @@
 package com.booking.common;
 
-/**
- * @author Rachana Sharma Room
- */
+import java.util.List;
+
 public class RoomResponse {
-	/**
-	 * The Room Id
-	 */
-	private int roomId;
-	/**
-	 * The Room Type
-	 */
-	private String roomType;
-	/**
-	 * The Room Price
-	 */
-	private double roomPrice;
-	/**
-	 * The Room Status
-	 */
-	private String roomStatus;
+	List<RoomModel> roomResponse;
 
 	/**
-	 * @param roomId
-	 * @param roomType
-	 * @param roomPrice
-	 * @param roomStatus
+	 * @return the roomResponse
 	 */
-	public RoomResponse(int roomId, String roomType, double roomPrice, String roomStatus) {
-
-		this.roomId = roomId;
-		this.roomType = roomType;
-		this.roomPrice = roomPrice;
-		this.roomStatus = roomStatus;
+	public List<RoomModel> getRoomResponse() {
+		return roomResponse;
 	}
 
 	/**
-	 * Empty Constructor
+	 * @param roomResponse the roomResponse to set
+	 */
+	public void setRoomResponse(List<RoomModel> roomResponse) {
+		this.roomResponse = roomResponse;
+	}
+
+	/**
+	 * 
 	 */
 	public RoomResponse() {
-
+		super();
 	}
 
 	/**
-	 * @return the roomId
+	 * @param roomRespon
 	 */
-	public int getRoomId() {
-		return roomId;
-	}
-
-	/**
-	 * @param roomId the roomId to set
-	 */
-	public void setRoomId(int roomId) {
-		this.roomId = roomId;
-	}
-
-	/**
-	 * @return the roomType
-	 */
-	public String getRoomType() {
-		return roomType;
-	}
-
-	/**
-	 * @param roomType the roomType to set
-	 */
-	public void setRoomType(String roomType) {
-		this.roomType = roomType;
-	}
-
-	/**
-	 * @return the roomPrice
-	 */
-	public double getRoomPrice() {
-		return roomPrice;
-	}
-
-	/**
-	 * @param roomPrice the roomPrice to set
-	 */
-	public void setRoomPrice(double roomPrice) {
-		this.roomPrice = roomPrice;
-	}
-
-	/**
-	 * @return the roomStatus
-	 */
-	public String getRoomStatus() {
-		return roomStatus;
-	}
-
-	/**
-	 * @param roomStatus the roomStatus to set
-	 */
-	public void setRoomStatus(String roomStatus) {
-		this.roomStatus = roomStatus;
-	}
-
+	public RoomResponse(List<RoomModel> roomResponse) {
+		super();
+		this.roomResponse = roomResponse;
+	};
 }
