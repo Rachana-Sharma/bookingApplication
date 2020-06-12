@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
 import com.booking.common.CustomerResponse;
+import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
 import com.booking.internalClient.GenerateBillClient;
+import com.booking.internalClient.GetAllRoomClient;
 import com.booking.internalClient.GetBookingClient;
 import com.booking.internalClient.GetCustomerClient;
-import com.booking.internalClient.GetRoomClient;
+import com.booking.internalClient.GetRoomByIdClient;
 import com.booking.internalClient.SaveBookingClient;
 
 /**
@@ -25,7 +27,7 @@ public class ExternalService {
 	 * GetRoomClient
 	 */
 	@Autowired
-	GetRoomClient getRoomClient;
+	GetRoomByIdClient getRoomClient;
 	/**
 	 * GetCustomerClient
 	 */
@@ -46,14 +48,11 @@ public class ExternalService {
 	 */
 	@Autowired
 	GenerateBillClient generateBillClient;
-
 	/**
-	 * @return roomList to add new room to the ArrayList
+	 * GetAllRoomClient
 	 */
-	public List<RoomResponse> getAllRoom() {
-		return getRoomClient.getAllRoomClient();
-
-	}
+	@Autowired
+	GetAllRoomClient getAllRoomClient;
 
 	/**
 	 * @return customerList to add new customer to the ArrayList
@@ -83,7 +82,7 @@ public class ExternalService {
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
-	public RoomResponse getRoomById(int id) {
+	public RoomModel getRoomById(int id) {
 		return getRoomClient.getRoomByIdClient(id);
 	}
 
@@ -100,5 +99,11 @@ public class ExternalService {
 	 */
 	public double generateBill(BillingRequest billingRequest) {
 		return generateBillClient.generateBillClientMethod(billingRequest);
+	}
+	/**
+	 * @return
+	 */
+	public RoomResponse getAllRoom() {
+		return getAllRoomClient.getAllRoomClientMethod();
 	}
 }

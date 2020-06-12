@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
+import com.booking.common.RoomResponse;
 import com.booking.internalModel.BookingEntity;
 import com.booking.internalModel.CustomerEntity;
 import com.booking.internalModel.RoomEntity;
@@ -39,11 +40,12 @@ public class InternalController {
 	@Autowired
 	InternalService internalService;
 
+	
 	/**
-	 * @return List of all hotel
+	 * @return all rooms
 	 */
-	@GetMapping("/room/get")
-	public List<RoomEntity> getAllRoom() {
+	@GetMapping("/room")
+	public RoomResponse getAllRoom() {
 		return internalService.getAllRoom();
 	}
 

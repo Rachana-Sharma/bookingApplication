@@ -5,9 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.internalClient.GenerateBillClient;
+import com.booking.internalClient.GetAllRoomClient;
 import com.booking.internalClient.GetBookingClient;
 import com.booking.internalClient.GetCustomerClient;
-import com.booking.internalClient.GetRoomClient;
+import com.booking.internalClient.GetRoomByIdClient;
 import com.booking.internalClient.SaveBookingClient;
 
 /**
@@ -28,8 +29,8 @@ public class ConfigurationClass {
 	 * Bean for GetRoomClient
 	 */
 	@Bean
-	public GetRoomClient client() {
-		return new GetRoomClient();
+	public GetRoomByIdClient client() {
+		return new GetRoomByIdClient();
 	}
 
 	/**
@@ -70,5 +71,12 @@ public class ConfigurationClass {
 	@Bean
 	public GenerateBillClient generateBillClient() {
 		return new GenerateBillClient();
+	}
+	/**
+	 * Bean for GetAllRoomClient
+	 */
+	@Bean
+	public GetAllRoomClient getAllRoomClient() {
+		return new GetAllRoomClient();
 	}
 }

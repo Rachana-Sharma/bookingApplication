@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
+import com.booking.common.RoomModel;
+import com.booking.common.RoomResponse;
 import com.booking.internalModel.BookingEntity;
 import com.booking.internalModel.BookingRepository;
 import com.booking.internalModel.CustomerEntity;
@@ -43,13 +45,27 @@ public class InternalService {
 
 	BookingEntity bookingEntity = new BookingEntity();
 
-	/**
-	 * @return hotelList
-	 */
-	public List<RoomEntity> getAllRoom() {
-		List<RoomEntity> roomList = new ArrayList<RoomEntity>();
-		roomRepository.findAll().forEach(room -> roomList.add(room));
-		return roomList;
+	
+	
+	public RoomResponse getAllRoom() {
+		List<RoomEntity> roomList=   (List<RoomEntity>) roomRepository.findAll();
+		List<RoomModel> list= new ArrayList<RoomModel>();
+		
+		RoomModel roomModel =  null;
+		for(int i=0; i<roomList.size();i++) {
+			roomModel	= new RoomModel();
+			roomModel.setRoomId(roomList.get(i).getRoomId());
+			roomModel.setRoomPrice(roomList.get(i).getRoomPrice());
+			roomModel.setRoomStatus(roomList.get(i).getRoomStatus());
+			roomModel.setRoomType(roomList.get(i).getRoomType());
+			list.add(roomModel);
+		}
+		//return roomResponse;
+		RoomResponse roomResponse=new RoomResponse();
+		roomResponse.setRoomResponse(list);
+		return roomResponse;
+		
+		  
 	}
 
 	/**

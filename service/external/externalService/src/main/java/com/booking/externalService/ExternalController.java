@@ -17,8 +17,9 @@ import org.springframework.web.client.RestTemplate;
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
 import com.booking.common.CustomerResponse;
+import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
-import com.booking.internalClient.GetRoomClient;
+import com.booking.internalClient.GetRoomByIdClient;
 
 /**
  * @author Rachana Sharma The ExternalController
@@ -41,16 +42,8 @@ public class ExternalController {
 	 * BookingClient
 	 */
 	@Autowired
-	GetRoomClient bookingCliet;
+	GetRoomByIdClient bookingCliet;
 
-	/**
-	 * @return List of room
-	 */
-	@GetMapping("/room/get/ec")
-	public List<RoomResponse> getAllRoom() {
-		return externalService.getAllRoom();
-
-	}
 
 	/**
 	 * @return List of customer
@@ -82,7 +75,7 @@ public class ExternalController {
 	 * @return saved details against given id
 	 */
 	@GetMapping("/hotel/ec/{id}")
-	public RoomResponse getRoomById(@PathVariable("id") int id) {
+	public RoomModel getRoomById(@PathVariable("id") int id) {
 		return externalService.getRoomById(id);
 	}
 
@@ -101,6 +94,10 @@ public class ExternalController {
 	@PostMapping("/bill/get")
 	public double generateBill(@RequestBody BillingRequest billingRequest) {
 		return externalService.generateBill(billingRequest);
+	}
+	@GetMapping("/room/response")
+	public RoomResponse getAllRoom() {
+		return externalService.getAllRoom();
 	}
 
 	public static void main(String[] args) {
