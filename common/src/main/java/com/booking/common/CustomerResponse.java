@@ -1,61 +1,35 @@
 package com.booking.common;
 
-/**
- * @author Rachana Sharma Customer
- */
+import java.util.List;
+
 public class CustomerResponse {
-	/**
-	 * The Customer Id
-	 */
-	private int customerId;
-	/**
-	 * The Customer Name
-	 */
-	private String customerName;
+	List<CustomerModel> customerResponse;
 
 	/**
-	 * @param customerId
-	 * @param customerName
+	 * @param customerResponse
 	 */
-	public CustomerResponse(int customerId, String customerName) {
-
-		this.customerId = customerId;
-		this.customerName = customerName;
+	public CustomerResponse(List<CustomerModel> customerResponse) {
+		this.customerResponse = customerResponse;
 	}
 
 	/**
-	 * Empty Constructor
+	 * @param customerResponse
 	 */
 	public CustomerResponse() {
 
 	}
 
 	/**
-	 * @return the customerId
+	 * @return the customerResponse
 	 */
-	public int getCustomerId() {
-		return customerId;
+	public List<CustomerModel> getCustomerResponse() {
+		return customerResponse;
 	}
 
 	/**
-	 * @param customerId the customerId to set
+	 * @param customerResponse the customerResponse to set
 	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerResponse(List<CustomerModel> customerResponse) {
+		this.customerResponse = customerResponse;
 	}
-
-	/**
-	 * @return the customerName
-	 */
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	/**
-	 * @param customerName the customerName to set
-	 */
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
 }
