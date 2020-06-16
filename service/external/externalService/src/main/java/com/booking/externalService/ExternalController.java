@@ -1,7 +1,5 @@
 package com.booking.externalService;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
+import com.booking.common.BookingResponse;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
@@ -44,24 +43,26 @@ public class ExternalController {
 	@Autowired
 	GetRoomByIdClient bookingCliet;
 
-
 	/**
+	 * returns all customer
 	 * @return List of customer
 	 */
 	@GetMapping("/customer/get/ec")
-	public List<CustomerResponse> getAllCustomer() {
+	public CustomerResponse getAllCustomer() {
 		return externalService.getAllCustomer();
 	}
 
 	/**
-	 * @return List of customer
+	 * returns all booking
+	 * @return List of booking
 	 */
 	@GetMapping("/booking/get/ec")
-	public List<BookingRequest> getAllBooking() {
+	public BookingResponse getAllBooking() {
 		return externalService.getBooking();
 	}
 
 	/**
+	 * saves new booking
 	 * @param bookingRequest
 	 * @return int
 	 */
@@ -71,15 +72,17 @@ public class ExternalController {
 	}
 
 	/**
+	 * get room by id
 	 * @param id
 	 * @return saved details against given id
 	 */
-	@GetMapping("/hotel/ec/{id}")
+	@GetMapping("/room/ec/{id}")
 	public RoomModel getRoomById(@PathVariable("id") int id) {
 		return externalService.getRoomById(id);
 	}
 
 	/**
+	 * delete booking by id
 	 * @param id
 	 */
 	@DeleteMapping("/hotel/delete/ec/{id}")
@@ -88,6 +91,7 @@ public class ExternalController {
 	}
 
 	/**
+	 * creates a bill against given booking details
 	 * @param billingRequest
 	 * @return
 	 */
@@ -95,6 +99,7 @@ public class ExternalController {
 	public double generateBill(@RequestBody BillingRequest billingRequest) {
 		return externalService.generateBill(billingRequest);
 	}
+
 	@GetMapping("/room/response")
 	public RoomResponse getAllRoom() {
 		return externalService.getAllRoom();

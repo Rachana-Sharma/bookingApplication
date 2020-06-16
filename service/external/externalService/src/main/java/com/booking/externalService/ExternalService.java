@@ -1,12 +1,11 @@
 package com.booking.externalService;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
+import com.booking.common.BookingResponse;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
@@ -55,22 +54,25 @@ public class ExternalService {
 	GetAllRoomClient getAllRoomClient;
 
 	/**
+	 * returns all customer
 	 * @return customerList to add new customer to the ArrayList
 	 */
-	public List<CustomerResponse> getAllCustomer() {
+	public CustomerResponse getAllCustomer() {
 		return getCustomerClient.getAllCustomerClient();
 
 	}
 
 	/**
+	 * returns all booking
 	 * @param bookingRequest
 	 * @return List<BookingRequest>
 	 */
-	public List<BookingRequest> getBooking() {
+	public BookingResponse getBooking() {
 		return getBookingClient.getAllBookingClient();
 	}
 
 	/**
+	 * saves new booking
 	 * @param bookingRequest
 	 * @return int
 	 */
@@ -79,6 +81,7 @@ public class ExternalService {
 	}
 
 	/**
+	 * get room by id
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
@@ -87,6 +90,7 @@ public class ExternalService {
 	}
 
 	/**
+	 * delete booking by id
 	 * @param id
 	 */
 	public void deleteBooking(int id) {
@@ -94,13 +98,15 @@ public class ExternalService {
 	}
 
 	/**
+	 * creates a bill against given booking details
 	 * @param billingRequest
-	 * @return
+	 * @return totalCharge
 	 */
 	public double generateBill(BillingRequest billingRequest) {
 		return generateBillClient.generateBillClientMethod(billingRequest);
 	}
 	/**
+	 * returns all rooms 
 	 * @return
 	 */
 	public RoomResponse getAllRoom() {

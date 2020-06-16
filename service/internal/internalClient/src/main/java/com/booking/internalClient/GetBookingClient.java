@@ -1,14 +1,13 @@
 package com.booking.internalClient;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import com.booking.common.BookingRequest;
+import com.booking.common.BookingResponse;
 
 /**
  * @author Rachana Sharma GetBookingClient
@@ -18,16 +17,16 @@ public class GetBookingClient {
 	private RestTemplate restTemplate;
 
 	/**
+	 * Client Method  get all booking
 	 * @param bookingRequest
-	 * @return List<BookingRequest>
+	 * @return BookingResponse
 	 */
-	public List<BookingRequest> getAllBookingClient() {
-		ParameterizedTypeReference<List<BookingRequest>> booking = new ParameterizedTypeReference<List<BookingRequest>>() {
-		};
-
-		ResponseEntity<List<BookingRequest>> response = restTemplate.exchange("http://localhost:8080/booking/get",
-				HttpMethod.GET, null, booking);
-		List<BookingRequest> myList = response.getBody();
-		return myList;
+	public BookingResponse getAllBookingClient() {
+		HttpHeaders headers = new HttpHeaders();
+		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
+		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange("http://localhost:8080/booking/get",
+				HttpMethod.GET, requestEntity, BookingResponse.class);
+		BookingResponse bookingResponse = responseEntity.getBody();
+		return bookingResponse;
 	}
 }

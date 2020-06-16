@@ -1,7 +1,5 @@
 package com.booking.internalService;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.booking.common.BillingRequest;
 import com.booking.common.BookingRequest;
+import com.booking.common.BookingResponse;
+import com.booking.common.CustomerResponse;
 import com.booking.common.RoomResponse;
-import com.booking.internalModel.BookingEntity;
-import com.booking.internalModel.CustomerEntity;
 import com.booking.internalModel.RoomEntity;
 
 /**
@@ -42,6 +40,7 @@ public class InternalController {
 
 	
 	/**
+	 * returns all rooms 
 	 * @return all rooms
 	 */
 	@GetMapping("/room")
@@ -50,23 +49,26 @@ public class InternalController {
 	}
 
 	/**
+	 * returns all customer
 	 * @return List of all customer
 	 */
 	@GetMapping("/customer/get")
-	public List<CustomerEntity> getAllCustomer() {
+	public CustomerResponse getAllCustomer() {
 		return internalService.getAllCustomer();
 	}
 
 	/**
+	 * get room by id
 	 * @param id
 	 * @return saved details against given id
 	 */
-	@GetMapping("/hotel/{id}")
+	@GetMapping("/room/{id}")
 	public RoomEntity getRoomById(@PathVariable("id") int id) {
 		return internalService.getRoomById(id);
 	}
 
 	/**
+	 * delete booking by id
 	 * @param id delete from repository against given id
 	 */
 	@DeleteMapping("/hotel/delete/{id}")
@@ -80,6 +82,7 @@ public class InternalController {
 	 */
 
 	/**
+	 * saves new booking 
 	 * @param bookingRequest
 	 * @return id
 	 */
@@ -89,14 +92,16 @@ public class InternalController {
 	}
 
 	/**
+	 * returns all booking
 	 * @return List of all booking
 	 */
 	@GetMapping("/booking/get")
-	public List<BookingEntity> getAllBooking() {
+	public BookingResponse getAllBooking() {
 		return internalService.getAllBooking();
 	}
 
 	/**
+	 * creates a bill against given booking details
 	 * @param billingRequest
 	 * @return totalCharge
 	 */
@@ -105,6 +110,9 @@ public class InternalController {
 		return internalService.generateBill(billingRequest);
 	}
 
+	/** Main Method
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(InternalController.class, args);
 	}

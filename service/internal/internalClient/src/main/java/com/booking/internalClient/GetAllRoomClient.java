@@ -16,6 +16,10 @@ public class GetAllRoomClient {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	/**
+	 * Client Method to get all rooms
+	 * @return roomResponse
+	 */
 	public RoomResponse getAllRoomClientMethod() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);

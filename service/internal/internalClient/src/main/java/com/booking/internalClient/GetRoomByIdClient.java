@@ -21,19 +21,23 @@ public class GetRoomByIdClient {
 	private RestTemplate restTemplate;
 
 	/**
+	 * Client Method to get room by id
 	 * @param id
-	 * @return saved values from repository against the given id via internal
-	 *         service
+	 * @return roomModel
 	 */
 	public RoomModel getRoomByIdClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange("http://localhost:8080/hotel/{id}",
+		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange("http://localhost:8080/room/{id}",
 				HttpMethod.GET, requestEntity, RoomModel.class, id);
-		RoomModel hotel = responseEntity.getBody();
-		return hotel;
+		RoomModel roomModel = responseEntity.getBody();
+		return roomModel;
 	}
 
+	/**
+	 * Client Method to delete booking by id
+	 * @param id
+	 */
 	public void deleteBookingClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);

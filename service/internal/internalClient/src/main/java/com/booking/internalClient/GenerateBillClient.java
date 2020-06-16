@@ -23,6 +23,11 @@ public class GenerateBillClient {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	/**
+	 * Client Method  for generating bill
+	 * @param billingRequest
+	 * @return result
+	 */
 	public double generateBillClientMethod(BillingRequest billingRequest) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
