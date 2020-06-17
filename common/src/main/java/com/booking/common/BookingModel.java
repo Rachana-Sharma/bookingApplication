@@ -9,8 +9,8 @@ public class BookingModel {
 	/**
 	 * The breakfast
 	 */
-	private String breakfast;
-	/**
+	private boolean breakfast;
+		/**
 	 * The total charge
 	 */
 	private double totalCharge;
@@ -29,7 +29,7 @@ public class BookingModel {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookingModel(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate) {
+	public BookingModel(int bookingId, boolean breakfast, double totalCharge, Date startDate, Date endDate) {
 		super();
 		this.bookingId = bookingId;
 		this.breakfast = breakfast;
@@ -44,6 +44,20 @@ public class BookingModel {
 		super();
 	}
 	/**
+	 * @return the breakfast
+	 */
+	public boolean isBreakfast() {
+		return breakfast;
+	}
+	/**
+	 * @param breakfast the breakfast to set
+	 */
+	public void setBreakfast(boolean breakfast) {
+		this.breakfast = breakfast;
+	}
+
+
+	/**
 	 * @return the bookingId
 	 */
 	public int getBookingId() {
@@ -55,19 +69,7 @@ public class BookingModel {
 	public void setBookingId(int bookingId) {
 		this.bookingId = bookingId;
 	}
-	/**
-	 * @return the breakfast
-	 */
-	public String getBreakfast() {
-		return breakfast;
-	}
-	/**
-	 * @param breakfast the breakfast to set
-	 */
-	public void setBreakfast(String breakfast) {
-		this.breakfast = breakfast;
-	}
-	/**
+		/**
 	 * @return the totalCharge
 	 */
 	public double getTotalCharge() {

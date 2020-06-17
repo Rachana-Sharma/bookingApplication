@@ -1,0 +1,9 @@
+com\booking\common\BillingAndBookingResponse.class
+com\booking\common\RoomModel.class
+com\booking\common\BookingModel.class
+com\booking\common\CustomerModel.class
+com\booking\common\BookingResponse.class
+com\booking\common\BillingRequest.class
+com\booking\common\CustomerResponse.class
+com\booking\common\BilliingAndBookingRequest.class
+com\booking\common\RoomResponse.class
