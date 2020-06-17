@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.booking.common.BillingRequest;
-import com.booking.common.BookingRequest;
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomResponse;
@@ -38,9 +38,9 @@ public class InternalController {
 	@Autowired
 	InternalService internalService;
 
-	
 	/**
-	 * returns all rooms 
+	 * returns all rooms
+	 * 
 	 * @return all rooms
 	 */
 	@GetMapping("/room")
@@ -50,6 +50,7 @@ public class InternalController {
 
 	/**
 	 * returns all customer
+	 * 
 	 * @return List of all customer
 	 */
 	@GetMapping("/customer/get")
@@ -59,6 +60,7 @@ public class InternalController {
 
 	/**
 	 * get room by id
+	 * 
 	 * @param id
 	 * @return saved details against given id
 	 */
@@ -69,6 +71,7 @@ public class InternalController {
 
 	/**
 	 * delete booking by id
+	 * 
 	 * @param id delete from repository against given id
 	 */
 	@DeleteMapping("/hotel/delete/{id}")
@@ -77,22 +80,8 @@ public class InternalController {
 	}
 
 	/**
-	 * @param customerRequest
-	 * @return id
-	 */
-
-	/**
-	 * saves new booking 
-	 * @param bookingRequest
-	 * @return id
-	 */
-	@PostMapping("/booking/save")
-	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
-		return internalService.saveBooking(bookingRequest);
-	}
-
-	/**
 	 * returns all booking
+	 * 
 	 * @return List of all booking
 	 */
 	@GetMapping("/booking/get")
@@ -101,16 +90,19 @@ public class InternalController {
 	}
 
 	/**
-	 * creates a bill against given booking details
-	 * @param billingRequest
-	 * @return totalCharge
+	 * save booking and generate bill
+	 * 
+	 * @param bookingRequest
+	 * @return total charge
 	 */
-	@PostMapping("/bill")
-	public double generateBill(@RequestBody BillingRequest billingRequest) {
-		return internalService.generateBill(billingRequest);
+	@PostMapping("/billing/booking")
+	public BillingAndBookingResponse billingAndBooking(@RequestBody BilliingAndBookingRequest bookingRequest) {
+		return internalService.billingAndBooking(bookingRequest);
 	}
 
-	/** Main Method
+	/**
+	 * Main Method
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {

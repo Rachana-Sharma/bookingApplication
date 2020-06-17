@@ -30,7 +30,7 @@ public class BookingEntity {
 	 * The breakfast
 	 */
 	@Column
-	private String breakfast;
+	private boolean breakfast;
 	/**
 	 * The total charge
 	 */
@@ -58,7 +58,7 @@ public class BookingEntity {
 	 * @param startDate
 	 * @param endDate
 	 */
-	public BookingEntity(int bookingId, String breakfast, double totalCharge, Date startDate, Date endDate,
+	public BookingEntity(int bookingId, boolean breakfast, double totalCharge, Date startDate, Date endDate,
 			RoomEntity room) {
 		// this.bookingId = bookingId;
 		this.breakfast = breakfast;
@@ -92,17 +92,16 @@ public class BookingEntity {
 	/**
 	 * @return the breakfast
 	 */
-	public String getBreakfast() {
+	public boolean isBreakfast() {
 		return breakfast;
 	}
 
 	/**
 	 * @param breakfast the breakfast to set
 	 */
-	public void setBreakfast(String breakfast) {
+	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
 	}
-
 	/**
 	 * @return the totalCharge
 	 */

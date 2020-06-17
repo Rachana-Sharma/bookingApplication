@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.booking.common.BillingRequest;
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingModel;
-import com.booking.common.BookingRequest;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerModel;
 import com.booking.common.CustomerResponse;
@@ -50,7 +50,8 @@ public class InternalService {
 	BookingEntity bookingEntity;
 
 	/**
-	 * returns all rooms 
+	 * returns all rooms
+	 * 
 	 * @return roomResponse
 	 */
 	public RoomResponse getAllRoom() {
@@ -72,6 +73,7 @@ public class InternalService {
 
 	/**
 	 * returns all customer
+	 * 
 	 * @return customerList
 	 */
 	public CustomerResponse getAllCustomer() {
@@ -90,6 +92,7 @@ public class InternalService {
 
 	/**
 	 * returns all booking
+	 * 
 	 * @return bookingResponse
 	 */
 	public BookingResponse getAllBooking() {
@@ -98,7 +101,7 @@ public class InternalService {
 		BookingModel bookingModel = new BookingModel();
 		for (int i = 0; i < bookingList.size(); i++) {
 			bookingModel.setBookingId(bookingList.get(i).getBookingId());
-			bookingModel.setBreakfast(bookingList.get(i).getBreakfast());
+			bookingModel.setBreakfast(bookingList.get(i).isBreakfast());
 			bookingModel.setTotalCharge(bookingList.get(i).getTotalCharge());
 			bookingModel.setStartDate(bookingList.get(i).getStartDate());
 			bookingModel.setEndDate(bookingList.get(i).getEndDate());
@@ -108,27 +111,10 @@ public class InternalService {
 		bookingResponse.setBookingResponse(list);
 		return bookingResponse;
 	}
-	/**
-	 * saves new booking 
-	 * @param bookingRequest
-	 * @return booking Id
-	 */
-	public int saveBooking(BookingRequest bookingRequest) {
-		bookingEntity = new BookingEntity();
-		customerEntity = new CustomerEntity();
-		bookingEntity.setBookingId(bookingRequest.getBookingId());
-		customerEntity.setCustomerId(bookingRequest.getCustomerId());
-		customerEntity.setCustomerName(bookingRequest.getCustomerName());
-		bookingEntity.setBreakfast(bookingRequest.getBreakfast());
-		bookingEntity.setStartDate(bookingRequest.getStartDate());
-		bookingEntity.setEndDate(bookingRequest.getEndDate());
-		bookingRepository.save(bookingEntity);
-		customerRepository.save(customerEntity);
-		return bookingEntity.getBookingId();
-	}
 
 	/**
 	 * get room by id
+	 * 
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
@@ -138,32 +124,49 @@ public class InternalService {
 
 	/**
 	 * delete booking by id
+	 * 
 	 * @param id to delete from repository against given id
 	 */
 	public void deleteBooking(int id) {
 		bookingRepository.deleteById(id);
 	}
-
+	
 	/**
-	 * creates a bill against given booking details
-	 * @param id
-	 * @param breakfast
-	 * @return totalCharge
+	 * save booking and generate bill
+	 * 
+	 * @param bookingRequest
+	 * @return
 	 */
-	public double generateBill(BillingRequest billingRequest) {
+	public BillingAndBookingResponse billingAndBooking(BilliingAndBookingRequest bookingRequest) {
 		double breakfastCharge = 1000;
 		double totalCharge = 0;
+		String roomStatus = "OCCUPIED";
 		roomEntity = new RoomEntity();
 		bookingEntity = new BookingEntity();
-		roomEntity = roomRepository.findById(billingRequest.getRoomId()).get();
-		bookingEntity = bookingRepository.findById(billingRequest.getBookingId()).get();
-		if (billingRequest.isBreakfast()) {
+		customerEntity = new CustomerEntity();
+		BillingAndBookingResponse billingAndBookingResponse = new BillingAndBookingResponse();
+		int id = roomRepository.findRoom(bookingRequest.getRoomType());
+		roomEntity = roomRepository.findById(id).get();
+		if (bookingRequest.isBreakfast()) {
 			totalCharge = roomEntity.getRoomPrice() + breakfastCharge;
 		} else {
 			totalCharge = roomEntity.getRoomPrice();
 		}
+		bookingEntity.setBookingId(bookingRequest.getBookingId());
+		customerEntity.setCustomerId(bookingRequest.getCustomerId());
+		customerEntity.setCustomerName(bookingRequest.getCustomerName());
+		bookingEntity.setBreakfast(bookingRequest.isBreakfast());
+		bookingEntity.setStartDate(bookingRequest.getStartDate());
+		bookingEntity.setEndDate(bookingRequest.getEndDate());
 		bookingEntity.setTotalCharge(totalCharge);
+		roomEntity.setRoomStatus(roomStatus);
 		bookingRepository.save(bookingEntity);
-		return totalCharge;
+		customerRepository.save(customerEntity);
+		bookingRepository.save(bookingEntity);
+		billingAndBookingResponse.setTotalCharge(totalCharge);
+		billingAndBookingResponse.getTotalCharge();
+		return billingAndBookingResponse;
+
 	}
+
 }

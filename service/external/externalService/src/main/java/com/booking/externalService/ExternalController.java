@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.booking.common.BillingRequest;
-import com.booking.common.BookingRequest;
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
@@ -45,6 +45,7 @@ public class ExternalController {
 
 	/**
 	 * returns all customer
+	 * 
 	 * @return List of customer
 	 */
 	@GetMapping("/customer/get/ec")
@@ -54,6 +55,7 @@ public class ExternalController {
 
 	/**
 	 * returns all booking
+	 * 
 	 * @return List of booking
 	 */
 	@GetMapping("/booking/get/ec")
@@ -63,16 +65,18 @@ public class ExternalController {
 
 	/**
 	 * saves new booking
+	 * 
 	 * @param bookingRequest
-	 * @return int
+	 * @return total charge
 	 */
-	@PostMapping("/booking/save/ec")
-	public int saveBooking(@RequestBody BookingRequest bookingRequest) {
-		return externalService.saveBooking(bookingRequest);
+	@PostMapping("/billing/booking/ec")
+	public BillingAndBookingResponse BillingAndBooking(@RequestBody BilliingAndBookingRequest bookingRequest) {
+		return externalService.BillingAndBooking(bookingRequest);
 	}
 
 	/**
 	 * get room by id
+	 * 
 	 * @param id
 	 * @return saved details against given id
 	 */
@@ -83,21 +87,12 @@ public class ExternalController {
 
 	/**
 	 * delete booking by id
+	 * 
 	 * @param id
 	 */
 	@DeleteMapping("/hotel/delete/ec/{id}")
 	public void deleteBooking(@PathVariable("id") int id) {
 		externalService.deleteBooking(id);
-	}
-
-	/**
-	 * creates a bill against given booking details
-	 * @param billingRequest
-	 * @return
-	 */
-	@PostMapping("/bill/get")
-	public double generateBill(@RequestBody BillingRequest billingRequest) {
-		return externalService.generateBill(billingRequest);
 	}
 
 	@GetMapping("/room/response")
