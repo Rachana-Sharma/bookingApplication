@@ -6,16 +6,24 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>external</artifactId>
+  <packaging>pom</packaging>
+  <modules>
+  	<module>externalService</module>
+  </modules>
+  <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
   <dependencies>
   	<dependency>
   		<groupId>com.booking</groupId>
   		<artifactId>internal</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
-  		<scope>provided</scope>
+  		<type>pom</type>
   	</dependency>
   </dependencies>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>externalService</module>
-  </modules>
 </project>
