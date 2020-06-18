@@ -9,7 +9,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * @author Rachana Sharma Customer
+ * The CustomerEntity
+ * 
+ * @author Rachana Sharma
  */
 @Entity
 @Table
@@ -18,7 +20,7 @@ public class CustomerEntity {
 	 * The Customer Id
 	 */
 	@Id
-	@SequenceGenerator(initialValue = 1,allocationSize = 3, name = "mySeqGen")
+	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int customerId;
 	/**
@@ -28,17 +30,7 @@ public class CustomerEntity {
 	private String customerName;
 
 	/**
-	 * @param customerId
-	 * @param customerName
-	 */
-	public CustomerEntity(int customerId, String customerName) {
-
-		this.customerId = customerId;
-		this.customerName = customerName;
-	}
-
-	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public CustomerEntity() {
 
@@ -71,5 +63,4 @@ public class CustomerEntity {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
 }

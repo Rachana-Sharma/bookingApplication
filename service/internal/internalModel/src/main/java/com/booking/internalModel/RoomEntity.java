@@ -11,7 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * @author Rachana Sharma Room
+ * The RoomEntity
+ * 
+ * @author Rachana Sharma
  */
 
 @Entity
@@ -44,21 +46,7 @@ public class RoomEntity {
 	private BookingEntity booking;
 
 	/**
-	 * @param roomId
-	 * @param roomType
-	 * @param roomPrice
-	 * @param roomStatus
-	 */
-	public RoomEntity(int roomId, String roomType, double roomPrice, String roomStatus) {
-
-		this.roomId = roomId;
-		this.roomType = roomType;
-		this.roomPrice = roomPrice;
-		this.roomStatus = roomStatus;
-	}
-
-	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public RoomEntity() {
 
@@ -119,5 +107,4 @@ public class RoomEntity {
 	public void setRoomStatus(String roomStatus) {
 		this.roomStatus = roomStatus;
 	}
-
 }

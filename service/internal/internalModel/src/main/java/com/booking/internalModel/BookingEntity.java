@@ -13,7 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * @author Rachana Sharma Booking
+ * BookingEntity
+ * 
+ * @author Rachana Sharma
  */
 @Entity
 @Table
@@ -22,8 +24,6 @@ public class BookingEntity {
 	 * The booking id
 	 */
 	@Id
-	// @SequenceGenerator(initialValue = 1,allocationSize = 3, name = "mySeqGen")
-	// @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bookingId;
 	/**
@@ -47,29 +47,15 @@ public class BookingEntity {
 	@Column
 	private Date endDate;
 
+	/**
+	 * Joining column roomId of RoomEntity into bookingEntity
+	 */
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "roomId")
 	private RoomEntity room;
 
 	/**
-	 * @param bookingId
-	 * @param breakfast
-	 * @param totalCharge
-	 * @param startDate
-	 * @param endDate
-	 */
-	public BookingEntity(int bookingId, boolean breakfast, double totalCharge, Date startDate, Date endDate,
-			RoomEntity room) {
-		// this.bookingId = bookingId;
-		this.breakfast = breakfast;
-		this.totalCharge = totalCharge;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.room = room;
-	}
-
-	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public BookingEntity() {
 
@@ -102,6 +88,7 @@ public class BookingEntity {
 	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
 	}
+
 	/**
 	 * @return the totalCharge
 	 */
@@ -143,5 +130,4 @@ public class BookingEntity {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-
 }
