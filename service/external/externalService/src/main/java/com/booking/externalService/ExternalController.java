@@ -21,7 +21,9 @@ import com.booking.common.RoomResponse;
 import com.booking.internalClient.GetRoomByIdClient;
 
 /**
- * @author Rachana Sharma The ExternalController
+ * The ExternalController
+ * 
+ * @author Rachana Sharma
  */
 @SpringBootApplication
 @ComponentScan("com.booking")
@@ -90,11 +92,14 @@ public class ExternalController {
 	 * 
 	 * @param id
 	 */
-	@DeleteMapping("/hotel/delete/ec/{id}")
+	@DeleteMapping("/booking/delete/ec/{id}")
 	public void deleteBooking(@PathVariable("id") int id) {
 		externalService.deleteBooking(id);
 	}
 
+	/**
+	 * @return all rooms
+	 */
 	@GetMapping("/room/response")
 	public RoomResponse getAllRoom() {
 		return externalService.getAllRoom();
