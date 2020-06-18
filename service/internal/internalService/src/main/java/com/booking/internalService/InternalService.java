@@ -33,6 +33,9 @@ public class InternalService {
 	@Autowired
 	RoomRepository roomRepository;
 
+	/**
+	 * defining RoomEntity object
+	 */
 	RoomEntity roomEntity;
 	/**
 	 * CustomerRepository
@@ -40,13 +43,18 @@ public class InternalService {
 	@Autowired
 	CustomerRepository customerRepository;
 
+	/**
+	 * defining CustomerEntity object
+	 */
 	CustomerEntity customerEntity;
 	/**
 	 * BookingRepository
 	 */
 	@Autowired
 	BookingRepository bookingRepository;
-
+	/**
+	 * defining BookingEntity object
+	 */
 	BookingEntity bookingEntity;
 
 	/**
@@ -56,18 +64,16 @@ public class InternalService {
 	 */
 	public RoomResponse getAllRoom() {
 		List<RoomEntity> roomList = (List<RoomEntity>) roomRepository.findAll();
-		List<RoomModel> list = new ArrayList<RoomModel>();
 		RoomModel roomModel = null;
+		RoomResponse roomResponse = new RoomResponse();
 		for (int i = 0; i < roomList.size(); i++) {
 			roomModel = new RoomModel();
 			roomModel.setRoomId(roomList.get(i).getRoomId());
 			roomModel.setRoomPrice(roomList.get(i).getRoomPrice());
 			roomModel.setRoomStatus(roomList.get(i).getRoomStatus());
 			roomModel.setRoomType(roomList.get(i).getRoomType());
-			list.add(roomModel);
+			 roomResponse.getRoomResponse().add(roomModel);
 		}
-		RoomResponse roomResponse = new RoomResponse();
-		roomResponse.setRoomResponse(list);
 		return roomResponse;
 	}
 
@@ -130,7 +136,7 @@ public class InternalService {
 	public void deleteBooking(int id) {
 		bookingRepository.deleteById(id);
 	}
-	
+
 	/**
 	 * save booking and generate bill
 	 * 
@@ -166,7 +172,5 @@ public class InternalService {
 		billingAndBookingResponse.setTotalCharge(totalCharge);
 		billingAndBookingResponse.getTotalCharge();
 		return billingAndBookingResponse;
-
 	}
-
 }
