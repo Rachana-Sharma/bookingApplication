@@ -1,6 +1,16 @@
 package com.booking.common;
 
+/**
+ * The BillingAndBookingResponse
+ * 
+ * @author Rachana Sharma
+ *
+ */
 public class BillingAndBookingResponse {
+	
+	/**
+	 * the total charge
+	 */
 	private double totalCharge;
 
 	/**
@@ -11,7 +21,7 @@ public class BillingAndBookingResponse {
 	}
 
 	/**
-	 * 
+	 * empty  constructor
 	 */
 	public BillingAndBookingResponse() {
 	}

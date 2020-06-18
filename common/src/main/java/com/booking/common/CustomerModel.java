@@ -1,7 +1,9 @@
 package com.booking.common;
 
 /**
- * @author Rachana Sharma Customer
+ * The CustomerModel
+ * 
+ * @author Rachana Sharma
  */
 public class CustomerModel {
 	/**
@@ -12,16 +14,6 @@ public class CustomerModel {
 	 * The Customer Name
 	 */
 	private String customerName;
-
-	/**
-	 * @param customerId
-	 * @param customerName
-	 */
-	public CustomerModel(int customerId, String customerName) {
-
-		this.customerId = customerId;
-		this.customerName = customerName;
-	}
 
 	/**
 	 * Empty Constructor
@@ -57,5 +49,4 @@ public class CustomerModel {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
 }

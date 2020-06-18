@@ -3,7 +3,9 @@ package com.booking.common;
 import java.util.Date;
 
 /**
- * @author Rachana Sharma Booking
+ * The BilliingAndBookingRequest
+ * 
+ * @author Rachana Sharma
  */
 public class BilliingAndBookingRequest {
 	/**
@@ -18,14 +20,24 @@ public class BilliingAndBookingRequest {
 	 * The booking id
 	 */
 	private String customerName;
-	
-
 
 	/**
 	 * The breakfast
 	 */
 	private boolean breakfast;
-	
+	/**
+	 * The start date
+	 */
+	private Date startDate;
+	/**
+	 * The end date
+	 */
+	private Date endDate;
+	/**
+	 * The room status
+	 */
+	private String roomType;
+
 	/**
 	 * @param bookingId
 	 * @param customerId
@@ -37,7 +49,6 @@ public class BilliingAndBookingRequest {
 	 */
 	public BilliingAndBookingRequest(int bookingId, int customerId, String customerName, boolean breakfast,
 			Date startDate, Date endDate, String roomType) {
-		super();
 		this.bookingId = bookingId;
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -45,6 +56,13 @@ public class BilliingAndBookingRequest {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.roomType = roomType;
+	}
+
+	/**
+	 * Empty Constructor
+	 */
+	public BilliingAndBookingRequest() {
+
 	}
 
 	/**
@@ -59,28 +77,6 @@ public class BilliingAndBookingRequest {
 	 */
 	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
-	}
-
-	/**
-	 * The start date
-	 */
-	private Date startDate;
-	/**
-	 * The end date
-	 */
-	private Date endDate;
-	/**
-	 * The room status
-	 */
-	private String roomType;
-
-
-	
-	/**
-	 * Empty Constructor
-	 */
-	public BilliingAndBookingRequest() {
-
 	}
 
 	/**
@@ -110,6 +106,7 @@ public class BilliingAndBookingRequest {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
+
 	/**
 	 * @return the customerName
 	 */
@@ -123,9 +120,6 @@ public class BilliingAndBookingRequest {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-
-	
-	
 
 	/**
 	 * @return the startDate
@@ -154,6 +148,7 @@ public class BilliingAndBookingRequest {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
 	/**
 	 * @return the roomType
 	 */
@@ -167,5 +162,4 @@ public class BilliingAndBookingRequest {
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
 	}
-	
 }

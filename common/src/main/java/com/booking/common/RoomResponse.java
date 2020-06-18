@@ -1,9 +1,19 @@
 package com.booking.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * RoomResponse
+ * 
+ * @author Rachana Sharma
+ *
+ */
 public class RoomResponse {
-	List<RoomModel> roomResponse;
+	/**
+	 * the room response
+	 */
+	private List<RoomModel> roomResponse=new ArrayList<>();
 
 	/**
 	 * @return the roomResponse
@@ -20,17 +30,16 @@ public class RoomResponse {
 	}
 
 	/**
-	 * 
+	 * empty constructor
 	 */
 	public RoomResponse() {
-		super();
+
 	}
 
 	/**
 	 * @param roomRespon
 	 */
 	public RoomResponse(List<RoomModel> roomResponse) {
-		super();
 		this.roomResponse = roomResponse;
 	};
 }

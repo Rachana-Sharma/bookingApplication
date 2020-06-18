@@ -1,7 +1,9 @@
 package com.booking.common;
 
 /**
- * @author Rachana Sharma Room
+ * The RoomModel
+ * 
+ * @author Rachana Sharma
  */
 public class RoomModel {
 	/**
@@ -20,20 +22,6 @@ public class RoomModel {
 	 * The Room Status
 	 */
 	private String roomStatus;
-
-	/**
-	 * @param roomId
-	 * @param roomType
-	 * @param roomPrice
-	 * @param roomStatus
-	 */
-	public RoomModel(int roomId, String roomType, double roomPrice, String roomStatus) {
-
-		this.roomId = roomId;
-		this.roomType = roomType;
-		this.roomPrice = roomPrice;
-		this.roomStatus = roomStatus;
-	}
 
 	/**
 	 * Empty Constructor
@@ -97,5 +85,4 @@ public class RoomModel {
 	public void setRoomStatus(String roomStatus) {
 		this.roomStatus = roomStatus;
 	}
-
 }

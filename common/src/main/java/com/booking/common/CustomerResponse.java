@@ -2,8 +2,16 @@ package com.booking.common;
 
 import java.util.List;
 
+/**
+ * The CustomerResponse
+ * 
+ * @author Rachana Sharma *
+ */
 public class CustomerResponse {
-	List<CustomerModel> customerResponse;
+	/**
+	 * The customer response
+	 */
+	private List<CustomerModel> customerResponse;
 
 	/**
 	 * @param customerResponse

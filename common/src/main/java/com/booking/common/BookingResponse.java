@@ -2,8 +2,17 @@ package com.booking.common;
 
 import java.util.List;
 
+/**
+ * The BookingResponse
+ * 
+ * @author Rachana Sharma
+ *
+ */
 public class BookingResponse {
-	List<BookingModel> bookingResponse;
+	/**
+	 * The bookingResponse
+	 */
+	private List<BookingModel> bookingResponse;
 
 	/**
 	 * @param bookingResponse
@@ -13,7 +22,7 @@ public class BookingResponse {
 	}
 
 	/**
-	 * 
+	 * empty constructor
 	 */
 	public BookingResponse() {
 	}
