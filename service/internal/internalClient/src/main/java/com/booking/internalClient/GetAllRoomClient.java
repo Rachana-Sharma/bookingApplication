@@ -9,15 +9,22 @@ import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.RoomResponse;
 
+/**
+ * The GetAllRoomClient
+ * 
+ * @author Rachana Sharma
+ *
+ */
 public class GetAllRoomClient {
 	/**
 	 * RestTemplate
 	 */
 	@Autowired
 	private RestTemplate restTemplate;
-	
+
 	/**
 	 * Client Method to get all rooms
+	 * 
 	 * @return roomResponse
 	 */
 	public RoomResponse getAllRoomClientMethod() {

@@ -10,7 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import com.booking.common.RoomModel;
 
 /**
- * @author Rachana Sharma The BookingClient
+ * The BookingClient
+ * 
+ * @author Rachana Sharma
  */
 public class GetRoomByIdClient {
 
@@ -22,6 +24,7 @@ public class GetRoomByIdClient {
 
 	/**
 	 * Client Method to get room by id
+	 * 
 	 * @param id
 	 * @return roomModel
 	 */
@@ -36,6 +39,7 @@ public class GetRoomByIdClient {
 
 	/**
 	 * Client Method to delete booking by id
+	 * 
 	 * @param id
 	 */
 	public void deleteBookingClient(int id) {

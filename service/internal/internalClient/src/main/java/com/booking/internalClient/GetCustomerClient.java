@@ -10,7 +10,9 @@ import org.springframework.web.client.RestTemplate;
 import com.booking.common.CustomerResponse;
 
 /**
- * @author Rachana Sharma GetCustomerClient
+ * The GetCustomerClient
+ * 
+ * @author Rachana Sharma
  *
  */
 public class GetCustomerClient {
@@ -23,9 +25,9 @@ public class GetCustomerClient {
 
 	/**
 	 * Client Method to get all customer
+	 * 
 	 * @return customerResponse
 	 */
-	
 	public CustomerResponse getAllCustomerClient() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);

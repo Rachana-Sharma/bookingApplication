@@ -12,6 +12,12 @@ import org.springframework.web.client.RestTemplate;
 import com.booking.common.BilliingAndBookingRequest;
 import com.booking.common.BillingAndBookingResponse;
 
+/**
+ * the BillingAndBookingClient
+ * 
+ * @author Rachana Sharma
+ *
+ */
 public class BillingAndBookingClient {
 
 	/**

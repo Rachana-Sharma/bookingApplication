@@ -10,14 +10,20 @@ import org.springframework.web.client.RestTemplate;
 import com.booking.common.BookingResponse;
 
 /**
- * @author Rachana Sharma GetBookingClient
+ * The GetBookingClient
+ * 
+ * @author Rachana Sharma
  */
 public class GetBookingClient {
+	/**
+	 * RestTemplate
+	 */
 	@Autowired
 	private RestTemplate restTemplate;
 
 	/**
-	 * Client Method  get all booking
+	 * Client Method get all booking
+	 * 
 	 * @param bookingRequest
 	 * @return BookingResponse
 	 */
