@@ -106,8 +106,6 @@ public class ExternalController {
 	}
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(ExternalController.class, args);
 	}
-
 }

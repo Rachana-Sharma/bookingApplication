@@ -49,15 +49,16 @@ public class ExternalService {
 
 	/**
 	 * returns all customer
+	 * 
 	 * @return customerList to add new customer to the ArrayList
 	 */
 	public CustomerResponse getAllCustomer() {
 		return getCustomerClient.getAllCustomerClient();
-
 	}
 
 	/**
 	 * returns all booking
+	 * 
 	 * @param bookingRequest
 	 * @return List<BookingRequest>
 	 */
@@ -67,6 +68,7 @@ public class ExternalService {
 
 	/**
 	 * saves new booking and generates bill
+	 * 
 	 * @param bookingRequest
 	 * @return int
 	 */
@@ -76,6 +78,7 @@ public class ExternalService {
 
 	/**
 	 * get room by id
+	 * 
 	 * @param id
 	 * @return saved values from repository against the given id
 	 */
@@ -85,6 +88,7 @@ public class ExternalService {
 
 	/**
 	 * delete booking by id
+	 * 
 	 * @param id
 	 */
 	public void deleteBooking(int id) {
@@ -92,7 +96,8 @@ public class ExternalService {
 	}
 
 	/**
-	 * returns all rooms 
+	 * returns all rooms
+	 * 
 	 * @return
 	 */
 	public RoomResponse getAllRoom() {

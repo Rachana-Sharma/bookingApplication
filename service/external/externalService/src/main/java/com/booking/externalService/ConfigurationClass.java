@@ -63,6 +63,7 @@ public class ConfigurationClass {
 	public GetBookingClient getBookingClient() {
 		return new GetBookingClient();
 	}
+
 	/**
 	 * Bean for GetAllRoomClient
 	 */
