@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Rachana Sharma
  */
 @Entity
-@Table
+@Table(name = "CUSTOMER_ENTITY")
 public class CustomerEntity {
 	/**
 	 * The Customer Id
@@ -26,7 +26,7 @@ public class CustomerEntity {
 	/**
 	 * The Customer Name
 	 */
-	@Column
+	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
 
 	/**

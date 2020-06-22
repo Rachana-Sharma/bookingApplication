@@ -18,7 +18,7 @@ import javax.persistence.Table;
  * @author Rachana Sharma
  */
 @Entity
-@Table
+@Table(name = "BOOKING_ENTITY")
 public class BookingEntity {
 	/**
 	 * The booking id
@@ -29,22 +29,22 @@ public class BookingEntity {
 	/**
 	 * The breakfast
 	 */
-	@Column
+	@Column(name = "BREAKFAST")
 	private boolean breakfast;
 	/**
 	 * The total charge
 	 */
-	@Column
+	@Column(name = "TOTAL_CHARGE")
 	private double totalCharge;
 	/**
 	 * The start date
 	 */
-	@Column
+	@Column(name = "START_DATE")
 	private Date startDate;
 	/**
 	 * The end date
 	 */
-	@Column
+	@Column(name = "END_DATE")
 	private Date endDate;
 
 	/**
@@ -52,7 +52,7 @@ public class BookingEntity {
 	 */
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "roomId")
-	private RoomEntity room;
+	private RoomEntity room;	
 
 	/**
 	 * Class Constructor
@@ -129,5 +129,18 @@ public class BookingEntity {
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	/**
+	 * @return the room
+	 */
+	public RoomEntity getRoom() {
+		return room;
+	}
+	
+	/**
+	 * @param room the room to set
+	 */
+	public void setRoom(RoomEntity room) {
+		this.room = room;
 	}
 }

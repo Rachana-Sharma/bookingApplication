@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
  * 
  * @author Rachana Sharma *
  */
-public interface BookingRepository extends CrudRepository<BookingEntity, Integer> {
+
+public interface BookingRepository extends CrudRepository<BookingEntity, Integer> {	
 
 }
