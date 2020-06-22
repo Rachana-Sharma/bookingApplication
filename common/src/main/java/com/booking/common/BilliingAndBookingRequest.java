@@ -39,26 +39,6 @@ public class BilliingAndBookingRequest {
 	private String roomType;
 
 	/**
-	 * @param bookingId
-	 * @param customerId
-	 * @param customerName
-	 * @param breakfast
-	 * @param startDate
-	 * @param endDate
-	 * @param roomType
-	 */
-	public BilliingAndBookingRequest(int bookingId, int customerId, String customerName, boolean breakfast,
-			Date startDate, Date endDate, String roomType) {
-		this.bookingId = bookingId;
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.breakfast = breakfast;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.roomType = roomType;
-	}
-
-	/**
 	 * Empty Constructor
 	 */
 	public BilliingAndBookingRequest() {

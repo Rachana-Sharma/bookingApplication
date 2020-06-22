@@ -1,5 +1,6 @@
 package com.booking.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class BookingResponse {
 	/**
 	 * The bookingResponse
 	 */
-	private List<BookingModel> bookingResponse;
+	private List<BookingModel> bookingResponse = new ArrayList<>();
 
 	/**
 	 * @param bookingResponse
@@ -22,7 +23,7 @@ public class BookingResponse {
 	}
 
 	/**
-	 * empty constructor
+	 * Class constructor
 	 */
 	public BookingResponse() {
 	}

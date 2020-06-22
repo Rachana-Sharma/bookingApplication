@@ -1,17 +1,18 @@
 package com.booking.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The CustomerResponse
  * 
- * @author Rachana Sharma *
+ * @author Rachana Sharma
  */
 public class CustomerResponse {
 	/**
 	 * The customer response
 	 */
-	private List<CustomerModel> customerResponse;
+	private List<CustomerModel> customerResponse = new ArrayList<>();
 
 	/**
 	 * @param customerResponse

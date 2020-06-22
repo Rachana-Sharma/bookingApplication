@@ -53,7 +53,8 @@ public class BookingModel {
 	}
 
 	/**
-	 * get booking id of this BookingModel 
+	 * get booking id of this BookingModel
+	 * 
 	 * @return the bookingId
 	 */
 	public int getBookingId() {

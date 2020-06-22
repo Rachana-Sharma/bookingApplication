@@ -13,7 +13,7 @@ public class RoomResponse {
 	/**
 	 * the room response
 	 */
-	private List<RoomModel> roomResponse=new ArrayList<>();
+	private List<RoomModel> roomResponse = new ArrayList<>();
 
 	/**
 	 * @return the roomResponse
@@ -30,7 +30,7 @@ public class RoomResponse {
 	}
 
 	/**
-	 * empty constructor
+	 * Class constructor
 	 */
 	public RoomResponse() {
 

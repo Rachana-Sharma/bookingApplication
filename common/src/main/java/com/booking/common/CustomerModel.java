@@ -16,7 +16,7 @@ public class CustomerModel {
 	private String customerName;
 
 	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public CustomerModel() {
 
