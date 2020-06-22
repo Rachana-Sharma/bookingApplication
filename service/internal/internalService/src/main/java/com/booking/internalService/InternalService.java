@@ -1,8 +1,8 @@
 package com.booking.internalService;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,16 +64,12 @@ public class InternalService {
 	 */
 	public RoomResponse getAllRoom() {
 		List<RoomEntity> roomList = (List<RoomEntity>) roomRepository.findAll();
-		RoomModel roomModel = null;
 		RoomResponse roomResponse = new RoomResponse();
-		for (int i = 0; i < roomList.size(); i++) {
-			roomModel = new RoomModel();
-			roomModel.setRoomId(roomList.get(i).getRoomId());
-			roomModel.setRoomPrice(roomList.get(i).getRoomPrice());
-			roomModel.setRoomStatus(roomList.get(i).getRoomStatus());
-			roomModel.setRoomType(roomList.get(i).getRoomType());
-			 roomResponse.getRoomResponse().add(roomModel);
-		}
+		roomList.forEach(room -> {
+			RoomModel roomModel = new RoomModel();
+			BeanUtils.copyProperties(room, roomModel);
+			roomResponse.getRoomResponse().add(roomModel);
+		});
 		return roomResponse;
 	}
 
@@ -84,15 +80,12 @@ public class InternalService {
 	 */
 	public CustomerResponse getAllCustomer() {
 		List<CustomerEntity> customerList = (List<CustomerEntity>) customerRepository.findAll();
-		List<CustomerModel> list = new ArrayList<CustomerModel>();
 		CustomerResponse customerResponse = new CustomerResponse();
-		CustomerModel customerModel = new CustomerModel();
-		for (int i = 0; i < customerList.size(); i++) {
-			customerModel.setCustomerId(customerList.get(i).getCustomerId());
-			customerModel.setCustomerName(customerList.get(i).getCustomerName());
-			list.add(customerModel);
-		}
-		customerResponse.setCustomerResponse(list);
+		customerList.forEach(customer -> {
+			CustomerModel customerModel = new CustomerModel();
+			BeanUtils.copyProperties(customer, customerModel);
+			customerResponse.getCustomerResponse().add(customerModel);
+		});
 		return customerResponse;
 	}
 
@@ -103,18 +96,12 @@ public class InternalService {
 	 */
 	public BookingResponse getAllBooking() {
 		List<BookingEntity> bookingList = (List<BookingEntity>) bookingRepository.findAll();
-		List<BookingModel> list = new ArrayList<BookingModel>();
-		BookingModel bookingModel = new BookingModel();
-		for (int i = 0; i < bookingList.size(); i++) {
-			bookingModel.setBookingId(bookingList.get(i).getBookingId());
-			bookingModel.setBreakfast(bookingList.get(i).isBreakfast());
-			bookingModel.setTotalCharge(bookingList.get(i).getTotalCharge());
-			bookingModel.setStartDate(bookingList.get(i).getStartDate());
-			bookingModel.setEndDate(bookingList.get(i).getEndDate());
-			list.add(bookingModel);
-		}
 		BookingResponse bookingResponse = new BookingResponse();
-		bookingResponse.setBookingResponse(list);
+		bookingList.forEach(booking -> {
+			BookingModel bookingModel = new BookingModel();
+			BeanUtils.copyProperties(booking, bookingModel);
+			bookingResponse.getBookingResponse().add(bookingModel);
+		});
 		return bookingResponse;
 	}
 
@@ -134,6 +121,13 @@ public class InternalService {
 	 * @param id to delete from repository against given id
 	 */
 	public void deleteBooking(int id) {
+		/*
+		 * String status="AVAILABLE"; bookingEntity = new BookingEntity(); roomEntity =
+		 * new RoomEntity(); bookingEntity=bookingRepository.findById(id).get(); int
+		 * roomId =bookingEntity.getRoom().getRoomId(); roomEntity
+		 * =roomRepository.findById(roomId).get(); roomEntity.setRoomStatus(status);
+		 */
+		// roomRepository.save(roomEntity);
 		bookingRepository.deleteById(id);
 	}
 
@@ -158,17 +152,17 @@ public class InternalService {
 		} else {
 			totalCharge = roomEntity.getRoomPrice();
 		}
-		bookingEntity.setBookingId(bookingRequest.getBookingId());
-		customerEntity.setCustomerId(bookingRequest.getCustomerId());
-		customerEntity.setCustomerName(bookingRequest.getCustomerName());
-		bookingEntity.setBreakfast(bookingRequest.isBreakfast());
-		bookingEntity.setStartDate(bookingRequest.getStartDate());
-		bookingEntity.setEndDate(bookingRequest.getEndDate());
-		bookingEntity.setTotalCharge(totalCharge);
+
+		BeanUtils.copyProperties(bookingRequest, customerEntity);
+
 		roomEntity.setRoomStatus(roomStatus);
-		bookingRepository.save(bookingEntity);
+		BeanUtils.copyProperties(bookingRequest, bookingEntity);
+		bookingEntity.setTotalCharge(totalCharge);
+		bookingEntity.setRoom(roomEntity);
+
 		customerRepository.save(customerEntity);
 		bookingRepository.save(bookingEntity);
+
 		billingAndBookingResponse.setTotalCharge(totalCharge);
 		billingAndBookingResponse.getTotalCharge();
 		return billingAndBookingResponse;
