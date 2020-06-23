@@ -1,2 +1,2 @@
-com\booking\internalService\InternalService.class
-com\booking\internalService\InternalController.class
+com\booking\internalservice\InternalController.class
+com\booking\internalservice\InternalService.class
