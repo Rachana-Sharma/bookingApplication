@@ -1,6 +1,6 @@
-com\booking\internalModel\BookingEntity.class
-com\booking\internalModel\RoomEntity.class
-com\booking\internalModel\CustomerRepository.class
-com\booking\internalModel\BookingRepository.class
-com\booking\internalModel\RoomRepository.class
-com\booking\internalModel\CustomerEntity.class
+com\booking\internalmodel\CustomerEntity.class
+com\booking\internalmodel\RoomEntity.class
+com\booking\internalmodel\RoomRepository.class
+com\booking\internalmodel\BookingEntity.class
+com\booking\internalmodel\BookingRepository.class
+com\booking\internalmodel\CustomerRepository.class
