@@ -121,7 +121,12 @@ public class InternalService {
 	 * @param id to delete from repository against given id
 	 */
 	public void deleteBooking(int id) {
-		 bookingRepository.deleteById(id);		 
+		 bookingEntity = new BookingEntity();
+		 roomEntity = new RoomEntity(); 
+		 bookingEntity=bookingRepository.findById(id).get(); 
+		 int roomId =bookingEntity.getRoom().getRoomId();		
+		 bookingRepository.deleteById(id);	
+		 roomRepository.updateStatusById(roomId);
 	}
 
 	/**

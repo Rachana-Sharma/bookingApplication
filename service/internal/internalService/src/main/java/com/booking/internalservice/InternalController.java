@@ -26,9 +26,9 @@ import com.booking.internalmodel.RoomEntity;
  */
 @SpringBootApplication
 @ComponentScan("com.booking")
-@EnableJpaRepositories(basePackages = "com.booking.internalModel")
+@EnableJpaRepositories(basePackages = "com.booking.internalmodel")
 @EnableTransactionManagement
-@EntityScan(basePackages = "com.booking.internalModel")
+@EntityScan(basePackages = "com.booking.internalmodel")
 @RestController
 public class InternalController {
 
@@ -76,7 +76,7 @@ public class InternalController {
 	 */
 	@DeleteMapping("/booking/delete/{id}")
 	public void deleteBooking(@PathVariable("id") int id) {
-		internalService.deleteBooking(id);
+		 internalService.deleteBooking(id);
 	}
 
 	/**
