@@ -1,5 +1,5 @@
-com\booking\internalClient\GetCustomerClient.class
-com\booking\internalClient\GetRoomByIdClient.class
-com\booking\internalClient\BillingAndBookingClient.class
-com\booking\internalClient\GetBookingClient.class
-com\booking\internalClient\GetAllRoomClient.class
+com\booking\internalclient\GetAllRoomClient.class
+com\booking\internalclient\BillingAndBookingClient.class
+com\booking\internalclient\GetRoomByIdClient.class
+com\booking\internalclient\GetCustomerClient.class
+com\booking\internalclient\GetBookingClient.class
