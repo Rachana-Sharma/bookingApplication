@@ -53,7 +53,7 @@ public class InternalController {
 	 * 
 	 * @return List of all customer
 	 */
-	@GetMapping("/customer/get")
+	@GetMapping("/customer")
 	public CustomerResponse getAllCustomer() {
 		return internalService.getAllCustomer();
 	}
@@ -76,7 +76,7 @@ public class InternalController {
 	 */
 	@DeleteMapping("/booking/delete/{id}")
 	public void deleteBooking(@PathVariable("id") int id) {
-		 internalService.deleteBooking(id);
+		internalService.deleteBooking(id);
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class InternalController {
 	 * 
 	 * @return List of all booking
 	 */
-	@GetMapping("/booking/get")
+	@GetMapping("/booking")
 	public BookingResponse getAllBooking() {
 		return internalService.getAllBooking();
 	}

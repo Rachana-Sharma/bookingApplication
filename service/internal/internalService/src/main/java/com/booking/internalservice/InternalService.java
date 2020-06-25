@@ -37,6 +37,7 @@ public class InternalService {
 	 * defining RoomEntity object
 	 */
 	RoomEntity roomEntity;
+
 	/**
 	 * CustomerRepository
 	 */
@@ -47,11 +48,13 @@ public class InternalService {
 	 * defining CustomerEntity object
 	 */
 	CustomerEntity customerEntity;
+
 	/**
 	 * BookingRepository
 	 */
 	@Autowired
 	BookingRepository bookingRepository;
+
 	/**
 	 * defining BookingEntity object
 	 */
@@ -121,12 +124,12 @@ public class InternalService {
 	 * @param id to delete from repository against given id
 	 */
 	public void deleteBooking(int id) {
-		 bookingEntity = new BookingEntity();
-		 roomEntity = new RoomEntity(); 
-		 bookingEntity=bookingRepository.findById(id).get(); 
-		 int roomId =bookingEntity.getRoom().getRoomId();		
-		 bookingRepository.deleteById(id);	
-		 roomRepository.updateStatusById(roomId);
+		bookingEntity = new BookingEntity();
+		roomEntity = new RoomEntity();
+		bookingEntity = bookingRepository.findById(id).get();
+		int roomId = bookingEntity.getRoom().getRoomId();
+		bookingRepository.deleteById(id);
+		roomRepository.updateStatusById(roomId);
 	}
 
 	/**
