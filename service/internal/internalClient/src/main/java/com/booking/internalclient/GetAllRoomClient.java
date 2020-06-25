@@ -16,6 +16,7 @@ import com.booking.common.RoomResponse;
  *
  */
 public class GetAllRoomClient {
+
 	/**
 	 * RestTemplate
 	 */

@@ -15,6 +15,7 @@ import com.booking.common.BookingResponse;
  * @author Rachana Sharma
  */
 public class GetBookingClient {
+
 	/**
 	 * RestTemplate
 	 */
@@ -30,7 +31,7 @@ public class GetBookingClient {
 	public BookingResponse getAllBookingClient() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange("http://localhost:8080/booking/get",
+		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange("http://localhost:8080/booking",
 				HttpMethod.GET, requestEntity, BookingResponse.class);
 		BookingResponse bookingResponse = responseEntity.getBody();
 		return bookingResponse;

@@ -45,7 +45,7 @@ public class GetRoomByIdClient {
 	public void deleteBookingClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		restTemplate.exchange("http://localhost:8080/hotel/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
+		restTemplate.exchange("http://localhost:8080/booking/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
 				id);
 	}
 }

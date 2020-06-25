@@ -3,6 +3,7 @@ package com.booking.internalclient;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,9 @@ public class BillingAndBookingClient {
 	 */
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Value( "$ {billing.url}" )
+	private String billingUrl;
 
 	/**
 	 * saves new booking and generates bill
@@ -37,8 +41,8 @@ public class BillingAndBookingClient {
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<BilliingAndBookingRequest> entity = new HttpEntity<BilliingAndBookingRequest>(bookingRequest,
 				headers);
-		BillingAndBookingResponse result = restTemplate.exchange("http://localhost:8080/billing/booking",
-				HttpMethod.POST, entity, BillingAndBookingResponse.class).getBody();
+		BillingAndBookingResponse result = restTemplate.exchange(billingUrl+"/billing/booking", HttpMethod.POST, 
+				entity, BillingAndBookingResponse.class).getBody();
 		return result;
 	}
 }
