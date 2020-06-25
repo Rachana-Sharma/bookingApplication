@@ -8,31 +8,37 @@ import java.util.Date;
  * @author Rachana Sharma
  */
 public class BilliingAndBookingRequest {
+
 	/**
 	 * The booking id
 	 */
 	private int bookingId;
+	
 	/**
 	 * The customer id
 	 */
 	private int customerId;
+	
 	/**
 	 * The booking id
 	 */
 	private String customerName;
-
+	
 	/**
 	 * The breakfast
 	 */
 	private boolean breakfast;
+	
 	/**
 	 * The start date
 	 */
 	private Date startDate;
+	
 	/**
 	 * The end date
 	 */
 	private Date endDate;
+	
 	/**
 	 * The room status
 	 */

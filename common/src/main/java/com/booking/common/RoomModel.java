@@ -6,18 +6,22 @@ package com.booking.common;
  * @author Rachana Sharma
  */
 public class RoomModel {
+
 	/**
 	 * The Room Id
 	 */
 	private int roomId;
+
 	/**
 	 * The Room Type
 	 */
 	private String roomType;
+
 	/**
 	 * The Room Price
 	 */
 	private double roomPrice;
+
 	/**
 	 * The Room Status
 	 */

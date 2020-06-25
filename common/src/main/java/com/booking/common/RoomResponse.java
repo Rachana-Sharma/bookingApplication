@@ -10,6 +10,7 @@ import java.util.List;
  *
  */
 public class RoomResponse {
+
 	/**
 	 * the room response
 	 */

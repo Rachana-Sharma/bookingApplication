@@ -8,22 +8,27 @@ import java.util.Date;
  * @author Rachana Sharma
  */
 public class BookingModel {
+
 	/**
 	 * The booking id
 	 */
 	private int bookingId;
+
 	/**
 	 * The breakfast
 	 */
 	private boolean breakfast;
+
 	/**
 	 * The total charge
 	 */
 	private double totalCharge;
+
 	/**
 	 * The start date
 	 */
 	private Date startDate;
+
 	/**
 	 * The end date
 	 */

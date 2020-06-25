@@ -7,7 +7,7 @@ package com.booking.common;
  *
  */
 public class BillingAndBookingResponse {
-	
+
 	/**
 	 * the total charge
 	 */
@@ -21,7 +21,7 @@ public class BillingAndBookingResponse {
 	}
 
 	/**
-	 * empty  constructor
+	 * empty constructor
 	 */
 	public BillingAndBookingResponse() {
 	}

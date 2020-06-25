@@ -6,10 +6,12 @@ package com.booking.common;
  * @author Rachana Sharma
  */
 public class CustomerModel {
+
 	/**
 	 * The Customer Id
 	 */
 	private int customerId;
+
 	/**
 	 * The Customer Name
 	 */

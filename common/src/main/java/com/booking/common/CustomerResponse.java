@@ -9,6 +9,7 @@ import java.util.List;
  * @author Rachana Sharma
  */
 public class CustomerResponse {
+
 	/**
 	 * The customer response
 	 */
