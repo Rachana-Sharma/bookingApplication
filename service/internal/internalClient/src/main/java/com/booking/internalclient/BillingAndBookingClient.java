@@ -27,7 +27,7 @@ public class BillingAndBookingClient {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Value( "$ {billing.url}" )
+	@Value("${billing.url}")
 	private String billingUrl;
 
 	/**
