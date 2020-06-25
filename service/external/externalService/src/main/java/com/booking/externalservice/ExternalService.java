@@ -26,21 +26,25 @@ public class ExternalService {
 	 */
 	@Autowired
 	GetRoomByIdClient getRoomClient;
+
 	/**
 	 * GetCustomerClient
 	 */
 	@Autowired
 	GetCustomerClient getCustomerClient;
+
 	/**
 	 * SaveCustomerClient
 	 */
 	@Autowired
 	BillingAndBookingClient saveBookingClient;
+
 	/**
 	 * GetBookingClient
 	 */
 	@Autowired
 	GetBookingClient getBookingClient;
+
 	/**
 	 * GetAllRoomClient
 	 */
@@ -72,7 +76,7 @@ public class ExternalService {
 	 * @param bookingRequest
 	 * @return int
 	 */
-	public BillingAndBookingResponse BillingAndBooking(BilliingAndBookingRequest bookingRequest) {
+	public BillingAndBookingResponse billingAndBooking(BilliingAndBookingRequest bookingRequest) {
 		return saveBookingClient.billingAndBookingClient(bookingRequest);
 	}
 

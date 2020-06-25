@@ -35,7 +35,6 @@ public class ConfigurationClass {
 	/**
 	 * Bean for External Service
 	 */
-
 	public ExternalService externalService() {
 		return new ExternalService();
 	}
