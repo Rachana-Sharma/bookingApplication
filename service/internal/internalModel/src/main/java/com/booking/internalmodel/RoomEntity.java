@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Room_Entity")
 public class RoomEntity {
+
 	/**
 	 * The Room Id
 	 */
@@ -27,23 +28,29 @@ public class RoomEntity {
 	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int roomId;
+
 	/**
 	 * The Room Type
 	 */
 	@Column(name = "RoomType")
 	private String roomType;
+
 	/**
 	 * The Room Price
 	 */
 	@Column(name = "RoomPrice")
 	private double roomPrice;
+
 	/**
 	 * The Room Status
 	 */
 	@Column(name = "RoomStatus")
 	private String roomStatus;
 
-	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	/**
+	 * Joining RoomEntity Table with BookingEntity Table through OneToOne Mapping
+	 */
+	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private BookingEntity booking;
 
 	/**

@@ -20,6 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CUSTOMER_ENTITY")
 public class CustomerEntity {
+
 	/**
 	 * The Customer Id
 	 */
@@ -27,22 +28,21 @@ public class CustomerEntity {
 	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int customerId;
+
 	/**
 	 * The Customer Name
 	 */
 	@Column(name = "CUSTOMER_NAME")
 	private String customerName;
-	
+
 	/**
 	 * Joining column roomId of RoomEntity into bookingEntity
 	 */
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "bookingId")
-	private BookingEntity bookingEntity;	
+	private BookingEntity bookingEntity;
 
-	
-
-		/**
+	/**
 	 * Class Constructor
 	 */
 	public CustomerEntity() {
@@ -76,6 +76,7 @@ public class CustomerEntity {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
 	/**
 	 * @return the bookingEntity
 	 */
@@ -90,6 +91,4 @@ public class CustomerEntity {
 		this.bookingEntity = bookingEntity;
 	}
 
-
-	
 }

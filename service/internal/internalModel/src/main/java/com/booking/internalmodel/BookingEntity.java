@@ -21,27 +21,32 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "BOOKING_ENTITY")
 public class BookingEntity {
+
 	/**
 	 * The booking id
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bookingId;
+
 	/**
 	 * The breakfast
 	 */
 	@Column(name = "BREAKFAST")
 	private boolean breakfast;
+
 	/**
 	 * The total charge
 	 */
 	@Column(name = "TOTAL_CHARGE")
 	private double totalCharge;
+
 	/**
 	 * The start date
 	 */
 	@Column(name = "START_DATE")
 	private Date startDate;
+
 	/**
 	 * The end date
 	 */
@@ -53,11 +58,14 @@ public class BookingEntity {
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "roomId")
-	private RoomEntity room;	
-	
-	@OneToOne(mappedBy = "bookingEntity", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-	private CustomerEntity customerEntity;
+	private RoomEntity room;
 
+	/**
+	 * Joining CustomerEntity Table with BookingEntity Table through OneToOne
+	 * Mapping
+	 */
+	@OneToOne(mappedBy = "bookingEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private CustomerEntity customerEntity;
 
 	/**
 	 * Class Constructor
@@ -135,13 +143,14 @@ public class BookingEntity {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+
 	/**
 	 * @return the room
 	 */
 	public RoomEntity getRoom() {
 		return room;
 	}
-	
+
 	/**
 	 * @param room the room to set
 	 */
