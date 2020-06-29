@@ -34,4 +34,6 @@ public interface RoomRepository extends CrudRepository<RoomEntity, Integer> {
 	@Query("UPDATE RoomEntity r SET r.roomStatus ='AVAILABLE' WHERE r.roomId =:roomId")
 	void updateStatusById(@Param("roomId") int roomId);
 
+	
+	
 }
