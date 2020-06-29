@@ -12,33 +12,23 @@ public class BilliingAndBookingRequest {
 	/**
 	 * The booking id
 	 */
-	private int bookingId;
-	
-	/**
-	 * The customer id
-	 */
-	private int customerId;
-	
-	/**
-	 * The booking id
-	 */
 	private String customerName;
-	
+
 	/**
 	 * The breakfast
 	 */
 	private boolean breakfast;
-	
+
 	/**
 	 * The start date
 	 */
 	private Date startDate;
-	
+
 	/**
 	 * The end date
 	 */
 	private Date endDate;
-	
+
 	/**
 	 * The room status
 	 */
@@ -63,34 +53,6 @@ public class BilliingAndBookingRequest {
 	 */
 	public void setBreakfast(boolean breakfast) {
 		this.breakfast = breakfast;
-	}
-
-	/**
-	 * @return the bookingId
-	 */
-	public int getBookingId() {
-		return bookingId;
-	}
-
-	/**
-	 * @param bookingId the bookingId to set
-	 */
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
-	}
-
-	/**
-	 * @return the customerId
-	 */
-	public int getCustomerId() {
-		return customerId;
-	}
-
-	/**
-	 * @param customerId the customerId to set
-	 */
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
 	}
 
 	/**
