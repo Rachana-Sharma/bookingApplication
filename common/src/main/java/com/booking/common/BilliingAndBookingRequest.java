@@ -10,7 +10,7 @@ import java.util.Date;
 public class BilliingAndBookingRequest {
 
 	/**
-	 * The booking id
+	 * The customer Name
 	 */
 	private String customerName;
 
