@@ -31,7 +31,7 @@ public class GetRoomByIdClient {
 	public RoomModel getRoomByIdClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange("http://localhost:8080/room/{id}",
+		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange("http://localhost:8088/room/{id}",
 				HttpMethod.GET, requestEntity, RoomModel.class, id);
 		RoomModel roomModel = responseEntity.getBody();
 		return roomModel;
@@ -45,7 +45,7 @@ public class GetRoomByIdClient {
 	public void deleteBookingClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		restTemplate.exchange("http://localhost:8080/booking/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
+		restTemplate.exchange("http://localhost:8088/booking/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
 				id);
 	}
 }

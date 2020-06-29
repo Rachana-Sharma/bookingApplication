@@ -31,7 +31,7 @@ public class GetCustomerClient {
 	public CustomerResponse getAllCustomerClient() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange("http://localhost:8080/customer",
+		ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange("http://localhost:8088/customer",
 				HttpMethod.GET, requestEntity, CustomerResponse.class);
 		CustomerResponse customerResponse = responseEntity.getBody();
 		return customerResponse;

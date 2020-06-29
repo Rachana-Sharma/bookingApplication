@@ -31,7 +31,7 @@ public class GetAllRoomClient {
 	public RoomResponse getAllRoomClientMethod() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<RoomResponse> responseEntity = restTemplate.exchange("http://localhost:8080/room",
+		ResponseEntity<RoomResponse> responseEntity = restTemplate.exchange("http://localhost:8088/room",
 				HttpMethod.GET, requestEntity, RoomResponse.class);
 		RoomResponse roomResponse = responseEntity.getBody();
 		return roomResponse;

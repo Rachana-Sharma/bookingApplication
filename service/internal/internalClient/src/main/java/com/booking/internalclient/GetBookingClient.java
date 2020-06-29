@@ -31,7 +31,7 @@ public class GetBookingClient {
 	public BookingResponse getAllBookingClient() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange("http://localhost:8080/booking",
+		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange("http://localhost:8088/booking",
 				HttpMethod.GET, requestEntity, BookingResponse.class);
 		BookingResponse bookingResponse = responseEntity.getBody();
 		return bookingResponse;
