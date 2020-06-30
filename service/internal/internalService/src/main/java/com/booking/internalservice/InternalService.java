@@ -129,7 +129,9 @@ public class InternalService {
 		bookingEntity = bookingRepository.findById(id).get();
 		int roomId = bookingEntity.getRoom().getRoomId();
 		bookingRepository.deleteById(id);
-		roomRepository.updateStatusById(roomId);
+		if (bookingRepository.findById(roomId) == null) {
+			roomRepository.updateStatusById(roomId);
+		}
 	}
 
 	/**
@@ -146,7 +148,7 @@ public class InternalService {
 		bookingEntity = new BookingEntity();
 		customerEntity = new CustomerEntity();
 		BillingAndBookingResponse billingAndBookingResponse = new BillingAndBookingResponse();
-		int id = roomRepository.findRoom(bookingRequest.getRoomType());
+		int id = roomRepository.findRoomByDate(bookingRequest.getStartDate(), bookingRequest.getRoomType());
 		roomEntity = roomRepository.findById(id).get();
 		if (bookingRequest.isBreakfast()) {
 			totalCharge = roomEntity.getRoomPrice() + breakfastCharge;
