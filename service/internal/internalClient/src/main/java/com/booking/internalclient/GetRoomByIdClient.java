@@ -1,6 +1,7 @@
 package com.booking.internalclient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -21,6 +22,12 @@ public class GetRoomByIdClient {
 	 */
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	/**
+	 * baseUrl
+	 */
+	@Value("${base.url}")
+	private String baseUrl;
 
 	/**
 	 * Client Method to get room by id
@@ -31,7 +38,7 @@ public class GetRoomByIdClient {
 	public RoomModel getRoomByIdClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange("http://localhost:8088/room/{id}",
+		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange(baseUrl+"/room/{id}",
 				HttpMethod.GET, requestEntity, RoomModel.class, id);
 		RoomModel roomModel = responseEntity.getBody();
 		return roomModel;
@@ -45,7 +52,7 @@ public class GetRoomByIdClient {
 	public void deleteBookingClient(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		restTemplate.exchange("http://localhost:8088/booking/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
+		restTemplate.exchange(baseUrl+"/booking/delete/{id}", HttpMethod.DELETE, requestEntity, void.class,
 				id);
 	}
 }

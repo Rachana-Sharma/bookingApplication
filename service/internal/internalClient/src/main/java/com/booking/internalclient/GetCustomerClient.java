@@ -1,6 +1,7 @@
 package com.booking.internalclient;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,6 +23,12 @@ public class GetCustomerClient {
 	 */
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	/**
+	 * baseUrl
+	 */
+	@Value("${base.url}")
+	private String baseUrl;
 
 	/**
 	 * Client Method to get all customer
@@ -31,7 +38,7 @@ public class GetCustomerClient {
 	public CustomerResponse getAllCustomerClient() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
-		ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange("http://localhost:8088/customer",
+		ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange(baseUrl+"/customer",
 				HttpMethod.GET, requestEntity, CustomerResponse.class);
 		CustomerResponse customerResponse = responseEntity.getBody();
 		return customerResponse;
