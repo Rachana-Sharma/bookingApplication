@@ -50,6 +50,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * get customerId of this CustomerEntity
+	 * 
 	 * @return the customerId
 	 */
 	public int getCustomerId() {
@@ -57,6 +59,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * Registers the customerId to display in CustomerEntity
+	 * 
 	 * @param customerId the customerId to set
 	 */
 	public void setCustomerId(int customerId) {
@@ -64,6 +68,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * get customerName of this CustomerEntity
+	 * 
 	 * @return the customerName
 	 */
 	public String getCustomerName() {
@@ -71,6 +77,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * Registers the customerName to display in CustomerEntity
+	 * 
 	 * @param customerName the customerName to set
 	 */
 	public void setCustomerName(String customerName) {
@@ -78,6 +86,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * get bookingEntity of this CustomerEntity
+	 * 
 	 * @return the bookingEntity
 	 */
 	public BookingEntity getBookingEntity() {
@@ -85,6 +95,8 @@ public class CustomerEntity {
 	}
 
 	/**
+	 * Registers the bookingEntity to display in CustomerEntity
+	 * 
 	 * @param bookingEntity the bookingEntity to set
 	 */
 	public void setBookingEntity(BookingEntity bookingEntity) {

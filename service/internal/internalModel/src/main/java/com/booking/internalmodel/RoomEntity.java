@@ -61,6 +61,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * get roomId of this RoomEntity
+	 * 
 	 * @return the roomId
 	 */
 	public int getRoomId() {
@@ -68,6 +70,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * Registers the roomId to display in RoomEntity
+	 * 
 	 * @param roomId the roomId to set
 	 */
 	public void setRoomId(int roomId) {
@@ -75,6 +79,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * get roomType of this RoomEntity
+	 * 
 	 * @return the roomType
 	 */
 	public String getRoomType() {
@@ -82,6 +88,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * Registers the roomType to display in RoomEntity
+	 * 
 	 * @param roomType the roomType to set
 	 */
 	public void setRoomType(String roomType) {
@@ -89,6 +97,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * get roomPrice of this RoomEntity
+	 * 
 	 * @return the roomPrice
 	 */
 	public double getRoomPrice() {
@@ -96,6 +106,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * Registers the roomPrice to display in RoomEntity
+	 * 
 	 * @param roomPrice the roomPrice to set
 	 */
 	public void setRoomPrice(double roomPrice) {
@@ -103,6 +115,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * get roomStatus of this RoomEntity
+	 * 
 	 * @return the roomStatus
 	 */
 	public String getRoomStatus() {
@@ -110,6 +124,8 @@ public class RoomEntity {
 	}
 
 	/**
+	 * Registers the roomStatus to display in RoomEntity
+	 * 
 	 * @param roomStatus the roomStatus to set
 	 */
 	public void setRoomStatus(String roomStatus) {

@@ -75,6 +75,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * get booking id of this BookingEntity
+	 * 
 	 * @return the bookingId
 	 */
 	public int getBookingId() {
@@ -82,6 +84,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the bookingId to display in BookingEntity
+	 * 
 	 * @param bookingId the bookingId to set
 	 */
 	public void setBookingId(int bookingId) {
@@ -96,6 +100,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the Breakfast to display in BookingEntity
+	 * 
 	 * @param breakfast the breakfast to set
 	 */
 	public void setBreakfast(boolean breakfast) {
@@ -103,6 +109,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * get totalCharge of this BookingEntity
+	 * 
 	 * @return the totalCharge
 	 */
 	public double getTotalCharge() {
@@ -110,6 +118,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the totalCharge to display in BookingEntity
+	 * 
 	 * @param totalCharge the totalCharge to set
 	 */
 	public void setTotalCharge(double totalCharge) {
@@ -117,6 +127,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * get startDate of this BookingModel
+	 * 
 	 * @return the startDate
 	 */
 	public Date getStartDate() {
@@ -124,6 +136,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the startDate to display in BookingEntity
+	 * 
 	 * @param startDate the startDate to set
 	 */
 	public void setStartDate(Date startDate) {
@@ -131,6 +145,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * get endDate of this BookingEntity
+	 * 
 	 * @return the endDate
 	 */
 	public Date getEndDate() {
@@ -138,6 +154,8 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the endDate to display in BookingEntity
+	 * 
 	 * @param endDate the endDate to set
 	 */
 	public void setEndDate(Date endDate) {
@@ -145,6 +163,7 @@ public class BookingEntity {
 	}
 
 	/**
+	 * get room of this BookingEntity
 	 * @return the room
 	 */
 	public RoomEntity getRoom() {
@@ -152,6 +171,7 @@ public class BookingEntity {
 	}
 
 	/**
+	 * Registers the room to display in BookingEntity
 	 * @param room the room to set
 	 */
 	public void setRoom(RoomEntity room) {
