@@ -30,6 +30,8 @@ public class BookingResponse {
 	}
 
 	/**
+	 * get bookingResponse of this BookingResponse
+	 * 
 	 * @return the bookingResponse
 	 */
 	public List<BookingModel> getBookingResponse() {
@@ -37,6 +39,8 @@ public class BookingResponse {
 	}
 
 	/**
+	 * Registers the bookingResponse to display in BookingResponse
+	 * 
 	 * @param bookingResponse the bookingResponse to set
 	 */
 	public void setBookingResponse(List<BookingModel> bookingResponse) {

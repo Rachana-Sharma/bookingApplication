@@ -21,12 +21,14 @@ public class BillingAndBookingResponse {
 	}
 
 	/**
-	 * empty constructor
+	 * Class constructor
 	 */
 	public BillingAndBookingResponse() {
 	}
 
 	/**
+	 * get totalCharge of this BillingAndBookingResponse
+	 * 
 	 * @return the totalCharge
 	 */
 	public double getTotalCharge() {
@@ -34,6 +36,8 @@ public class BillingAndBookingResponse {
 	}
 
 	/**
+	 * Registers the totalCharge to display in BillingAndBookingResponse
+	 * 
 	 * @param totalCharge the totalCharge to set
 	 */
 	public void setTotalCharge(double totalCharge) {

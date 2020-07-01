@@ -30,6 +30,8 @@ public class CustomerResponse {
 	}
 
 	/**
+	 * get customerResponse of this CustomerResponse
+	 * 
 	 * @return the customerResponse
 	 */
 	public List<CustomerModel> getCustomerResponse() {
@@ -37,6 +39,8 @@ public class CustomerResponse {
 	}
 
 	/**
+	 * Registers the customerResponse to display in CustomerResponse
+	 * 
 	 * @param customerResponse the customerResponse to set
 	 */
 	public void setCustomerResponse(List<CustomerModel> customerResponse) {

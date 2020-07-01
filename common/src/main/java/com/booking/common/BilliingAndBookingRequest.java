@@ -10,7 +10,7 @@ import java.util.Date;
 public class BilliingAndBookingRequest {
 
 	/**
-	 * The customer Name
+	 * The booking id
 	 */
 	private String customerName;
 
@@ -35,7 +35,7 @@ public class BilliingAndBookingRequest {
 	private String roomType;
 
 	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public BilliingAndBookingRequest() {
 
@@ -49,6 +49,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * Registers the breakfast to display in BilliingAndBookingRequest
+	 * 
 	 * @param breakfast the breakfast to set
 	 */
 	public void setBreakfast(boolean breakfast) {
@@ -56,6 +58,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * get customerName of this BilliingAndBookingRequest
+	 * 
 	 * @return the customerName
 	 */
 	public String getCustomerName() {
@@ -63,6 +67,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * Registers the customerName to display in BilliingAndBookingRequest
+	 * 
 	 * @param customerName the customerName to set
 	 */
 	public void setCustomerName(String customerName) {
@@ -70,6 +76,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * get startDate of this BilliingAndBookingRequest
+	 * 
 	 * @return the startDate
 	 */
 	public Date getStartDate() {
@@ -77,6 +85,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * Registers the startDate to display in BilliingAndBookingRequest
+	 * 
 	 * @param startDate the startDate to set
 	 */
 	public void setStartDate(Date startDate) {
@@ -84,6 +94,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * get endDate of this BilliingAndBookingRequest
+	 * 
 	 * @return the endDate
 	 */
 	public Date getEndDate() {
@@ -91,6 +103,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * Registers the endDate to display in BilliingAndBookingRequest
+	 * 
 	 * @param endDate the endDate to set
 	 */
 	public void setEndDate(Date endDate) {
@@ -98,6 +112,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * get roomType of this BilliingAndBookingRequest
+	 * 
 	 * @return the roomType
 	 */
 	public String getRoomType() {
@@ -105,6 +121,8 @@ public class BilliingAndBookingRequest {
 	}
 
 	/**
+	 * Registers the roomType to display in BilliingAndBookingRequest
+	 * 
 	 * @param roomType the roomType to set
 	 */
 	public void setRoomType(String roomType) {

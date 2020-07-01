@@ -28,13 +28,15 @@ public class RoomModel {
 	private String roomStatus;
 
 	/**
-	 * Empty Constructor
+	 * Class Constructor
 	 */
 	public RoomModel() {
 
 	}
 
 	/**
+	 * get roomId of this RoomModel
+	 * 
 	 * @return the roomId
 	 */
 	public int getRoomId() {
@@ -42,6 +44,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * Registers the roomId to display in RoomModel
+	 * 
 	 * @param roomId the roomId to set
 	 */
 	public void setRoomId(int roomId) {
@@ -49,6 +53,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * get roomType of this RoomModel
+	 * 
 	 * @return the roomType
 	 */
 	public String getRoomType() {
@@ -56,6 +62,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * Registers the roomType to display in RoomModel
+	 * 
 	 * @param roomType the roomType to set
 	 */
 	public void setRoomType(String roomType) {
@@ -63,6 +71,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * get roomPrice of this RoomModel
+	 * 
 	 * @return the roomPrice
 	 */
 	public double getRoomPrice() {
@@ -70,6 +80,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * Registers the roomPrice to display in RoomModel
+	 * 
 	 * @param roomPrice the roomPrice to set
 	 */
 	public void setRoomPrice(double roomPrice) {
@@ -77,6 +89,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * get roomStatus of this RoomModel
+	 * 
 	 * @return the roomStatus
 	 */
 	public String getRoomStatus() {
@@ -84,6 +98,8 @@ public class RoomModel {
 	}
 
 	/**
+	 * Registers the roomStatus to display in RoomModel
+	 * 
 	 * @param roomStatus the roomStatus to set
 	 */
 	public void setRoomStatus(String roomStatus) {

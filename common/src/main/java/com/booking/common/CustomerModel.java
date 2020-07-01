@@ -25,6 +25,8 @@ public class CustomerModel {
 	}
 
 	/**
+	 * get customerId of this CustomerModel
+	 * 
 	 * @return the customerId
 	 */
 	public int getCustomerId() {
@@ -32,6 +34,8 @@ public class CustomerModel {
 	}
 
 	/**
+	 * Registers the customerId to display in CustomerModel
+	 * 
 	 * @param customerId the customerId to set
 	 */
 	public void setCustomerId(int customerId) {
@@ -39,6 +43,8 @@ public class CustomerModel {
 	}
 
 	/**
+	 * get customerName of this CustomerModel
+	 * 
 	 * @return the customerName
 	 */
 	public String getCustomerName() {
@@ -46,6 +52,8 @@ public class CustomerModel {
 	}
 
 	/**
+	 * Registers the customerName to display in CustomerModel
+	 * 
 	 * @param customerName the customerName to set
 	 */
 	public void setCustomerName(String customerName) {

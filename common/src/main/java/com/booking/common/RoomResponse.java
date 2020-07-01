@@ -17,20 +17,6 @@ public class RoomResponse {
 	private List<RoomModel> roomResponse = new ArrayList<>();
 
 	/**
-	 * @return the roomResponse
-	 */
-	public List<RoomModel> getRoomResponse() {
-		return roomResponse;
-	}
-
-	/**
-	 * @param roomResponse the roomResponse to set
-	 */
-	public void setRoomResponse(List<RoomModel> roomResponse) {
-		this.roomResponse = roomResponse;
-	}
-
-	/**
 	 * Class constructor
 	 */
 	public RoomResponse() {
@@ -38,9 +24,20 @@ public class RoomResponse {
 	}
 
 	/**
-	 * @param roomRespon
+	 * get roomResponse of this RoomResponse
+	 * 
+	 * @return the roomResponse
 	 */
-	public RoomResponse(List<RoomModel> roomResponse) {
+	public List<RoomModel> getRoomResponse() {
+		return roomResponse;
+	}
+
+	/**
+	 * Registers the roomResponse to display in RoomResponse
+	 * 
+	 * @param roomResponse the roomResponse to set
+	 */
+	public void setRoomResponse(List<RoomModel> roomResponse) {
 		this.roomResponse = roomResponse;
-	};
+	}
 }

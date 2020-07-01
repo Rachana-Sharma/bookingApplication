@@ -67,6 +67,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * Registers the bookingId to display in BookingModel
+	 * 
 	 * @param bookingId the bookingId to set
 	 */
 	public void setBookingId(int bookingId) {
@@ -74,6 +76,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * get totalCharge of this BookingModel
+	 * 
 	 * @return the totalCharge
 	 */
 	public double getTotalCharge() {
@@ -81,6 +85,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * Registers the totalCharge to display in BookingModel
+	 * 
 	 * @param totalCharge the totalCharge to set
 	 */
 	public void setTotalCharge(double totalCharge) {
@@ -88,6 +94,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * get startDate of this BookingModel
+	 * 
 	 * @return the startDate
 	 */
 	public Date getStartDate() {
@@ -95,6 +103,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * Registers the startDate to display in BookingModel
+	 * 
 	 * @param startDate the startDate to set
 	 */
 	public void setStartDate(Date startDate) {
@@ -102,6 +112,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * get endDate of this BookingModel
+	 * 
 	 * @return the endDate
 	 */
 	public Date getEndDate() {
@@ -109,6 +121,8 @@ public class BookingModel {
 	}
 
 	/**
+	 * Registers the endDate to display in BookingModel
+	 * 
 	 * @param endDate the endDate to set
 	 */
 	public void setEndDate(Date endDate) {
