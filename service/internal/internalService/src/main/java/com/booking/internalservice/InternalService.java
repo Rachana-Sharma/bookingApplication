@@ -31,34 +31,34 @@ public class InternalService {
 	 * RoomRepository
 	 */
 	@Autowired
-	RoomRepository roomRepository;
+	private RoomRepository roomRepository;
 
 	/**
 	 * defining RoomEntity object
 	 */
-	RoomEntity roomEntity;
+	private RoomEntity roomEntity;
 
 	/**
 	 * CustomerRepository
 	 */
 	@Autowired
-	CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
 
 	/**
 	 * defining CustomerEntity object
 	 */
-	CustomerEntity customerEntity;
+	private CustomerEntity customerEntity;
 
 	/**
 	 * BookingRepository
 	 */
 	@Autowired
-	BookingRepository bookingRepository;
+	private BookingRepository bookingRepository;
 
 	/**
 	 * defining BookingEntity object
 	 */
-	BookingEntity bookingEntity;
+	private BookingEntity bookingEntity;
 
 	/**
 	 * returns all rooms
@@ -130,9 +130,10 @@ public class InternalService {
 		int roomId = bookingEntity.getRoom().getRoomId();
 		bookingRepository.deleteById(id);
 		roomRepository.updateStatusById(roomId);
-		/*if (bookingRepository.findById(roomId) == null) {
-			roomRepository.updateStatusById(roomId);
-		}*/
+		/*
+		 * if (bookingRepository.findById(roomId) == null) {
+		 * roomRepository.updateStatusById(roomId); }
+		 */
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class InternalService {
 		customerEntity = new CustomerEntity();
 		BillingAndBookingResponse billingAndBookingResponse = new BillingAndBookingResponse();
 		int id = roomRepository.findRoomByDate(bookingRequest.getStartDate(), bookingRequest.getRoomType());
-		//int id=roomRepository.findRoomByDateRange(bookingRequest.getStartDate(),bookingRequest.getEndDate(),bookingRequest.getRoomType());
+		// int id=roomRepository.findRoomByDateRange(bookingRequest.getStartDate(),bookingRequest.getEndDate(),bookingRequest.getRoomType());
 		roomEntity = roomRepository.findById(id).get();
 		if (bookingRequest.isBreakfast()) {
 			totalCharge = roomEntity.getRoomPrice() + breakfastCharge;

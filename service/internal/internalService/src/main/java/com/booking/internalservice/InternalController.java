@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,7 +24,6 @@ import com.booking.internalmodel.RoomEntity;
  * @author Rachana Sharma The InternalController
  */
 @SpringBootApplication
-@ComponentScan("com.booking")
 @EnableJpaRepositories(basePackages = "com.booking.internalmodel")
 @EnableTransactionManagement
 @EntityScan(basePackages = "com.booking.internalmodel")
@@ -36,7 +34,7 @@ public class InternalController {
 	 * internalService
 	 */
 	@Autowired
-	InternalService internalService;
+	private InternalService internalService;
 
 	/**
 	 * returns all rooms
