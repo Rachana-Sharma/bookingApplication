@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.internalclient.BillingAndBookingClient;
+import com.booking.internalclient.DeleteBookingByIdClient;
 import com.booking.internalclient.GetAllRoomClient;
 import com.booking.internalclient.GetBookingClient;
 import com.booking.internalclient.GetCustomerClient;
@@ -69,5 +70,13 @@ public class ConfigurationClass {
 	@Bean
 	public GetAllRoomClient getAllRoomClient() {
 		return new GetAllRoomClient();
+	}
+	
+	/**-
+	 * Bean for DeleteBookingByIdClient
+	 */
+	@Bean
+	public DeleteBookingByIdClient deleteBookingByIdClient() {
+		return new DeleteBookingByIdClient();
 	}
 }

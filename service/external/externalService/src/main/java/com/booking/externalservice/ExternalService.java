@@ -10,6 +10,7 @@ import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
 import com.booking.internalclient.BillingAndBookingClient;
+import com.booking.internalclient.DeleteBookingByIdClient;
 import com.booking.internalclient.GetAllRoomClient;
 import com.booking.internalclient.GetBookingClient;
 import com.booking.internalclient.GetCustomerClient;
@@ -25,31 +26,37 @@ public class ExternalService {
 	 * GetRoomClient
 	 */
 	@Autowired
-	GetRoomByIdClient getRoomClient;
+	private GetRoomByIdClient getRoomClient;
 
 	/**
 	 * GetCustomerClient
 	 */
 	@Autowired
-	GetCustomerClient getCustomerClient;
+	private GetCustomerClient getCustomerClient;
 
 	/**
 	 * SaveCustomerClient
 	 */
 	@Autowired
-	BillingAndBookingClient saveBookingClient;
+	private BillingAndBookingClient saveBookingClient;
 
 	/**
 	 * GetBookingClient
 	 */
 	@Autowired
-	GetBookingClient getBookingClient;
+	private GetBookingClient getBookingClient;
 
 	/**
 	 * GetAllRoomClient
 	 */
 	@Autowired
-	GetAllRoomClient getAllRoomClient;
+	private GetAllRoomClient getAllRoomClient;
+	
+	/**
+	 * DeleteBookingByIdClient
+	 */
+	@Autowired
+	private DeleteBookingByIdClient deleteBookingByIdClient;
 
 	/**
 	 * returns all customer
@@ -74,7 +81,7 @@ public class ExternalService {
 	 * saves new booking and generates bill
 	 * 
 	 * @param bookingRequest
-	 * @return int
+	 * @return BillingAndBookingResponse
 	 */
 	public BillingAndBookingResponse billingAndBooking(BilliingAndBookingRequest bookingRequest) {
 		return saveBookingClient.billingAndBookingClient(bookingRequest);
@@ -96,7 +103,7 @@ public class ExternalService {
 	 * @param id
 	 */
 	public void deleteBooking(int id) {
-		getRoomClient.deleteBookingClient(id);
+		deleteBookingByIdClient.deleteBookingClient(id);
 	}
 
 	/**
