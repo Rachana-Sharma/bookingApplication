@@ -150,6 +150,7 @@ public class InternalService {
 		bookingEntity = new BookingEntity();
 		customerEntity = new CustomerEntity();
 		BillingAndBookingResponse billingAndBookingResponse = new BillingAndBookingResponse();
+		//int id=roomRepository.findRoom(bookingRequest.getRoomType());
 		int id = roomRepository.findRoomByDate(bookingRequest.getStartDate(),bookingRequest.getEndDate(), bookingRequest.getRoomType());
 		// int id=roomRepository.findRoomByDateRange(bookingRequest.getStartDate(),bookingRequest.getEndDate(),bookingRequest.getRoomType());
 		roomEntity = roomRepository.findById(id).get();
