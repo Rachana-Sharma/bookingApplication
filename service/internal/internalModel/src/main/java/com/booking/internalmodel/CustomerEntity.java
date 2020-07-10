@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -25,8 +24,7 @@ public class CustomerEntity {
 	 * The Customer Id
 	 */
 	@Id
-	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int customerId;
 
 	/**
