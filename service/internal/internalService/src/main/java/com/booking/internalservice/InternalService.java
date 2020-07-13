@@ -1,5 +1,8 @@
 package com.booking.internalservice;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -146,33 +149,42 @@ public class InternalService {
 		double breakfastCharge = 1000;
 		double totalCharge = 0;
 		String roomStatus = "OCCUPIED";
+		String bookingMessage1 = "Booking Successful";
+		String bookingMessage2 = "Booking Not Successful. Try another date. ";
 		roomEntity = new RoomEntity();
 		bookingEntity = new BookingEntity();
 		customerEntity = new CustomerEntity();
 		BillingAndBookingResponse billingAndBookingResponse = new BillingAndBookingResponse();
-		//int id=roomRepository.findRoom(bookingRequest.getRoomType());
-		int id = roomRepository.findRoomByDate(bookingRequest.getStartDate(),bookingRequest.getEndDate(), bookingRequest.getRoomType());
-		// int id=roomRepository.findRoomByDateRange(bookingRequest.getStartDate(),bookingRequest.getEndDate(),bookingRequest.getRoomType());
-		roomEntity = roomRepository.findById(id).get();
-		if (bookingRequest.isBreakfast()) {
-			totalCharge = roomEntity.getRoomPrice() + breakfastCharge;
+		LocalDate today = LocalDate.now();
+		ZoneId defaultZoneId = ZoneId.systemDefault();
+		Instant instant = bookingRequest.getStartDate().toInstant();
+		LocalDate startDay = instant.atZone(defaultZoneId).toLocalDate();
+		if (today.isBefore(startDay) || today.equals(startDay)) {
+			int id = roomRepository.findRoomByDate(bookingRequest.getStartDate(), bookingRequest.getEndDate(),
+					bookingRequest.getRoomType());
+			roomEntity = roomRepository.findById(id).get();
+			if (bookingRequest.isBreakfast()) {
+				totalCharge = roomEntity.getRoomPrice() + breakfastCharge;
+			} else {
+				totalCharge = roomEntity.getRoomPrice();
+			}
+
+			BeanUtils.copyProperties(bookingRequest, customerEntity);
+
+			roomEntity.setRoomStatus(roomStatus);
+			BeanUtils.copyProperties(bookingRequest, bookingEntity);
+			bookingEntity.setTotalCharge(totalCharge);
+			bookingEntity.setRoom(roomEntity);
+			customerEntity.setBookingEntity(bookingEntity);
+
+			customerRepository.save(customerEntity);
+			bookingRepository.save(bookingEntity);
+
+			billingAndBookingResponse.setTotalCharge(totalCharge);
+			billingAndBookingResponse.setMessage(bookingMessage1);
 		} else {
-			totalCharge = roomEntity.getRoomPrice();
+			billingAndBookingResponse.setMessage(bookingMessage2);
 		}
-
-		BeanUtils.copyProperties(bookingRequest, customerEntity);
-
-		roomEntity.setRoomStatus(roomStatus);
-		BeanUtils.copyProperties(bookingRequest, bookingEntity);
-		bookingEntity.setTotalCharge(totalCharge);
-		bookingEntity.setRoom(roomEntity);
-		customerEntity.setBookingEntity(bookingEntity);
-
-		customerRepository.save(customerEntity);
-		bookingRepository.save(bookingEntity);
-
-		billingAndBookingResponse.setTotalCharge(totalCharge);
-		billingAndBookingResponse.getTotalCharge();
 		return billingAndBookingResponse;
 	}
 }

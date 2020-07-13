@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 /**
  * The CustomerEntity
@@ -24,7 +25,8 @@ public class CustomerEntity {
 	 * The Customer Id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@TableGenerator(name = "cusId",allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.TABLE, generator = "cusId")
 	private int customerId;
 
 	/**

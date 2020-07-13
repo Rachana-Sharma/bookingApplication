@@ -26,7 +26,7 @@ public class BookingEntity {
 	 * The booking id
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int bookingId;
 
 	/**
