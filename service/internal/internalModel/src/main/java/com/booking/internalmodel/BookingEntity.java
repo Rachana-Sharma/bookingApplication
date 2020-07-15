@@ -56,7 +56,7 @@ public class BookingEntity {
 	/**
 	 * Joining column roomId of RoomEntity into bookingEntity
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, targetEntity =RoomEntity.class )
 	@JoinColumn(name = "roomId")
 	private RoomEntity room;
 

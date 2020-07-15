@@ -4,11 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -25,8 +22,6 @@ public class RoomEntity {
 	 * The Room Id
 	 */
 	@Id
-	@SequenceGenerator(initialValue = 1, allocationSize = 3, name = "mySeqGen")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int roomId;
 
 	/**
@@ -50,7 +45,7 @@ public class RoomEntity {
 	/**
 	 * Joining RoomEntity Table with BookingEntity Table through OneToOne Mapping
 	 */
-	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
 	private BookingEntity booking;
 
 	/**
