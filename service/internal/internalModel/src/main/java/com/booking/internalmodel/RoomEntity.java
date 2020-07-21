@@ -43,6 +43,20 @@ public class RoomEntity {
 	private String roomStatus;
 
 	/**
+	 * @param roomId
+	 * @param roomType
+	 * @param roomPrice
+	 * @param roomStatus
+	 */
+	public RoomEntity(int roomId, String roomType, double roomPrice, String roomStatus) {
+		super();
+		this.roomId = roomId;
+		this.roomType = roomType;
+		this.roomPrice = roomPrice;
+		this.roomStatus = roomStatus;
+	}
+
+	/**
 	 * Joining RoomEntity Table with BookingEntity Table through OneToOne Mapping
 	 */
 	@OneToOne(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
