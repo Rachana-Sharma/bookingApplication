@@ -35,6 +35,22 @@ public class BookingModel {
 	private Date endDate;
 
 	/**
+	 * @param bookingId
+	 * @param breakfast
+	 * @param totalCharge
+	 * @param startDate
+	 * @param endDate
+	 */
+	public BookingModel(int bookingId, boolean breakfast, double totalCharge, Date startDate, Date endDate) {
+		super();
+		this.bookingId = bookingId;
+		this.breakfast = breakfast;
+		this.totalCharge = totalCharge;
+		this.startDate = startDate;
+		this.endDate = endDate;
+	}
+
+	/**
 	 * Class constructor
 	 */
 	public BookingModel() {

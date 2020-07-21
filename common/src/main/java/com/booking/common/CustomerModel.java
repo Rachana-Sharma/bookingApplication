@@ -18,6 +18,16 @@ public class CustomerModel {
 	private String customerName;
 
 	/**
+	 * @param customerId
+	 * @param customerName
+	 */
+	public CustomerModel(int customerId, String customerName) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+	}
+
+	/**
 	 * Class Constructor
 	 */
 	public CustomerModel() {

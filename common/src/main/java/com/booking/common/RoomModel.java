@@ -28,6 +28,20 @@ public class RoomModel {
 	private String roomStatus;
 
 	/**
+	 * @param roomId
+	 * @param roomType
+	 * @param roomPrice
+	 * @param roomStatus
+	 */
+	public RoomModel(int roomId, String roomType, double roomPrice, String roomStatus) {
+		super();
+		this.roomId = roomId;
+		this.roomType = roomType;
+		this.roomPrice = roomPrice;
+		this.roomStatus = roomStatus;
+	}
+
+	/**
 	 * Class Constructor
 	 */
 	public RoomModel() {
