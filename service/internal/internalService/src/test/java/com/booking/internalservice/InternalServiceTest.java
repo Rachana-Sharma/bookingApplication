@@ -72,6 +72,11 @@ public class InternalServiceTest {
 	private Date sDate;
 	private Date eDate;
 
+	/**
+	 * sets up all the values and is executed before the actual test cases runs
+	 * 
+	 * @throws ParseException
+	 */
 	@BeforeEach
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
@@ -98,7 +103,7 @@ public class InternalServiceTest {
 
 		customerEntity = new CustomerEntity();
 		customerEntity.setCustomerId(1);
-		customerEntity.setCustomerName("Chandler");
+		customerEntity.setCustomerName("chandler");
 		customerList = new ArrayList<CustomerEntity>();
 		customerList.add(customerEntity);
 		customerModel = new CustomerModel(1, "chandler");
@@ -118,38 +123,76 @@ public class InternalServiceTest {
 		bookingResponse.getBookingResponse().add(bookingModel);
 	}
 
+	/**
+	 * {@link InternalService#getAllRoom()}
+	 */
 	@Test
 	public void getAllRoomTest() {
 		Mockito.when((List<RoomEntity>) roomRepository.findAll()).thenReturn(roomList);
-		assertEquals(1, roomResponse.getRoomResponse().get(0).getRoomId());
-		assertEquals("SINGLE", roomResponse.getRoomResponse().get(0).getRoomType());
-		assertEquals(5000, roomResponse.getRoomResponse().get(0).getRoomPrice());
-		assertEquals("AVAILABLE", roomResponse.getRoomResponse().get(0).getRoomStatus());
+		List<RoomEntity> roomList = (List<RoomEntity>) roomRepository.findAll();
+		assertEquals(1, roomList.get(0).getRoomId());
+		assertEquals("SINGLE", roomList.get(0).getRoomType());
+		assertEquals(5000, roomList.get(0).getRoomPrice());
+		assertEquals("AVAILABLE", roomList.get(0).getRoomStatus());
+		Mockito.verify(roomRepository).findAll();
 	}
 
+	/**
+	 * {@link InternalService#getAllCustomer()}
+	 */
 	@Test
 	public void getAllCustomerTest() {
 		Mockito.when((List<CustomerEntity>) customerRepository.findAll()).thenReturn(customerList);
-		assertEquals(1, customerResponse.getCustomerResponse().get(0).getCustomerId());
-		assertEquals("chandler", customerResponse.getCustomerResponse().get(0).getCustomerName());
+		List<CustomerEntity> customerList = (List<CustomerEntity>) customerRepository.findAll();
+		assertEquals(1, customerList.get(0).getCustomerId());
+		assertEquals("chandler", customerList.get(0).getCustomerName());
+		Mockito.verify(customerRepository).findAll();
 	}
 
+	/**
+	 * {@link InternalService#getAllBooking()}
+	 */
 	@Test
 	public void getAllBookingTest() {
 		Mockito.when((List<BookingEntity>) bookingRepository.findAll()).thenReturn(bookingList);
-		assertEquals(1, bookingResponse.getBookingResponse().get(0).getBookingId());
-		assertEquals(true, bookingResponse.getBookingResponse().get(0).isBreakfast());
-		assertEquals(sDate, bookingResponse.getBookingResponse().get(0).getStartDate());
-		assertEquals(eDate, bookingResponse.getBookingResponse().get(0).getEndDate());
-		assertEquals(6000, bookingResponse.getBookingResponse().get(0).getTotalCharge());
+		List<BookingEntity> bookingList = (List<BookingEntity>) bookingRepository.findAll();
+		assertEquals(1, bookingList.get(0).getBookingId());
+		assertEquals(true, bookingList.get(0).isBreakfast());
+		assertEquals(sDate, bookingList.get(0).getStartDate());
+		assertEquals(eDate, bookingList.get(0).getEndDate());
+		assertEquals(6000, bookingList.get(0).getTotalCharge());
+		Mockito.verify(bookingRepository).findAll();
 	}
 
+	/**
+	 * {@link InternalService#getRoomById(int)()}
+	 */
 	@Test
 	public void getRoomByIdTest() {
 		Mockito.when(roomRepository.findById(id)).thenReturn(Optional.of(roomEntity));
+		RoomEntity roomEntity = roomRepository.findById(1).get();
 		assertEquals(1, roomEntity.getRoomId());
 		assertEquals(5000, roomEntity.getRoomPrice());
 		assertEquals("AVAILABLE", roomEntity.getRoomStatus());
 		assertEquals("SINGLE", roomEntity.getRoomType());
+		Mockito.verify(roomRepository).findById(id);
+	}
+	
+	/**
+	 * {@link InternalService#deleteBooking(int)}
+	 */
+	@Test
+	public void deleteBookingTest() {
+		bookingRepository.deleteById(id);
+		Mockito.verify(bookingRepository).deleteById(id);
+	}
+	
+	/**
+	 * {@link InternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
+	 */
+	@Test
+	public void billingAndBookingTest() {
+		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
+		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
 	}
 }
