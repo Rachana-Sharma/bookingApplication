@@ -20,6 +20,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingModel;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerModel;
@@ -29,16 +31,15 @@ import com.booking.common.RoomResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @ExtendWith(MockitoExtension.class)
 public class ExternalControllerTest {
 
 	@InjectMocks
 	ExternalController externalController;
-	
+
 	@Mock
 	ExternalService externalService;
-	
+
 	private MockMvc mockMvc;
 
 	private RoomResponse roomResponse = null;
@@ -53,15 +54,23 @@ public class ExternalControllerTest {
 
 	private BookingModel bookingModel = null;
 
+	private BilliingAndBookingRequest billiingAndBookingRequest = null;
+
+	private BillingAndBookingResponse billingAndBookingResponse = null;
+
 	private int id;
 
 	private Date sDate;
 
 	private Date eDate;
-	
+
+	/**
+	 * sets up all the values and is executed before the actual test cases runs
+	 * 
+	 * @throws Exception
+	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-
 		mockMvc = MockMvcBuilders.standaloneSetup(externalController).build();
 
 		id = 1;
@@ -82,11 +91,24 @@ public class ExternalControllerTest {
 		bookingModel = new BookingModel(1, true, 6000, sDate, eDate);
 		bookingResponse = new BookingResponse();
 		bookingResponse.getBookingResponse().add(bookingModel);
+
+		billiingAndBookingRequest = new BilliingAndBookingRequest();
+		billiingAndBookingRequest.setCustomerName("chandler");
+		billiingAndBookingRequest.setStartDate(sDate);
+		billiingAndBookingRequest.setEndDate(eDate);
+		billiingAndBookingRequest.setBreakfast(true);
+		billiingAndBookingRequest.setRoomType("SINGLE");
+
+		billingAndBookingResponse = new BillingAndBookingResponse();
+		billingAndBookingResponse.setTotalCharge(6000);
+		billingAndBookingResponse.setMessage("Booking Successful");
 	}
-	
+
+	/**
+	 * {@link ExternalController#getAllRoomById(int)}
+	 */
 	@Test
 	public void getRoomByIdTest() throws Exception {
-
 		Mockito.when(externalService.getRoomById(Mockito.anyInt())).thenReturn(roomModel);
 
 		String URI = "/room/1";
@@ -98,10 +120,12 @@ public class ExternalControllerTest {
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
-	
+
+	/**
+	 * {@link ExternalController#getAllRoom()}
+	 */
 	@Test
 	public void getAllRoomTest() throws Exception {
-
 		Mockito.when(externalService.getAllRoom()).thenReturn(roomResponse);
 
 		String URI = "/room";
@@ -113,10 +137,12 @@ public class ExternalControllerTest {
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
-	
+
+	/**
+	 * {@link ExternalController#getAllCustomer()}
+	 */
 	@Test
 	public void getAllCustomerTest() throws Exception {
-
 		Mockito.when(externalService.getAllCustomer()).thenReturn(customerResponse);
 
 		String URI = "/customer";
@@ -128,10 +154,12 @@ public class ExternalControllerTest {
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
-	
+
+	/**
+	 * {@link ExternalController#getAllBooking()}
+	 */
 	@Test
 	public void getAllBookingTest() throws Exception {
-
 		Mockito.when(externalService.getBooking()).thenReturn(bookingResponse);
 
 		String URI = "/booking";
@@ -143,7 +171,42 @@ public class ExternalControllerTest {
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
-	
+
+	/**
+	 * {@link ExternalController#deleteBooking(int)}
+	 */
+	@Test
+	public void deleteBookingTest() {
+		externalService.deleteBooking(id);
+		Mockito.verify(externalService).deleteBooking(id);
+	}
+
+	/**
+	 * {@link ExternalController#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void billingAndBookingTest() throws Exception {
+		Mockito.when(externalService.billingAndBooking(Mockito.any(BilliingAndBookingRequest.class)))
+				.thenReturn(billingAndBookingResponse);
+
+		String URI = "/billing/booking";
+
+		String inputJson = this.mapToJson(billiingAndBookingRequest);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON)
+				.content(inputJson);
+		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+	}
+
+	/**
+	 * converts POJO to JSON
+	 * 
+	 * @param object
+	 * @return
+	 * @throws JsonProcessingException
+	 */
 	public String mapToJson(Object object) throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		return objectMapper.writeValueAsString(object);

@@ -13,12 +13,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingModel;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerModel;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
+import com.booking.internalclient.BillingAndBookingClient;
+import com.booking.internalclient.DeleteBookingByIdClient;
 import com.booking.internalclient.GetAllRoomClient;
 import com.booking.internalclient.GetBookingClient;
 import com.booking.internalclient.GetCustomerClient;
@@ -39,7 +43,13 @@ public class ExternalServiceTest {
 	GetBookingClient getBookingClient;
 
 	@Mock
+	DeleteBookingByIdClient deleteBookingByIdClient;
+
+	@Mock
 	GetCustomerClient getCustomerClient;
+
+	@Mock
+	BillingAndBookingClient billingAndBookingClient;
 
 	private RoomModel roomModel = null;
 
@@ -53,14 +63,26 @@ public class ExternalServiceTest {
 
 	private BookingModel bookingModel = null;
 
+	private BilliingAndBookingRequest billiingAndBookingRequest = null;
+
+	private BillingAndBookingResponse billingAndBookingResponse = null;
+
 	private Date sDate;
 
 	private Date eDate;
 
+	private int id;
+
+	/**
+	 * sets up all the values and is executed before the actual test cases runs
+	 * 
+	 * @throws ParseException
+	 */
 	@BeforeEach
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
 
+		id = 1;
 		String startDate = "27-08-2020";
 		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
 		String endDate = "28-08-2020";
@@ -77,8 +99,22 @@ public class ExternalServiceTest {
 		customerModel = new CustomerModel(1, "chandler");
 		customerResponse = new CustomerResponse();
 		customerResponse.getCustomerResponse().add(customerModel);
+
+		billiingAndBookingRequest = new BilliingAndBookingRequest();
+		billiingAndBookingRequest.setCustomerName("chandler");
+		billiingAndBookingRequest.setStartDate(sDate);
+		billiingAndBookingRequest.setEndDate(eDate);
+		billiingAndBookingRequest.setBreakfast(true);
+		billiingAndBookingRequest.setRoomType("SINGLE");
+
+		billingAndBookingResponse = new BillingAndBookingResponse();
+		billingAndBookingResponse.setTotalCharge(6000);
+		billingAndBookingResponse.setMessage("Booking Successful");
 	}
 
+	/**
+	 * {@link ExternalService#getRoomById(int)}
+	 */
 	@Test
 	public void getRoomByIdTest() {
 		Mockito.when(getRoomByIdClient.getRoomByIdClient(Mockito.anyInt())).thenReturn(roomModel);
@@ -90,6 +126,9 @@ public class ExternalServiceTest {
 		Mockito.verify(getRoomByIdClient).getRoomByIdClient(Mockito.anyInt());
 	}
 
+	/**
+	 * {@link ExternalService#getAllRoom()}
+	 */
 	@Test
 	public void getAllRoomTest() {
 		Mockito.when(getAllRoomClient.getAllRoomClientMethod()).thenReturn(roomResponse);
@@ -101,6 +140,9 @@ public class ExternalServiceTest {
 		Mockito.verify(getAllRoomClient).getAllRoomClientMethod();
 	}
 
+	/**
+	 * {@link ExternalService#getBooking()}
+	 */
 	@Test
 	public void getBookingTest() {
 		Mockito.when(getBookingClient.getAllBookingClient()).thenReturn(bookingResponse);
@@ -114,6 +156,9 @@ public class ExternalServiceTest {
 		Mockito.verify(getBookingClient).getAllBookingClient();
 	}
 
+	/**
+	 * {@link ExternalService#getAllCustomer()}
+	 */
 	@Test
 	public void getAllCustomerTest() {
 		Mockito.when(getCustomerClient.getAllCustomerClient()).thenReturn(customerResponse);
@@ -121,5 +166,29 @@ public class ExternalServiceTest {
 		assertEquals(1, response.getCustomerResponse().get(0).getCustomerId());
 		assertEquals("chandler", response.getCustomerResponse().get(0).getCustomerName());
 		Mockito.verify(getCustomerClient).getAllCustomerClient();
+	}
+
+	/**
+	 * {@link ExternalService#deleteBooking(int)}
+	 */
+	@Test
+	public void deleteBookingTest() {
+		deleteBookingByIdClient.deleteBookingClient(id);
+		Mockito.verify(deleteBookingByIdClient).deleteBookingClient(id);
+	}
+
+	/**
+	 * {@link ExternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void billingAndBookingTest() throws Exception {
+		Mockito.when(billingAndBookingClient.billingAndBookingClient(billiingAndBookingRequest))
+				.thenReturn(billingAndBookingResponse);
+		BillingAndBookingResponse response = billingAndBookingClient.billingAndBookingClient(billiingAndBookingRequest);
+		assertEquals(6000, response.getTotalCharge());
+		assertEquals("Booking Successful", response.getMessage());
+		Mockito.verify(billingAndBookingClient).billingAndBookingClient(billiingAndBookingRequest);
 	}
 }
