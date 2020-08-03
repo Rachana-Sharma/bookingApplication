@@ -118,7 +118,7 @@ public class ExternalServiceTest {
 	@Test
 	public void getRoomByIdTest() {
 		Mockito.when(getRoomByIdClient.getRoomByIdClient(Mockito.anyInt())).thenReturn(roomModel);
-		RoomModel rm = getRoomByIdClient.getRoomByIdClient(1);
+		RoomModel rm = externalService.getRoomById(1);
 		assertEquals(1, rm.getRoomId());
 		assertEquals("SINGLE", rm.getRoomType());
 		assertEquals(5000, rm.getRoomPrice());
@@ -132,7 +132,7 @@ public class ExternalServiceTest {
 	@Test
 	public void getAllRoomTest() {
 		Mockito.when(getAllRoomClient.getAllRoomClientMethod()).thenReturn(roomResponse);
-		RoomResponse response = getAllRoomClient.getAllRoomClientMethod();
+		RoomResponse response = externalService.getAllRoom();
 		assertEquals(1, response.getRoomResponse().get(0).getRoomId());
 		assertEquals("SINGLE", response.getRoomResponse().get(0).getRoomType());
 		assertEquals(5000, response.getRoomResponse().get(0).getRoomPrice());
@@ -147,7 +147,7 @@ public class ExternalServiceTest {
 	public void getBookingTest() {
 		Mockito.when(getBookingClient.getAllBookingClient()).thenReturn(bookingResponse);
 
-		BookingResponse response = getBookingClient.getAllBookingClient();
+		BookingResponse response = externalService.getBooking();
 		assertEquals(1, response.getBookingResponse().get(0).getBookingId());
 		assertEquals(true, response.getBookingResponse().get(0).isBreakfast());
 		assertEquals(sDate, response.getBookingResponse().get(0).getStartDate());
@@ -162,7 +162,7 @@ public class ExternalServiceTest {
 	@Test
 	public void getAllCustomerTest() {
 		Mockito.when(getCustomerClient.getAllCustomerClient()).thenReturn(customerResponse);
-		CustomerResponse response = getCustomerClient.getAllCustomerClient();
+		CustomerResponse response = externalService.getAllCustomer();
 		assertEquals(1, response.getCustomerResponse().get(0).getCustomerId());
 		assertEquals("chandler", response.getCustomerResponse().get(0).getCustomerName());
 		Mockito.verify(getCustomerClient).getAllCustomerClient();
@@ -186,7 +186,7 @@ public class ExternalServiceTest {
 	public void billingAndBookingTest() throws Exception {
 		Mockito.when(billingAndBookingClient.billingAndBookingClient(billiingAndBookingRequest))
 				.thenReturn(billingAndBookingResponse);
-		BillingAndBookingResponse response = billingAndBookingClient.billingAndBookingClient(billiingAndBookingRequest);
+		BillingAndBookingResponse response = externalService.billingAndBooking(billiingAndBookingRequest);
 		assertEquals(6000, response.getTotalCharge());
 		assertEquals("Booking Successful", response.getMessage());
 		Mockito.verify(billingAndBookingClient).billingAndBookingClient(billiingAndBookingRequest);

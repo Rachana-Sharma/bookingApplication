@@ -119,6 +119,7 @@ public class ExternalControllerTest {
 		String outputInJson = result.getResponse().getContentAsString();
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		Mockito.verify(externalService).getRoomById(id);
 	}
 
 	/**
@@ -136,7 +137,8 @@ public class ExternalControllerTest {
 		String outputInJson = result.getResponse().getContentAsString();
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
-	}
+		Mockito.verify(externalService).getAllRoom();
+		}
 
 	/**
 	 * {@link ExternalController#getAllCustomer()}
@@ -153,6 +155,7 @@ public class ExternalControllerTest {
 		String outputInJson = result.getResponse().getContentAsString();
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		Mockito.verify(externalService).getAllCustomer();
 	}
 
 	/**
@@ -170,6 +173,7 @@ public class ExternalControllerTest {
 		String outputInJson = result.getResponse().getContentAsString();
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+		Mockito.verify(externalService).getBooking();
 	}
 
 	/**
