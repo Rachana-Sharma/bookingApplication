@@ -16,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.booking.common.BilliingAndBookingRequest;
+import com.booking.common.BillingAndBookingResponse;
 import com.booking.common.BookingModel;
 import com.booking.common.BookingResponse;
 import com.booking.common.CustomerModel;
@@ -32,7 +34,7 @@ import com.booking.internalmodel.RoomRepository;
 public class InternalServiceTest {
 
 	@InjectMocks
-	InternalService InternalService;
+	InternalService internalService;
 
 	@Mock
 	private RoomRepository roomRepository;
@@ -66,6 +68,10 @@ public class InternalServiceTest {
 	private List<CustomerEntity> customerList = null;
 
 	private List<BookingEntity> bookingList = null;
+	
+	private BilliingAndBookingRequest billiingAndBookingRequest = null;
+	
+	private BillingAndBookingResponse billingAndBookingResponse = null;
 
 	private int id;
 
@@ -121,6 +127,18 @@ public class InternalServiceTest {
 		bookingModel = new BookingModel(1, true, 6000, sDate, eDate);
 		bookingResponse = new BookingResponse();
 		bookingResponse.getBookingResponse().add(bookingModel);
+		
+		billiingAndBookingRequest = new BilliingAndBookingRequest();
+		billiingAndBookingRequest.setCustomerName("chandler");
+		billiingAndBookingRequest.setStartDate(sDate);
+		billiingAndBookingRequest.setEndDate(eDate);
+		billiingAndBookingRequest.setBreakfast(true);
+		billiingAndBookingRequest.setRoomType("SINGLE");
+		
+		billingAndBookingResponse = new BillingAndBookingResponse();
+		billingAndBookingResponse.setTotalCharge(6000);
+		billingAndBookingResponse.setMessage("Booking Successful");
+
 	}
 
 	/**
@@ -129,11 +147,11 @@ public class InternalServiceTest {
 	@Test
 	public void getAllRoomTest() {
 		Mockito.when((List<RoomEntity>) roomRepository.findAll()).thenReturn(roomList);
-		List<RoomEntity> roomList = (List<RoomEntity>) roomRepository.findAll();
-		assertEquals(1, roomList.get(0).getRoomId());
-		assertEquals("SINGLE", roomList.get(0).getRoomType());
-		assertEquals(5000, roomList.get(0).getRoomPrice());
-		assertEquals("AVAILABLE", roomList.get(0).getRoomStatus());
+		RoomResponse roomResponse = internalService.getAllRoom();
+		assertEquals(1, roomResponse.getRoomResponse().get(0).getRoomId());
+		assertEquals("SINGLE", roomResponse.getRoomResponse().get(0).getRoomType());
+		assertEquals(5000, roomResponse.getRoomResponse().get(0).getRoomPrice());
+		assertEquals("AVAILABLE", roomResponse.getRoomResponse().get(0).getRoomStatus());
 		Mockito.verify(roomRepository).findAll();
 	}
 
@@ -143,9 +161,9 @@ public class InternalServiceTest {
 	@Test
 	public void getAllCustomerTest() {
 		Mockito.when((List<CustomerEntity>) customerRepository.findAll()).thenReturn(customerList);
-		List<CustomerEntity> customerList = (List<CustomerEntity>) customerRepository.findAll();
-		assertEquals(1, customerList.get(0).getCustomerId());
-		assertEquals("chandler", customerList.get(0).getCustomerName());
+		CustomerResponse customerResponse = internalService.getAllCustomer();
+		assertEquals(1, customerResponse.getCustomerResponse().get(0).getCustomerId());
+		assertEquals("chandler", customerResponse.getCustomerResponse().get(0).getCustomerName());
 		Mockito.verify(customerRepository).findAll();
 	}
 
@@ -155,12 +173,12 @@ public class InternalServiceTest {
 	@Test
 	public void getAllBookingTest() {
 		Mockito.when((List<BookingEntity>) bookingRepository.findAll()).thenReturn(bookingList);
-		List<BookingEntity> bookingList = (List<BookingEntity>) bookingRepository.findAll();
-		assertEquals(1, bookingList.get(0).getBookingId());
-		assertEquals(true, bookingList.get(0).isBreakfast());
-		assertEquals(sDate, bookingList.get(0).getStartDate());
-		assertEquals(eDate, bookingList.get(0).getEndDate());
-		assertEquals(6000, bookingList.get(0).getTotalCharge());
+		BookingResponse bookingResponse = internalService.getAllBooking();
+		assertEquals(1, bookingResponse.getBookingResponse().get(0).getBookingId());
+		assertEquals(true, bookingResponse.getBookingResponse().get(0).isBreakfast());
+		assertEquals(sDate, bookingResponse.getBookingResponse().get(0).getStartDate());
+		assertEquals(eDate, bookingResponse.getBookingResponse().get(0).getEndDate());
+		assertEquals(6000, bookingResponse.getBookingResponse().get(0).getTotalCharge());
 		Mockito.verify(bookingRepository).findAll();
 	}
 
@@ -170,7 +188,7 @@ public class InternalServiceTest {
 	@Test
 	public void getRoomByIdTest() {
 		Mockito.when(roomRepository.findById(id)).thenReturn(Optional.of(roomEntity));
-		RoomEntity roomEntity = roomRepository.findById(1).get();
+		RoomEntity roomEntity = internalService.getRoomById(1);
 		assertEquals(1, roomEntity.getRoomId());
 		assertEquals(5000, roomEntity.getRoomPrice());
 		assertEquals("AVAILABLE", roomEntity.getRoomStatus());
@@ -194,5 +212,9 @@ public class InternalServiceTest {
 	public void billingAndBookingTest() {
 		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
+		 billingAndBookingResponse = internalService.billingAndBooking(billiingAndBookingRequest);
+		assertEquals(6000, billingAndBookingResponse.getTotalCharge());
+		assertEquals("Booking Successful", billingAndBookingResponse.getMessage());
+		Mockito.verify(internalService).billingAndBooking(billiingAndBookingRequest);
 	}
 }
