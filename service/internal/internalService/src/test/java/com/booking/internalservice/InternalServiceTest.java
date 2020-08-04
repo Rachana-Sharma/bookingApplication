@@ -212,7 +212,7 @@ public class InternalServiceTest {
 	public void billingAndBookingTest() {
 		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
-		/* billingAndBookingResponse = internalService.billingAndBooking(billiingAndBookingRequest);
+		/*BillingAndBookingResponse billingAndBookingResponse = internalService.billingAndBooking(billiingAndBookingRequest);
 		assertEquals(6000, billingAndBookingResponse.getTotalCharge());
 		assertEquals("Booking Successful", billingAndBookingResponse.getMessage());
 		Mockito.verify(internalService).billingAndBooking(billiingAndBookingRequest);*/
