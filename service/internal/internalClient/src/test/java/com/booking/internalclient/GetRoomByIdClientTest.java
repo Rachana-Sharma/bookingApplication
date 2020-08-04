@@ -52,6 +52,6 @@ public class GetRoomByIdClientTest {
 			//	ArgumentMatchers.any(HttpEntity.class), ArgumentMatchers.eq(RoomModel.class), ArgumentMatchers.eq(1)).getBody())
 			//	.thenReturn(roomModel);
 		RoomModel returnedRoomModel = getRoomByIdClient.getRoomByIdClientMethod(1); 
-		 Assertions.assertEquals( roomModel,RoomModel.class);
+		 Assertions.assertEquals( roomModel,returnedRoomModel);
 	}
 }
