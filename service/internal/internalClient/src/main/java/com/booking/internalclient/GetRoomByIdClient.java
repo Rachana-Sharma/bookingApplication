@@ -35,11 +35,13 @@ public class GetRoomByIdClient {
 	 * @param id
 	 * @return roomModel
 	 */
-	public RoomModel getRoomByIdClient(int id) {
+	public RoomModel getRoomByIdClientMethod(int id) {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		ResponseEntity<RoomModel> responseEntity = restTemplate.exchange(baseUrl+"/room/{id}",
 				HttpMethod.GET, requestEntity, RoomModel.class, id);
+		//RoomModel roomModel = restTemplate.exchange(baseUrl+"/room/{id}",
+		//		HttpMethod.GET, requestEntity, RoomModel.class, id).getBody();
 		RoomModel roomModel = responseEntity.getBody();
 		return roomModel;
 	}
