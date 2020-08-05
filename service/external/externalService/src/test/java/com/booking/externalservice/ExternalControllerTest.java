@@ -31,37 +31,84 @@ import com.booking.common.RoomResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * ExternalControllerTest
+ * 
+ * @author Rachana Sharma
+ */
 @ExtendWith(MockitoExtension.class)
 public class ExternalControllerTest {
 
+	/**
+	 * ExternalController
+	 */
 	@InjectMocks
 	ExternalController externalController;
 
+	/**
+	 * ExternalService
+	 */
 	@Mock
 	ExternalService externalService;
 
+	/**
+	 * MockMvc
+	 */
 	private MockMvc mockMvc;
 
+	/**
+	 * defining and initializing RoomResponse object
+	 */
 	private RoomResponse roomResponse = null;
 
+	/**
+	 * defining and initializing CustomerResponse object
+	 */
 	private CustomerResponse customerResponse = null;
 
+	/**
+	 * defining and initializing BookingResponse object
+	 */
 	private BookingResponse bookingResponse = null;
 
+	/**
+	 * defining and initializing CustomerModel object
+	 */
 	private CustomerModel customerModel = null;
 
+	/**
+	 * defining and initializing RoomModel object
+	 */
 	private RoomModel roomModel = null;
 
+	/**
+	 * defining and initializing BookingModel object
+	 */
 	private BookingModel bookingModel = null;
 
+	/**
+	 * defining and initializing BilliingAndBookingRequest object
+	 */
 	private BilliingAndBookingRequest billiingAndBookingRequest = null;
 
+	/**
+	 * defining and initializing BillingAndBookingResponse object
+	 */
 	private BillingAndBookingResponse billingAndBookingResponse = null;
 
+	/**
+	 * the id
+	 */
 	private int id;
 
+	/**
+	 * the start date
+	 */
 	private Date sDate;
 
+	/**
+	 * the end date
+	 */
 	private Date eDate;
 
 	/**
@@ -105,7 +152,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * {@link ExternalController#getAllRoomById(int)}
+	 * tests getAllRoomById method {@link ExternalController#getAllRoomById(int)}
 	 */
 	@Test
 	public void getRoomByIdTest() throws Exception {
@@ -123,7 +170,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * {@link ExternalController#getAllRoom()}
+	 * tests getAllRoom method {@link ExternalController#getAllRoom()}
 	 */
 	@Test
 	public void getAllRoomTest() throws Exception {
@@ -138,10 +185,10 @@ public class ExternalControllerTest {
 		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 		Mockito.verify(externalService).getAllRoom();
-		}
+	}
 
 	/**
-	 * {@link ExternalController#getAllCustomer()}
+	 * tests getAllCustomer method {@link ExternalController#getAllCustomer()}
 	 */
 	@Test
 	public void getAllCustomerTest() throws Exception {
@@ -159,7 +206,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * {@link ExternalController#getAllBooking()}
+	 * tests getAllBooking method {@link ExternalController#getAllBooking()}
 	 */
 	@Test
 	public void getAllBookingTest() throws Exception {
@@ -177,7 +224,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * {@link ExternalController#deleteBooking(int)}
+	 * tests deleteBooking method {@link ExternalController#deleteBooking(int)}
 	 */
 	@Test
 	public void deleteBookingTest() {
@@ -186,6 +233,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
+	 * tests billingAndBooking method
 	 * {@link ExternalController#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 * 
 	 * @throws Exception

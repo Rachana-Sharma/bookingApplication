@@ -28,49 +28,108 @@ import com.booking.internalclient.GetBookingClient;
 import com.booking.internalclient.GetCustomerClient;
 import com.booking.internalclient.GetRoomByIdClient;
 
+/**
+ * ExternalServiceTest
+ * 
+ * @author Rachana Sharma
+ */
 public class ExternalServiceTest {
 
+	/**
+	 * ExternalService
+	 */
 	@InjectMocks
 	ExternalService externalService;
 
+	/**
+	 * GetRoomByIdClient
+	 */
 	@Mock
 	GetRoomByIdClient getRoomByIdClient;
 
+	/**
+	 * GetAllRoomClient
+	 */
 	@Mock
 	GetAllRoomClient getAllRoomClient;
 
+	/**
+	 * GetBookingClient
+	 */
 	@Mock
 	GetBookingClient getBookingClient;
 
+	/**
+	 * DeleteBookingByIdClient
+	 */
 	@Mock
 	DeleteBookingByIdClient deleteBookingByIdClient;
 
+	/**
+	 * GetCustomerClient
+	 */
 	@Mock
 	GetCustomerClient getCustomerClient;
 
+	/**
+	 * BillingAndBookingClient
+	 */
 	@Mock
 	BillingAndBookingClient billingAndBookingClient;
 
+	/**
+	 * defining and initializing RoomModel object
+	 */
 	private RoomModel roomModel = null;
 
+	/**
+	 * defining and initializing RoomResponse object
+	 */
 	private RoomResponse roomResponse = null;
 
+	/**
+	 * defining and initializing CustomerResponse object
+	 */
 	private CustomerResponse customerResponse = null;
 
+	/**
+	 * defining and initializing BookingResponse object
+	 */
 	private BookingResponse bookingResponse = null;
 
+	/**
+	 * defining and initializing CustomerModel object
+	 */
 	private CustomerModel customerModel = null;
 
+	/**
+	 * defining and initializing BookingModel object
+	 */
 	private BookingModel bookingModel = null;
 
+	/**
+	 * defining and initializing BilliingAndBookingRequest object
+	 */
 	private BilliingAndBookingRequest billiingAndBookingRequest = null;
 
+	/**
+	 * defining and initializing BillingAndBookingResponse object
+	 */
 	private BillingAndBookingResponse billingAndBookingResponse = null;
 
+	/**
+	 * the start date
+	 */
 	private Date sDate;
 
+	/**
+	 * the end date
+	 */
 	private Date eDate;
 
+	/**
+	 * the id
+	 */
 	private int id;
 
 	/**
@@ -113,25 +172,27 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * {@link ExternalService#getRoomById(int)}
+	 * tests getRoomById method {@link ExternalService#getRoomById(int)}
 	 */
 	@Test
 	public void getRoomByIdTest() {
-		Mockito.when(getRoomByIdClient.getRoomByIdClient(Mockito.anyInt())).thenReturn(roomModel);
+		Mockito.when(getRoomByIdClient.getRoomByIdClientMethod(Mockito.anyInt())).thenReturn(roomModel);
+
 		RoomModel rm = externalService.getRoomById(1);
 		assertEquals(1, rm.getRoomId());
 		assertEquals("SINGLE", rm.getRoomType());
 		assertEquals(5000, rm.getRoomPrice());
 		assertEquals("AVAILABLE", rm.getRoomStatus());
-		Mockito.verify(getRoomByIdClient).getRoomByIdClient(Mockito.anyInt());
+		Mockito.verify(getRoomByIdClient).getRoomByIdClientMethod(Mockito.anyInt());
 	}
 
 	/**
-	 * {@link ExternalService#getAllRoom()}
+	 * tests getAllRoom method {@link ExternalService#getAllRoom()}
 	 */
 	@Test
 	public void getAllRoomTest() {
 		Mockito.when(getAllRoomClient.getAllRoomClientMethod()).thenReturn(roomResponse);
+
 		RoomResponse response = externalService.getAllRoom();
 		assertEquals(1, response.getRoomResponse().get(0).getRoomId());
 		assertEquals("SINGLE", response.getRoomResponse().get(0).getRoomType());
@@ -141,11 +202,11 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * {@link ExternalService#getBooking()}
+	 * tests getBooking method {@link ExternalService#getBooking()}
 	 */
 	@Test
 	public void getBookingTest() {
-		Mockito.when(getBookingClient.getAllBookingClient()).thenReturn(bookingResponse);
+		Mockito.when(getBookingClient.getAllBookingClientMethod()).thenReturn(bookingResponse);
 
 		BookingResponse response = externalService.getBooking();
 		assertEquals(1, response.getBookingResponse().get(0).getBookingId());
@@ -153,23 +214,24 @@ public class ExternalServiceTest {
 		assertEquals(sDate, response.getBookingResponse().get(0).getStartDate());
 		assertEquals(eDate, response.getBookingResponse().get(0).getEndDate());
 		assertEquals(6000, response.getBookingResponse().get(0).getTotalCharge());
-		Mockito.verify(getBookingClient).getAllBookingClient();
+		Mockito.verify(getBookingClient).getAllBookingClientMethod();
 	}
 
 	/**
-	 * {@link ExternalService#getAllCustomer()}
+	 * tests getAllCustomer method {@link ExternalService#getAllCustomer()}
 	 */
 	@Test
 	public void getAllCustomerTest() {
-		Mockito.when(getCustomerClient.getAllCustomerClient()).thenReturn(customerResponse);
+		Mockito.when(getCustomerClient.getAllCustomerClientMethod()).thenReturn(customerResponse);
+
 		CustomerResponse response = externalService.getAllCustomer();
 		assertEquals(1, response.getCustomerResponse().get(0).getCustomerId());
 		assertEquals("chandler", response.getCustomerResponse().get(0).getCustomerName());
-		Mockito.verify(getCustomerClient).getAllCustomerClient();
+		Mockito.verify(getCustomerClient).getAllCustomerClientMethod();
 	}
 
 	/**
-	 * {@link ExternalService#deleteBooking(int)}
+	 * tests deleteBooking method {@link ExternalService#deleteBooking(int)}
 	 */
 	@Test
 	public void deleteBookingTest() {
@@ -178,17 +240,19 @@ public class ExternalServiceTest {
 	}
 
 	/**
+	 * tests billingAndBooking method
 	 * {@link ExternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void billingAndBookingTest() throws Exception {
-		Mockito.when(billingAndBookingClient.billingAndBookingClient(billiingAndBookingRequest))
+		Mockito.when(billingAndBookingClient.billingAndBookingClientMethod(billiingAndBookingRequest))
 				.thenReturn(billingAndBookingResponse);
+
 		BillingAndBookingResponse response = externalService.billingAndBooking(billiingAndBookingRequest);
 		assertEquals(6000, response.getTotalCharge());
 		assertEquals("Booking Successful", response.getMessage());
-		Mockito.verify(billingAndBookingClient).billingAndBookingClient(billiingAndBookingRequest);
+		Mockito.verify(billingAndBookingClient).billingAndBookingClientMethod(billiingAndBookingRequest);
 	}
 }

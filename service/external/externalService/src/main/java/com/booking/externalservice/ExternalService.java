@@ -64,7 +64,7 @@ public class ExternalService {
 	 * @return customerList to add new customer to the ArrayList
 	 */
 	public CustomerResponse getAllCustomer() {
-		return getCustomerClient.getAllCustomerClient();
+		return getCustomerClient.getAllCustomerClientMethod();
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class ExternalService {
 	 * @return List<BookingRequest>
 	 */
 	public BookingResponse getBooking() {
-		return getBookingClient.getAllBookingClient();
+		return getBookingClient.getAllBookingClientMethod();
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class ExternalService {
 	 * @return BillingAndBookingResponse
 	 */
 	public BillingAndBookingResponse billingAndBooking(BilliingAndBookingRequest bookingRequest) {
-		return saveBookingClient.billingAndBookingClient(bookingRequest);
+		return saveBookingClient.billingAndBookingClientMethod(bookingRequest);
 	}
 
 	/**
@@ -94,7 +94,7 @@ public class ExternalService {
 	 * @return saved values from repository against the given id
 	 */
 	public RoomModel getRoomById(int id) {
-		return getRoomClient.getRoomByIdClient(id);
+		return getRoomClient.getRoomByIdClientMethod(id);
 	}
 
 	/**
