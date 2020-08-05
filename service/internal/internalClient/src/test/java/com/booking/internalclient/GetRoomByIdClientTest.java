@@ -1,15 +1,14 @@
 package com.booking.internalclient;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Answers;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -18,40 +17,60 @@ import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.RoomModel;
 
+/**
+ * GetRoomByIdClientTest
+ * 
+ * @author Rachana Sharma
+ */
+
 public class GetRoomByIdClientTest {
 
+	/**
+	 * GetRoomByIdClient
+	 */
 	@InjectMocks
-	private GetRoomByIdClient getRoomByIdClient = new GetRoomByIdClient();
+	private GetRoomByIdClient getRoomByIdClient;
 
+	/**
+	 * RestTemplate
+	 */
 	@Mock
 	private RestTemplate restTemplate;
 
-	private RoomModel roomModel = null;
 	/**
-	 * baseUrl
+	 * defining and initializing RoomModel object
 	 */
-	private String baseUrl ="http://localhost:8088" ;
+	private RoomModel roomModel = null;
 
+	/**
+	 * sets up all the values and is executed before the actual test cases runs
+	 */
 	@BeforeEach
 	public void setUp() {
-				MockitoAnnotations.initMocks(this);
-		// ReflectionTestUtils.setField(getRoomByIdClient, "baseUrl",
-		// "baseUrl/room/{id}");
-				roomModel = new RoomModel(1, "SINGLE", 5000, "AVAILABLE");
+		MockitoAnnotations.initMocks(this);
+
+		roomModel = new RoomModel(1, "SINGLE", 5000, "AVAILABLE");
 	}
 
+	/**
+	 * Tests getRoomByIdClientMethod
+	 * {@link GetRoomByIdClient#getRoomByIdClientMethod(int)}
+	 */
 	@Test
 	public void getRoomByIdClientTest() {
+		ResponseEntity<RoomModel> responseEntity = new ResponseEntity<RoomModel>(roomModel, HttpStatus.OK);
+		Mockito.when(restTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+				Matchers.<HttpEntity<?>>any(), Matchers.<Class<RoomModel>>any(), Matchers.anyInt()))
+				.thenReturn(responseEntity);
 
-	
-			Mockito.when(restTemplate.exchange(ArgumentMatchers.eq(baseUrl+"/room/{id}"), ArgumentMatchers.eq(HttpMethod.GET),
-				ArgumentMatchers.any(HttpEntity.class), ArgumentMatchers.eq(RoomModel.class), ArgumentMatchers.eq(1)))
-				.thenReturn(new ResponseEntity<RoomModel>(roomModel, HttpStatus.OK));
+		RoomModel returnedRoomModel = getRoomByIdClient.getRoomByIdClientMethod(1);
 
-			//Mockito.when(restTemplate.exchange(ArgumentMatchers.eq("baseUrl/room/1"), ArgumentMatchers.eq(HttpMethod.GET),
-			//	ArgumentMatchers.any(HttpEntity.class), ArgumentMatchers.eq(RoomModel.class), ArgumentMatchers.eq(1)).getBody())
-			//	.thenReturn(roomModel);
-		RoomModel returnedRoomModel = getRoomByIdClient.getRoomByIdClientMethod(1); 
-		 Assertions.assertEquals( roomModel,returnedRoomModel);
+		assertEquals(roomModel.getRoomId(), returnedRoomModel.getRoomId());
+		assertEquals(roomModel.getRoomPrice(), returnedRoomModel.getRoomPrice());
+		assertEquals(roomModel.getRoomStatus(), returnedRoomModel.getRoomStatus());
+		assertEquals(roomModel.getRoomType(), returnedRoomModel.getRoomType());
+
+		Mockito.verify(restTemplate).exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+				Matchers.<HttpEntity<?>>any(), Matchers.<Class<RoomModel>>any(), Matchers.anyInt());
 	}
 }
