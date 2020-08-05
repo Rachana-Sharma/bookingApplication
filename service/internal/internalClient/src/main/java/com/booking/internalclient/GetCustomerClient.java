@@ -35,7 +35,7 @@ public class GetCustomerClient {
 	 * 
 	 * @return customerResponse
 	 */
-	public CustomerResponse getAllCustomerClient() {
+	public CustomerResponse getAllCustomerClientMethod() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		ResponseEntity<CustomerResponse> responseEntity = restTemplate.exchange(baseUrl+"/customer",

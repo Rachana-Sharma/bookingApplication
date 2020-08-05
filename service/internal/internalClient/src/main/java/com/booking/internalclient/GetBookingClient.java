@@ -35,7 +35,7 @@ public class GetBookingClient {
 	 * @param bookingRequest
 	 * @return BookingResponse
 	 */
-	public BookingResponse getAllBookingClient() {
+	public BookingResponse getAllBookingClientMethod() {
 		HttpHeaders headers = new HttpHeaders();
 		HttpEntity<String> requestEntity = new HttpEntity<String>(headers);
 		ResponseEntity<BookingResponse> responseEntity = restTemplate.exchange(baseUrl+"/booking",

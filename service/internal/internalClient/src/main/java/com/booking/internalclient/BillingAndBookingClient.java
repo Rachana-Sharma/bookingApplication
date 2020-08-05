@@ -40,7 +40,7 @@ public class BillingAndBookingClient {
 	 * @param bookingRequest
 	 * @return result
 	 */
-	public BillingAndBookingResponse billingAndBookingClient(BilliingAndBookingRequest bookingRequest) {
+	public BillingAndBookingResponse billingAndBookingClientMethod(BilliingAndBookingRequest bookingRequest) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<BilliingAndBookingRequest> entity = new HttpEntity<BilliingAndBookingRequest>(bookingRequest,
