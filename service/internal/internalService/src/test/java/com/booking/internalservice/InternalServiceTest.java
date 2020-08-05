@@ -31,51 +31,120 @@ import com.booking.internalmodel.CustomerRepository;
 import com.booking.internalmodel.RoomEntity;
 import com.booking.internalmodel.RoomRepository;
 
+/**
+ * InternalServiceTest
+ * 
+ * @author Rachana Sharma
+ */
 public class InternalServiceTest {
 
+	/**
+	 * RestTemplate
+	 */
 	@InjectMocks
 	InternalService internalService;
 
+	/**
+	 * RoomRepository
+	 */
 	@Mock
 	private RoomRepository roomRepository;
 
+	/**
+	 * BookingRepository
+	 */
 	@Mock
 	private BookingRepository bookingRepository;
 
+	/**
+	 * CustomerRepository
+	 */
 	@Mock
 	private CustomerRepository customerRepository;
 
+	/**
+	 * defining and initializing RoomResponse object
+	 */
 	private RoomResponse roomResponse = null;
 
+	/**
+	 * defining and initializing CustomerResponse object
+	 */
 	private CustomerResponse customerResponse = null;
 
+	/**
+	 * defining and initializing BookingResponse object
+	 */
 	private BookingResponse bookingResponse = null;
 
+	/**
+	 * defining and initializing RoomModel object
+	 */
 	private RoomModel roomModel = null;
 
+	/**
+	 * defining and initializing customerModel object
+	 */
 	private CustomerModel customerModel = null;
 
+	/**
+	 * defining and initializing BookingModel object
+	 */
 	private BookingModel bookingModel = null;
 
+	/**
+	 * defining and initializing RoomEntity object
+	 */
 	private RoomEntity roomEntity = null;
 
+	/**
+	 * defining and initializing CustomerEntity object
+	 */
 	private CustomerEntity customerEntity = null;
 
+	/**
+	 * defining and initializing BookingEntity object
+	 */
 	private BookingEntity bookingEntity = null;
 
+	/**
+	 * creating and initializing List<RoomEntity>
+	 */
 	private List<RoomEntity> roomList = null;
 
+	/**
+	 * creating and initializing List<CustomerEntity>
+	 */
 	private List<CustomerEntity> customerList = null;
 
+	/**
+	 * creating and initializing List<BookingEntity>
+	 */
 	private List<BookingEntity> bookingList = null;
-	
+
+	/**
+	 * defining and initializing BilliingAndBookingRequest object
+	 */
 	private BilliingAndBookingRequest billiingAndBookingRequest = null;
-	
+
+	/**
+	 * defining and initializing BillingAndBookingResponse object
+	 */
 	private BillingAndBookingResponse billingAndBookingResponse = null;
 
+	/**
+	 * the id
+	 */
 	private int id;
 
+	/**
+	 * the start date
+	 */
 	private Date sDate;
+
+	/**
+	 * the end date
+	 */
 	private Date eDate;
 
 	/**
@@ -127,22 +196,21 @@ public class InternalServiceTest {
 		bookingModel = new BookingModel(1, true, 6000, sDate, eDate);
 		bookingResponse = new BookingResponse();
 		bookingResponse.getBookingResponse().add(bookingModel);
-		
+
 		billiingAndBookingRequest = new BilliingAndBookingRequest();
 		billiingAndBookingRequest.setCustomerName("chandler");
 		billiingAndBookingRequest.setStartDate(sDate);
 		billiingAndBookingRequest.setEndDate(eDate);
 		billiingAndBookingRequest.setBreakfast(true);
 		billiingAndBookingRequest.setRoomType("SINGLE");
-		
+
 		billingAndBookingResponse = new BillingAndBookingResponse();
 		billingAndBookingResponse.setTotalCharge(6000);
 		billingAndBookingResponse.setMessage("Booking Successful");
-
 	}
 
 	/**
-	 * {@link InternalService#getAllRoom()}
+	 * Tests getAllRoom method {@link InternalService#getAllRoom()}
 	 */
 	@Test
 	public void getAllRoomTest() {
@@ -156,7 +224,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * {@link InternalService#getAllCustomer()}
+	 * Test getAllCustomer method {@link InternalService#getAllCustomer()}
 	 */
 	@Test
 	public void getAllCustomerTest() {
@@ -168,7 +236,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * {@link InternalService#getAllBooking()}
+	 * Test getAllBooking method {@link InternalService#getAllBooking()}
 	 */
 	@Test
 	public void getAllBookingTest() {
@@ -183,7 +251,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * {@link InternalService#getRoomById(int)()}
+	 * Test getRoomById method {@link InternalService#getRoomById(int)()}
 	 */
 	@Test
 	public void getRoomByIdTest() {
@@ -195,26 +263,30 @@ public class InternalServiceTest {
 		assertEquals("SINGLE", roomEntity.getRoomType());
 		Mockito.verify(roomRepository).findById(id);
 	}
-	
+
 	/**
-	 * {@link InternalService#deleteBooking(int)}
+	 * Test deleteBooking method {@link InternalService#deleteBooking(int)}
 	 */
 	@Test
 	public void deleteBookingTest() {
 		bookingRepository.deleteById(id);
 		Mockito.verify(bookingRepository).deleteById(id);
 	}
-	
+
 	/**
+	 * Test billingAndBooking method
 	 * {@link InternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 */
 	@Test
 	public void billingAndBookingTest() {
 		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
-		/*BillingAndBookingResponse billingAndBookingResponse = internalService.billingAndBooking(billiingAndBookingRequest);
-		assertEquals(6000, billingAndBookingResponse.getTotalCharge());
-		assertEquals("Booking Successful", billingAndBookingResponse.getMessage());
-		Mockito.verify(internalService).billingAndBooking(billiingAndBookingRequest);*/
+		/*
+		 * BillingAndBookingResponse billingAndBookingResponse =
+		 * internalService.billingAndBooking(billiingAndBookingRequest);
+		 * assertEquals(6000, billingAndBookingResponse.getTotalCharge());
+		 * assertEquals("Booking Successful", billingAndBookingResponse.getMessage());
+		 * Mockito.verify(internalService).billingAndBooking(billiingAndBookingRequest);
+		 */
 	}
 }

@@ -28,45 +28,93 @@ import com.booking.common.CustomerModel;
 import com.booking.common.CustomerResponse;
 import com.booking.common.RoomModel;
 import com.booking.common.RoomResponse;
-import com.booking.internalmodel.BookingEntity;
-import com.booking.internalmodel.CustomerEntity;
 import com.booking.internalmodel.RoomEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * InternalControllerTest
+ * 
+ * @author Rachana Sharma
+ */
 @ExtendWith(MockitoExtension.class)
 public class InternalControllerTest {
 
+	/**
+	 * InternalController
+	 */
 	@InjectMocks
 	private InternalController internalController;
 
+	/**
+	 * InternalService
+	 */
 	@Mock
 	private InternalService internalService;
 
+	/**
+	 * MockMvc
+	 */
 	private MockMvc mockMvc;
 
+	/**
+	 * defining and initializing RoomEntity object
+	 */
 	private RoomEntity roomEntity = null;
 
+	/**
+	 * defining and initializing RoomResponse object
+	 */
 	private RoomResponse roomResponse = null;
 
+	/**
+	 * defining and initializing CustomerResponse object
+	 */
 	private CustomerResponse customerResponse = null;
 
+	/**
+	 * defining and initializing BookingResponse object
+	 */
 	private BookingResponse bookingResponse = null;
 
+	/**
+	 * defining and initializing CustomerModel object
+	 */
 	private CustomerModel customerModel = null;
 
+	/**
+	 * defining and initializing RoomModel object
+	 */
 	private RoomModel roomModel = null;
 
+	/**
+	 * defining and initializing BookingModel object
+	 */
 	private BookingModel bookingModel = null;
 
+	/**
+	 * defining and initializing BilliingAndBookingRequest object
+	 */
 	private BilliingAndBookingRequest billiingAndBookingRequest = null;
-	
+
+	/**
+	 * defining and initializing BillingAndBookingResponse object
+	 */
 	private BillingAndBookingResponse billingAndBookingResponse = null;
-	
+
+	/**
+	 * the id
+	 */
 	private int id;
 
+	/**
+	 * the start date
+	 */
 	private Date sDate;
 
+	/**
+	 * the end date
+	 */
 	private Date eDate;
 
 	/**
@@ -103,21 +151,21 @@ public class InternalControllerTest {
 		bookingModel = new BookingModel(1, true, 6000, sDate, eDate);
 		bookingResponse = new BookingResponse();
 		bookingResponse.getBookingResponse().add(bookingModel);
-		
+
 		billiingAndBookingRequest = new BilliingAndBookingRequest();
 		billiingAndBookingRequest.setCustomerName("chandler");
 		billiingAndBookingRequest.setStartDate(sDate);
 		billiingAndBookingRequest.setEndDate(eDate);
 		billiingAndBookingRequest.setBreakfast(true);
 		billiingAndBookingRequest.setRoomType("SINGLE");
-		
+
 		billingAndBookingResponse = new BillingAndBookingResponse();
 		billingAndBookingResponse.setTotalCharge(6000);
 		billingAndBookingResponse.setMessage("Booking Successful");
 	}
 
 	/**
-	 * {@link InternalController#getRoomById(int)}
+	 * Tests getRoomById method {@link InternalController#getRoomById(int)}
 	 * 
 	 * @throws Exception
 	 */
@@ -138,7 +186,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * {@link InternalController#getAllRoom()}
+	 * Tests getAllRoom method {@link InternalController#getAllRoom()}
 	 * 
 	 * @throws Exception
 	 */
@@ -159,7 +207,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * {@link InternalController#getAllCustomer()}
+	 * Test getAllCustomer {@link InternalController#getAllCustomer()}
 	 * 
 	 * @throws Exception
 	 */
@@ -180,13 +228,12 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * {@link InternalController#getAllBooking()}
+	 * Tests getAllBooking method {@link InternalController#getAllBooking()}
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void getAllBookingTest() throws Exception {
-
 		Mockito.when(internalService.getAllBooking()).thenReturn(bookingResponse);
 
 		String URI = "/booking";
@@ -201,33 +248,39 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * {@link InternalController#deleteBooking(int)}
-	 * @throws Exception 
+	 * Tests deleteBooking method {@link InternalController#deleteBooking(int)}
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	public void deleteBookingTest() throws Exception {		
-		String URI ="/booking/delete/1";
+	public void deleteBookingTest() throws Exception {
+		String URI = "/booking/delete/1";
+
 		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete(URI)).andReturn();
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 		Mockito.verify(internalService).deleteBooking(id);
 	}
-	
+
 	/**
+	 * Tests billingAndBooking method
 	 * {@link InternalController#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	@Test
 	public void billingAndBookingTest() throws Exception {
-		Mockito.when(internalService.billingAndBooking(Mockito.any(BilliingAndBookingRequest.class))).thenReturn(billingAndBookingResponse);
-		
+		Mockito.when(internalService.billingAndBooking(Mockito.any(BilliingAndBookingRequest.class)))
+				.thenReturn(billingAndBookingResponse);
+
 		String URI = "/billing/booking";
-		
+
 		String inputJson = this.mapToJson(billiingAndBookingRequest);
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON).content(inputJson);
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON)
+				.content(inputJson);
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
-	
+
 	/**
 	 * converts POJO into JSON
 	 * 
