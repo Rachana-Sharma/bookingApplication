@@ -152,7 +152,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * tests getAllRoomById method {@link ExternalController#getAllRoomById(int)}
+	 * tests getAllRoomById method
 	 */
 	@Test
 	public void getRoomByIdTest() throws Exception {
@@ -170,7 +170,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * tests getAllRoom method {@link ExternalController#getAllRoom()}
+	 * tests getAllRoom method
 	 */
 	@Test
 	public void getAllRoomTest() throws Exception {
@@ -188,7 +188,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * tests getAllCustomer method {@link ExternalController#getAllCustomer()}
+	 * tests getAllCustomer method
 	 */
 	@Test
 	public void getAllCustomerTest() throws Exception {
@@ -206,7 +206,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * tests getAllBooking method {@link ExternalController#getAllBooking()}
+	 * tests getAllBooking method
 	 */
 	@Test
 	public void getAllBookingTest() throws Exception {
@@ -224,7 +224,7 @@ public class ExternalControllerTest {
 	}
 
 	/**
-	 * tests deleteBooking method {@link ExternalController#deleteBooking(int)}
+	 * tests deleteBooking method
 	 */
 	@Test
 	public void deleteBookingTest() {
@@ -234,7 +234,6 @@ public class ExternalControllerTest {
 
 	/**
 	 * tests billingAndBooking method
-	 * {@link ExternalController#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 * 
 	 * @throws Exception
 	 */

@@ -172,7 +172,7 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * tests getRoomById method {@link ExternalService#getRoomById(int)}
+	 * tests getRoomById method
 	 */
 	@Test
 	public void getRoomByIdTest() {
@@ -187,7 +187,7 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * tests getAllRoom method {@link ExternalService#getAllRoom()}
+	 * tests getAllRoom method
 	 */
 	@Test
 	public void getAllRoomTest() {
@@ -202,7 +202,7 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * tests getBooking method {@link ExternalService#getBooking()}
+	 * tests getBooking method
 	 */
 	@Test
 	public void getBookingTest() {
@@ -218,7 +218,7 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * tests getAllCustomer method {@link ExternalService#getAllCustomer()}
+	 * tests getAllCustomer method
 	 */
 	@Test
 	public void getAllCustomerTest() {
@@ -231,7 +231,7 @@ public class ExternalServiceTest {
 	}
 
 	/**
-	 * tests deleteBooking method {@link ExternalService#deleteBooking(int)}
+	 * tests deleteBooking method
 	 */
 	@Test
 	public void deleteBookingTest() {
@@ -241,7 +241,6 @@ public class ExternalServiceTest {
 
 	/**
 	 * tests billingAndBooking method
-	 * {@link ExternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 * 
 	 * @throws Exception
 	 */
