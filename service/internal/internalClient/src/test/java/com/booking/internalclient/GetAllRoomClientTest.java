@@ -15,6 +15,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.BilliingAndBookingRequest;
@@ -51,11 +52,17 @@ public class GetAllRoomClientTest {
 	private RoomResponse roomResponse = null;
 
 	/**
+	 * baseUrl
+	 */
+	private String baseUrl = null;
+
+	/**
 	 * sets up all the values and is executed before the actual test cases runs
 	 */
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(this.getAllRoomClient, "baseUrl", baseUrl);
 
 		roomModel = new RoomModel(1, "SINGLE", 5000, "AVAILABLE");
 		roomResponse = new RoomResponse();
@@ -64,13 +71,12 @@ public class GetAllRoomClientTest {
 
 	/**
 	 * Tests billingAndBookingClientMethod
-	 * {@link GetAllRoomClient#getAllRoomClientMethod()}
 	 */
 	@Test
 	public void getAllRoomClientMethodTest() {
 
 		ResponseEntity<RoomResponse> responseEntity = new ResponseEntity<RoomResponse>(roomResponse, HttpStatus.OK);
-		Mockito.when(restTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+		Mockito.when(restTemplate.exchange(Matchers.eq(baseUrl + "/room"), Matchers.eq(HttpMethod.GET),
 				Matchers.<HttpEntity<?>>any(), Matchers.<Class<RoomResponse>>any())).thenReturn(responseEntity);
 
 		RoomResponse returnedRoomResponse = getAllRoomClient.getAllRoomClientMethod();

@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -31,22 +32,28 @@ public class DeleteBookingByIdClientTest {
 	private RestTemplate restTemplate;
 
 	/**
+	 * baseUrl
+	 */
+	private String baseUrl = null;
+
+	/**
 	 * sets up all the values and is executed before the actual test cases runs
 	 */
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(this.deleteBookingByIdClient, "baseUrl", baseUrl);
 	}
 
 	/**
 	 * Tests getAllRoomClientMethod
-	 * {@link DeleteBookingByIdClientTest#deleteBookingByIdClient}
 	 */
 
 	@Test
 	public void deleteBookingByIdClientTest() {
 		deleteBookingByIdClient.deleteBookingClient(1);
-		Mockito.verify(restTemplate).exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
-				Matchers.<HttpEntity<?>>any(), Matchers.<Class<Void>>any(), Matchers.anyInt());
+		Mockito.verify(restTemplate).exchange(Matchers.eq(baseUrl + "/booking/delete/{id}"),
+				Matchers.eq(HttpMethod.DELETE), Matchers.<HttpEntity<?>>any(), Matchers.<Class<Void>>any(),
+				Matchers.anyInt());
 	}
 }

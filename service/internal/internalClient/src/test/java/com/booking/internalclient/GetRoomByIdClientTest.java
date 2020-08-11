@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.RoomModel;
@@ -43,23 +44,28 @@ public class GetRoomByIdClientTest {
 	private RoomModel roomModel = null;
 
 	/**
+	 * baseUrl
+	 */
+	private String baseUrl = null;
+
+	/**
 	 * sets up all the values and is executed before the actual test cases runs
 	 */
 	@BeforeEach
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(this.getRoomByIdClient, "baseUrl", baseUrl);
 
 		roomModel = new RoomModel(1, "SINGLE", 5000, "AVAILABLE");
 	}
 
 	/**
 	 * Tests getRoomByIdClientMethod
-	 * {@link GetRoomByIdClient#getRoomByIdClientMethod(int)}
 	 */
 	@Test
 	public void getRoomByIdClientTest() {
 		ResponseEntity<RoomModel> responseEntity = new ResponseEntity<RoomModel>(roomModel, HttpStatus.OK);
-		Mockito.when(restTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+		Mockito.when(restTemplate.exchange(Matchers.eq(baseUrl + "/room/{id}"), Matchers.eq(HttpMethod.GET),
 				Matchers.<HttpEntity<?>>any(), Matchers.<Class<RoomModel>>any(), Matchers.anyInt()))
 				.thenReturn(responseEntity);
 

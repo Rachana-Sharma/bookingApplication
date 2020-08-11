@@ -17,6 +17,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.BilliingAndBookingRequest;
@@ -53,6 +54,11 @@ public class GetBookingClientTest {
 	private BookingResponse bookingResponse = null;
 
 	/**
+	 * baseUrl
+	 */
+	private String baseUrl = null;
+
+	/**
 	 * the start date
 	 */
 	private Date sDate;
@@ -70,6 +76,7 @@ public class GetBookingClientTest {
 	@BeforeEach
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(this.getBookingClient, "baseUrl", baseUrl);
 
 		String startDate = "27-07-2020";
 		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
@@ -83,13 +90,12 @@ public class GetBookingClientTest {
 
 	/**
 	 * Tests getAllBookingClientMethod
-	 * {@link GetBookingClient#getAllBookingClientMethod()}
 	 */
 	@Test
 	public void getAllBookingClientMethodTest() {
 		ResponseEntity<BookingResponse> responseEntity = new ResponseEntity<BookingResponse>(bookingResponse,
 				HttpStatus.OK);
-		Mockito.when(restTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+		Mockito.when(restTemplate.exchange(Matchers.eq(baseUrl + "/booking"), Matchers.eq(HttpMethod.GET),
 				Matchers.<HttpEntity<?>>any(), Matchers.<Class<BookingResponse>>any())).thenReturn(responseEntity);
 
 		BookingResponse returnedBookingResponse = getBookingClient.getAllBookingClientMethod();

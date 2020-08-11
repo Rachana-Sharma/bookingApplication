@@ -17,6 +17,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.common.BilliingAndBookingRequest;
@@ -52,6 +53,11 @@ public class BillingAndBookingClientTest {
 	private BillingAndBookingResponse billingAndBookingResponse = null;
 
 	/**
+	 * baseUrl
+	 */
+	private String baseUrl = null;
+
+	/**
 	 * sDate
 	 */
 	private Date sDate;
@@ -69,6 +75,7 @@ public class BillingAndBookingClientTest {
 	@BeforeEach
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
+		ReflectionTestUtils.setField(this.billingAndBookingClient, "baseUrl", baseUrl);
 
 		String startDate = "27-07-2020";
 		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
@@ -89,13 +96,12 @@ public class BillingAndBookingClientTest {
 
 	/**
 	 * Tests billingAndBookingClientMethod
-	 * {@link BillingAndBookingClient#billingAndBookingClientMethod(BilliingAndBookingRequest)}
 	 */
 	@Test
 	public void billingAndBookingClientMethodTest() {
 		ResponseEntity<BillingAndBookingResponse> responseEntity = new ResponseEntity<BillingAndBookingResponse>(
 				billingAndBookingResponse, HttpStatus.OK);
-		Mockito.when(restTemplate.exchange(Matchers.anyString(), Matchers.any(HttpMethod.class),
+		Mockito.when(restTemplate.exchange(Matchers.eq(baseUrl + "/billing/booking"), Matchers.eq(HttpMethod.POST),
 				Matchers.<HttpEntity<?>>any(), Matchers.<Class<BillingAndBookingResponse>>any()))
 				.thenReturn(responseEntity);
 
