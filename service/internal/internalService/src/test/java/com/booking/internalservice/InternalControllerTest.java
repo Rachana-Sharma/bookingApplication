@@ -165,7 +165,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * Tests getRoomById method {@link InternalController#getRoomById(int)}
+	 * Tests getRoomById method
 	 * 
 	 * @throws Exception
 	 */
@@ -186,7 +186,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * Tests getAllRoom method {@link InternalController#getAllRoom()}
+	 * Tests getAllRoom method
 	 * 
 	 * @throws Exception
 	 */
@@ -207,7 +207,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * Test getAllCustomer {@link InternalController#getAllCustomer()}
+	 * Test getAllCustomer method
 	 * 
 	 * @throws Exception
 	 */
@@ -228,7 +228,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * Tests getAllBooking method {@link InternalController#getAllBooking()}
+	 * Tests getAllBooking method
 	 * 
 	 * @throws Exception
 	 */
@@ -248,7 +248,7 @@ public class InternalControllerTest {
 	}
 
 	/**
-	 * Tests deleteBooking method {@link InternalController#deleteBooking(int)}
+	 * Tests deleteBooking method
 	 * 
 	 * @throws Exception
 	 */
@@ -263,7 +263,6 @@ public class InternalControllerTest {
 
 	/**
 	 * Tests billingAndBooking method
-	 * {@link InternalController#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 * 
 	 * @throws Exception
 	 */
@@ -278,6 +277,9 @@ public class InternalControllerTest {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.post(URI).contentType(MediaType.APPLICATION_JSON)
 				.content(inputJson);
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+		String expectedJson = this.mapToJson(billingAndBookingResponse);
+		String outputInJson = result.getResponse().getContentAsString();
+		assertEquals(outputInJson, expectedJson);
 		assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
 	}
 

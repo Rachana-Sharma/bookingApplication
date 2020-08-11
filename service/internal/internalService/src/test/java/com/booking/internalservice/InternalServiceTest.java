@@ -157,9 +157,9 @@ public class InternalServiceTest {
 		MockitoAnnotations.initMocks(this);
 		id = 1;
 
-		String startDate = "27-07-2020";
+		String startDate = "27-08-2020";
 		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
-		String endDate = "28-07-2020";
+		String endDate = "28-08-2020";
 		eDate = new SimpleDateFormat("dd-mm-yyyy").parse(endDate);
 
 		roomEntity = new RoomEntity();
@@ -210,7 +210,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * Tests getAllRoom method {@link InternalService#getAllRoom()}
+	 * Tests getAllRoom method
 	 */
 	@Test
 	public void getAllRoomTest() {
@@ -224,7 +224,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * Test getAllCustomer method {@link InternalService#getAllCustomer()}
+	 * Test getAllCustomer method
 	 */
 	@Test
 	public void getAllCustomerTest() {
@@ -236,7 +236,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * Test getAllBooking method {@link InternalService#getAllBooking()}
+	 * Test getAllBooking method
 	 */
 	@Test
 	public void getAllBookingTest() {
@@ -251,7 +251,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * Test getRoomById method {@link InternalService#getRoomById(int)()}
+	 * Test getRoomById method
 	 */
 	@Test
 	public void getRoomByIdTest() {
@@ -265,7 +265,7 @@ public class InternalServiceTest {
 	}
 
 	/**
-	 * Test deleteBooking method {@link InternalService#deleteBooking(int)}
+	 * Test deleteBooking method
 	 */
 	@Test
 	public void deleteBookingTest() {
@@ -275,18 +275,22 @@ public class InternalServiceTest {
 
 	/**
 	 * Test billingAndBooking method
-	 * {@link InternalService#billingAndBooking(com.booking.common.BilliingAndBookingRequest)}
 	 */
 	@Test
 	public void billingAndBookingTest() {
+		Mockito.when(roomRepository.findRoomByDate(Mockito.any(Date.class),Mockito.any(Date.class),Mockito.anyString())).thenReturn(id);
+		Mockito.when(roomRepository.findById(id)).thenReturn(Optional.of(roomEntity));
 		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
-		/*
-		 * BillingAndBookingResponse billingAndBookingResponse =
-		 * internalService.billingAndBooking(billiingAndBookingRequest);
-		 * assertEquals(6000, billingAndBookingResponse.getTotalCharge());
-		 * assertEquals("Booking Successful", billingAndBookingResponse.getMessage());
-		 * Mockito.verify(internalService).billingAndBooking(billiingAndBookingRequest);
-		 */
+		
+		 BillingAndBookingResponse billingAndBookingResponse =
+		  internalService.billingAndBooking(billiingAndBookingRequest);
+		 System.out.println(billingAndBookingResponse.getTotalCharge());
+		 System.out.println(billingAndBookingResponse.getMessage());
+		 assertEquals(0.0, billingAndBookingResponse.getTotalCharge());
+		  assertEquals("Booking Not Successful. Try another date. ", billingAndBookingResponse.getMessage());
+		//  Mockito.verify(roomRepository).findRoomByDate(billiingAndBookingRequest.getStartDate(), billiingAndBookingRequest.getEndDate(),
+				//	billiingAndBookingRequest.getRoomType());
+		 
 	}
 }
