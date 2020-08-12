@@ -156,7 +156,6 @@ public class InternalServiceTest {
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
 		id = 1;
-
 		String startDate = "27-08-2020";
 		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
 		String endDate = "28-08-2020";
@@ -278,19 +277,23 @@ public class InternalServiceTest {
 	 */
 	@Test
 	public void billingAndBookingTest() {
-		Mockito.when(roomRepository.findRoomByDate(Mockito.any(Date.class),Mockito.any(Date.class),Mockito.anyString())).thenReturn(id);
+		Mockito.when(roomRepository.findRoomByDate(billiingAndBookingRequest.getStartDate(),
+				billiingAndBookingRequest.getEndDate(), billiingAndBookingRequest.getRoomType())).thenReturn(id);
 		Mockito.when(roomRepository.findById(id)).thenReturn(Optional.of(roomEntity));
-		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 		Mockito.when(customerRepository.save(Mockito.any(CustomerEntity.class))).thenReturn(customerEntity);
-		
-		 BillingAndBookingResponse billingAndBookingResponse =
-		  internalService.billingAndBooking(billiingAndBookingRequest);
-		 System.out.println(billingAndBookingResponse.getTotalCharge());
-		 System.out.println(billingAndBookingResponse.getMessage());
-		 assertEquals(0.0, billingAndBookingResponse.getTotalCharge());
-		  assertEquals("Booking Not Successful. Try another date. ", billingAndBookingResponse.getMessage());
-		//  Mockito.verify(roomRepository).findRoomByDate(billiingAndBookingRequest.getStartDate(), billiingAndBookingRequest.getEndDate(),
-				//	billiingAndBookingRequest.getRoomType());
-		 
+		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
+
+		BillingAndBookingResponse response = internalService.billingAndBooking(billiingAndBookingRequest);
+		System.out.println(response.getTotalCharge());
+		System.out.println(response.getMessage());
+		System.out.println(billingAndBookingResponse.getTotalCharge());
+		System.out.println(billingAndBookingResponse.getMessage());
+		assertEquals(0.0, response.getTotalCharge());
+		assertEquals("Booking Not Successful. Try another date. ", response.getMessage());
+		// Mockito.verify(roomRepository).findRoomByDate(billiingAndBookingRequest.getStartDate(),
+		// billiingAndBookingRequest.getEndDate(),
+		// billiingAndBookingRequest.getRoomType());
+		// Mockito.verify(roomRepository).findById(id);
+
 	}
 }

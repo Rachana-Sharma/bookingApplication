@@ -287,7 +287,7 @@ public class InternalControllerTest {
 	 * converts POJO into JSON
 	 * 
 	 * @param object
-	 * @return
+	 * @return String
 	 * @throws JsonProcessingException
 	 */
 	public String mapToJson(Object object) throws JsonProcessingException {
