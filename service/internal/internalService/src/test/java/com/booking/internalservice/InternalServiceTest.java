@@ -3,7 +3,6 @@ package com.booking.internalservice;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -156,10 +155,9 @@ public class InternalServiceTest {
 	public void setUp() throws ParseException {
 		MockitoAnnotations.initMocks(this);
 		id = 1;
-		String startDate = "27-08-2020";
-		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
-		String endDate = "28-08-2020";
-		eDate = new SimpleDateFormat("dd-mm-yyyy").parse(endDate);
+
+		sDate = new Date(2020, 7, 22);
+		eDate = new Date(2020, 7, 24);
 
 		roomEntity = new RoomEntity();
 		roomEntity.setRoomId(1);
@@ -276,7 +274,8 @@ public class InternalServiceTest {
 	 * Test billingAndBooking method
 	 */
 	@Test
-	public void billingAndBookingTest() {
+	public void billingAndBookingSuccesfulTest() {
+
 		Mockito.when(roomRepository.findRoomByDate(billiingAndBookingRequest.getStartDate(),
 				billiingAndBookingRequest.getEndDate(), billiingAndBookingRequest.getRoomType())).thenReturn(id);
 		Mockito.when(roomRepository.findById(id)).thenReturn(Optional.of(roomEntity));
@@ -284,16 +283,13 @@ public class InternalServiceTest {
 		Mockito.when(bookingRepository.save(Mockito.any(BookingEntity.class))).thenReturn(bookingEntity);
 
 		BillingAndBookingResponse response = internalService.billingAndBooking(billiingAndBookingRequest);
-		System.out.println(response.getTotalCharge());
-		System.out.println(response.getMessage());
-		System.out.println(billingAndBookingResponse.getTotalCharge());
-		System.out.println(billingAndBookingResponse.getMessage());
-		assertEquals(0.0, response.getTotalCharge());
-		assertEquals("Booking Not Successful. Try another date. ", response.getMessage());
-		// Mockito.verify(roomRepository).findRoomByDate(billiingAndBookingRequest.getStartDate(),
-		// billiingAndBookingRequest.getEndDate(),
-		// billiingAndBookingRequest.getRoomType());
-		// Mockito.verify(roomRepository).findById(id);
+		assertEquals(6000, response.getTotalCharge());
+		assertEquals("Booking Successful", response.getMessage());
 
+		Mockito.verify(roomRepository).findRoomByDate(billiingAndBookingRequest.getStartDate(),
+				billiingAndBookingRequest.getEndDate(), billiingAndBookingRequest.getRoomType());
+		Mockito.verify(roomRepository).findById(id);
+		Mockito.verify(customerRepository).save(Mockito.any(CustomerEntity.class));
+		Mockito.verify(bookingRepository).save(Mockito.any(BookingEntity.class));
 	}
 }

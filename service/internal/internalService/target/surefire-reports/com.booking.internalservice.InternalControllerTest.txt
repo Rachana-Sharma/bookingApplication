@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.booking.internalservice.InternalControllerTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.087 s - in com.booking.internalservice.InternalControllerTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.424 s - in com.booking.internalservice.InternalControllerTest
