@@ -1,4 +1,5 @@
 com\booking\internalmodel\CustomerEntity.class
+com\booking\internalmodel\TestConfiguration.class
 com\booking\internalmodel\RoomEntity.class
 com\booking\internalmodel\RoomRepository.class
 com\booking\internalmodel\BookingEntity.class
