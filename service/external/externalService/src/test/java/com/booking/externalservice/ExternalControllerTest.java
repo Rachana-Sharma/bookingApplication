@@ -122,10 +122,8 @@ public class ExternalControllerTest {
 
 		id = 1;
 
-		String startDate = "27-07-2020";
-		sDate = new SimpleDateFormat("dd-mm-yyyy").parse(startDate);
-		String endDate = "28-07-2020";
-		eDate = new SimpleDateFormat("dd-mm-yyyy").parse(endDate);
+		sDate = new Date(2020, 7, 22);
+		eDate = new Date(2020, 7, 24);
 
 		roomModel = new RoomModel(1, "SINGLE", 5000, "AVAILABLE");
 		roomResponse = new RoomResponse();
