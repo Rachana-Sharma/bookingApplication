@@ -8,99 +8,38 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * RoomRepositoryTest
  * 
  * @author Rachana Sharma
  */
+
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
+@ContextConfiguration(classes = {DatabaseConfig.class},loader = AnnotationConfigContextLoader.class)
 public class RoomRepositoryTest {
 
 	/**
 	 * defining and initializing RoomRepository object
 	 */
 	@Autowired
-	private RoomRepository roomRepository = new RoomRepository() {
-
-		@Override
-		public <S extends RoomEntity> S save(S entity) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public int findRoomByDate(Date startDate, Date endDate, String roomType) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public <S extends RoomEntity> Iterable<S> saveAll(Iterable<S> entities) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Optional<RoomEntity> findById(Integer id) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public boolean existsById(Integer id) {
-			// TODO Auto-generated method stub
-			return false;
-		}
-
-		@Override
-		public Iterable<RoomEntity> findAll() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public Iterable<RoomEntity> findAllById(Iterable<Integer> ids) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public long count() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public void deleteById(Integer id) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void delete(RoomEntity entity) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void deleteAll(Iterable<? extends RoomEntity> entities) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void deleteAll() {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void updateStatusById(int roomId) {
-			// TODO Auto-generated method stub
-
-		}
-	};
+	private RoomRepository roomRepository;
 
 	/**
 	 * the start date

@@ -1,4 +1,7 @@
 -------------------------------------------------------------------------------
 Test set: com.booking.internalmodel.RoomRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s - in com.booking.internalmodel.RoomRepositoryTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.691 s <<< FAILURE! - in com.booking.internalmodel.RoomRepositoryTest
+com.booking.internalmodel.RoomRepositoryTest  Time elapsed: 0.689 s  <<< ERROR!
+java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=...) with your test
+
