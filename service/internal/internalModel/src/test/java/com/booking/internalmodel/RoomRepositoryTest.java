@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class RoomRepositoryTest {
 	 * 
 	 * @throws ParseException
 	 */
+	@BeforeEach
 	public void setUp() throws ParseException {
 
 		sDate = new Date(2020, 7, 22);
