@@ -32,10 +32,10 @@ public class DatabaseConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-		dataSource.setDriverClassName(env.getProperty("org.h2.Driver"));
-		dataSource.setUrl(env.getProperty("jdbc:h2:mem:bookingdb"));
-		dataSource.setUsername(env.getProperty("sa"));
-		dataSource.setPassword(env.getProperty(""));
+		dataSource.setDriverClassName(env.getProperty("spring.datasource.driverClassName"));
+		dataSource.setUrl(env.getProperty("spring.datasource.url"));
+		dataSource.setUsername(env.getProperty("spring.datasource.username"));
+		dataSource.setPassword(env.getProperty("spring.datasource.password"));
 
 		return dataSource;
 	}
