@@ -2,6 +2,7 @@ package com.booking.externalservice;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestTemplate;
 
 import com.booking.internalclient.BillingAndBookingClient;
@@ -15,6 +16,7 @@ import com.booking.internalclient.GetRoomByIdClient;
  * @author Rachana Sharma ConfigurationClass
  */
 @Configuration
+@Import(DatabaseConfig.class)
 public class ConfigurationClass {
 
 	/**
