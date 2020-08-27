@@ -6,4 +6,12 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>internalModel</artifactId>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.booking</groupId>
+  		<artifactId>externalService</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>provided</scope>
+  	</dependency>
+  </dependencies>
 </project>
