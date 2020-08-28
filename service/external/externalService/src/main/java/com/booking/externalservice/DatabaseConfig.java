@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -25,17 +26,40 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class DatabaseConfig {
 
+	
 	@Autowired
 	private Environment env;
 
+	@Value("${spring.datasource.url}")
+	private String jdbcUrl;
+	
+	@Value("${spring.datasource.driverClassName}")
+	private String jdbcDriver;
+	
+	@Value("${spring.datasource.username}")
+	private String jdbcUsername;
+	
+	@Value("${spring.datasource.password}")
+	private String jdbcPassword;
+	
+	/*@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+		dataSource.setDriverClassName(env.getProperty("jdbcDriver"));
+		dataSource.setUrl(env.getProperty("jdbcUrl"));
+		dataSource.setUsername(env.getProperty("jdbcUsername"));
+		dataSource.setPassword(env.getProperty("jdbcPassword"));
+		return dataSource;
+	}*/
 	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-		dataSource.setDriverClassName(env.getProperty("spring.datasource.url"));
-		dataSource.setUrl(env.getProperty("spring.datasource.driverClassName"));
-		dataSource.setUsername(env.getProperty("spring.datasource.username"));
-		dataSource.setPassword(env.getProperty("spring.datasource.password"));
+		dataSource.setDriverClassName(jdbcDriver);
+		dataSource.setUrl(jdbcUrl);
+		dataSource.setUsername(jdbcUsername);
+		dataSource.setPassword(jdbcPassword);
 		return dataSource;
 	}
 	
@@ -64,5 +88,7 @@ public class DatabaseConfig {
 		return properties;
 
 	}
+	
 }
+
 
