@@ -266,8 +266,12 @@ public class InternalServiceTest {
 	 */
 	@Test
 	public void deleteBookingTest() {
+		bookingEntity = new BookingEntity();
+		roomEntity = new RoomEntity();
+		bookingEntity = bookingRepository.findById(id).get();
+		int roomId = bookingEntity.getRoom().getRoomId();
 		bookingRepository.deleteById(id);
-		Mockito.verify(bookingRepository).deleteById(id);
+		roomRepository.updateStatusById(roomId);
 	}
 
 	/**
